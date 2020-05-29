@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Color yellow = new Color(255, 255, 0);
     private Color red = new Color(255, 0, 0);
+    private Color blue = new Color(0, 0, 255);
 
     public GameObject MainCamera;
 
@@ -59,15 +60,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        MoveHorizontal();
+        var moveDirection = MoveHorizontal();
         Jump();
-        HandleDash();
+
+        DirectionEnum direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;        
+        HandleDash(direction);
     }
 
-    void MoveHorizontal()
+    Vector3 MoveHorizontal()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);        
         transform.position += movement * Time.deltaTime * moveSpeed;
+        return movement.normalized;
     }
 
     void Jump()
@@ -111,21 +115,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void DetermineDashDirection()
+    void HandleDash(DirectionEnum dir)
     {
-        if (Input.GetKey(KeyCode.RightArrow)) direction = DirectionEnum.Right;
-        else if (Input.GetKey(KeyCode.LeftArrow)) direction = DirectionEnum.Left;
-        else direction = 0;
-    }
-
-    void HandleDash()
-    {
-        // Initiate dash
-        DetermineDashDirection();
+        // Initiate dash        
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            DashMove();
+            DashMove(dir);
             GetComponent<WaterHandling>().StartDash();
+            sprite.color = blue;
         }
 
         // End dash
@@ -134,10 +131,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
             GetComponent<WaterHandling>().EndDash();
+            sprite.color = yellow;
         }
     }
 
-    void DashMove()
+    void DashMove(DirectionEnum direction)
     {
         dashTime = 0.1f;
         if(direction != DirectionEnum.None)
