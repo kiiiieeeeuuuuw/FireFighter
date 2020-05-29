@@ -61,10 +61,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         var moveDirection = MoveHorizontal();
-        Jump();
-
-        DirectionEnum direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;        
+        DirectionEnum direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
         HandleDash(direction);
+        Jump();
+        Fall();
     }
 
     Vector3 MoveHorizontal()
@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isGrounded && rb.velocity.y < 0)
         {
-
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*1.05f);
         }
     }
 
