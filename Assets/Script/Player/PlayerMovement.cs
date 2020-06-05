@@ -52,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    #region wallglide
+
+    public Transform FrontalCheck;
+    public bool IsTouchingFront;
+    public float CheckRadius;
+
+    #endregion
 
     private void Start()
     {
@@ -64,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         DirectionEnum direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
         HandleDash(direction);
         Jump();
+        WallGlide();
         Fall();
     }
 
@@ -143,5 +151,14 @@ public class PlayerMovement : MonoBehaviour
             if (direction == DirectionEnum.Right) rb.velocity = Vector2.right * dashSpeed;
             if (direction == DirectionEnum.Left) rb.velocity = Vector2.left * dashSpeed;            
         }                
+    }
+
+    void WallGlide()
+    {
+        IsTouchingFront = Physics2D.OverlapCircle(FrontalCheck.position, CheckRadius, 7);
+        if (IsTouchingFront)
+        {
+            int a = 0;
+        }
     }
 }
