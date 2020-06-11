@@ -57,17 +57,14 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform FrontalCheck;
     public bool IsTouchingFront;
-    public float CheckRadius;
-
-    public LookingDirection looking;
+    public float CheckRadius;    
 
     #endregion    
     private Vector2 startScale;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        looking = LookingDirection.Right;
+        rb = GetComponent<Rigidbody2D>();        
 
         startScale = new Vector2
         {
@@ -90,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
+        //change the player orientation
         if(Mathf.Abs(movement.x) > 0)
             transform.localScale = new Vector3(startScale.x * movement.normalized.x, startScale.y);
         return movement.normalized;
@@ -139,21 +137,13 @@ public class PlayerMovement : MonoBehaviour
     void HandleDash(DirectionEnum dir)
     {
         // Initiate dash        
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            DashMove(dir);
-            GetComponent<WaterHandling>().StartDash();
-            sprite.color = blue;
-        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))        
+            DashMove(dir);                                
 
         // End dash
         dashTime -= Time.deltaTime;
-        if (dashTime <= 0)
-        {
-            rb.velocity = new Vector2(0f, rb.velocity.y);
-            GetComponent<WaterHandling>().EndDash();
-            sprite.color = yellow;
-        }
+        if (dashTime <= 0)        
+            rb.velocity = new Vector2(0f, rb.velocity.y);                                
     }
 
     void DashMove(DirectionEnum direction)
