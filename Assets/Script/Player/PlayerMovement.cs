@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Script.General;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,11 +59,21 @@ public class PlayerMovement : MonoBehaviour
     public bool IsTouchingFront;
     public float CheckRadius;
 
-    #endregion
+    public LookingDirection looking;
+
+    #endregion    
+    private Vector2 startScale;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        looking = LookingDirection.Right;
+
+        startScale = new Vector2
+        {
+            x = transform.localScale.x,
+            y = transform.localScale.y
+        };
     }
 
     void Update()
@@ -72,13 +83,15 @@ public class PlayerMovement : MonoBehaviour
         HandleDash(direction);
         Jump();
         WallGlide();
-        Fall();
+        Fall();        
     }
 
     Vector3 MoveHorizontal()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);        
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
+        if(Mathf.Abs(movement.x) > 0)
+            transform.localScale = new Vector3(startScale.x * movement.normalized.x, startScale.y);
         return movement.normalized;
     }
 
