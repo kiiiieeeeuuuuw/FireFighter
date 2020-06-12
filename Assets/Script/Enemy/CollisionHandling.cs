@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CollisionHandling : MonoBehaviour
@@ -29,8 +30,8 @@ public class CollisionHandling : MonoBehaviour
             var player = collision.gameObject;
 
             if (player.GetComponent<WaterHandling>().CoatedInWater)
-            {
-                Enemy.GetComponentInChildren<ParticleSystem>().Stop();
+            {                
+                Enemy.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(x => x.Stop());
                 CurrentTime = Time.time;
                 doused = true;
             }            

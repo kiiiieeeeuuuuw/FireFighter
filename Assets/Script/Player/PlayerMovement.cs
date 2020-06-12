@@ -15,18 +15,19 @@ public class PlayerMovement : MonoBehaviour
     private Color red = new Color(255, 0, 0);
     private Color blue = new Color(0, 0, 255);
 
-    public GameObject MainCamera;
+    private Vector3 movement;
 
     #endregion
 
     #region horizontal movement fields
-
+    [Header("Horizontal movement")]
     public float moveSpeed = 5f;
 
     #endregion
 
     #region vertical movement fields
 
+    [Header("Vertical Movement")]
     public float jumpForce = 5f;
 
     public bool isGrounded = false;
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region dash movement fields
-
+    [Header("Dash Movement")]
     public float dashSpeed;
 
     private float dashTime;    
@@ -54,12 +55,16 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region wallglide
-
+    [Header("Wallglide parameters")]
     public Transform FrontalCheck;
     public bool IsTouchingFront;
+    public bool WallSliding;
+    public float WallSlidingSpeed;
     public float CheckRadius;    
 
     #endregion    
+
+
     private Vector2 startScale;
 
     private void Start()
@@ -70,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         {
             x = transform.localScale.x,
             y = transform.localScale.y
-        };
+        };        
     }
 
     void Update()
@@ -85,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 MoveHorizontal()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
         //change the player orientation
         if(Mathf.Abs(movement.x) > 0)
@@ -159,9 +164,10 @@ public class PlayerMovement : MonoBehaviour
     void WallGlide()
     {
         IsTouchingFront = Physics2D.OverlapCircle(FrontalCheck.position, CheckRadius, 7);
-        if (IsTouchingFront)
+        var move = Input.GetAxisRaw("Horizontal");
+        if(IsTouchingFront && !isGrounded && move != 0)
         {
-            int a = 0;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
         }
     }
 }

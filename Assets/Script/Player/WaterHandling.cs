@@ -5,26 +5,30 @@ using UnityEngine;
 public class WaterHandling : MonoBehaviour
 {
     public bool CoatedInWater;
-    public float WaterTime = 5f;
+    public float WaterTime = 2f;
     public KeyCode WaterCoat = KeyCode.J;
-    public SpriteRenderer sprite;
-    public float diff;
+    public SpriteRenderer sprite;    
 
-    private float StartWaterCoat;
+    public float StartWaterCoat;
+    public float tempDelta;
 
+    Color blue = new Color(0, 0, 255);
+    Color yellow = new Color(0, 255, 0);
     public void Update()
     {
+        tempDelta = Time.deltaTime;
+
         if (Input.GetKeyDown(WaterCoat) && !CoatedInWater)
         {
             CoatedInWater = true;
-            StartWaterCoat = Time.deltaTime;
+            StartWaterCoat = WaterTime;
         }
 
         if (CoatedInWater)
         {
-            diff = Time.deltaTime - StartWaterCoat;
-            sprite.color = Color.Lerp(new Color(0,0,255), new Color(0,255,0), Time.deltaTime - StartWaterCoat);            
-            CoatedInWater = Time.deltaTime - StartWaterCoat > 5f;
+            StartWaterCoat -= Time.deltaTime;
+            sprite.color = Color.Lerp(yellow, blue, StartWaterCoat);            
+            CoatedInWater = StartWaterCoat > 0f;
         }
     }
 
