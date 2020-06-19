@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashTime;    
 
     private DirectionEnum direction = DirectionEnum.None;
+    private DirectionEnum prevDirection;
 
     #endregion
 
@@ -60,7 +61,12 @@ public class PlayerMovement : MonoBehaviour
     public bool IsTouchingFront;
     public bool WallSliding;
     public float WallSlidingSpeed;
-    public float CheckRadius;    
+    public float CheckRadius = 0.1f;
+
+    bool WallJumping;
+    public float xWallForce;
+    public float yWallForce;
+    public float WallJumpTime;
 
     #endregion    
 
@@ -78,23 +84,35 @@ public class PlayerMovement : MonoBehaviour
         };        
     }
 
-    void Update()
+    private void Update()
     {
         var moveDirection = MoveHorizontal();
-        DirectionEnum direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
+        direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
         HandleDash(direction);
         Jump();
         WallGlide();
-        Fall();        
+        Fall();
+    }
+
+    void FixedUpdate()
+    {        
+               
     }
 
     Vector3 MoveHorizontal()
     {
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * moveSpeed;
+        var currentDirection = movement.normalized.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
+        if (!IsTouchingFront)
+            transform.position += movement * Time.deltaTime * moveSpeed;
+        else if (currentDirection != prevDirection)        
+            transform.position += movement * Time.deltaTime * moveSpeed;
+
+        prevDirection = currentDirection;
         //change the player orientation
-        if(Mathf.Abs(movement.x) > 0)
+        if (Mathf.Abs(movement.x) > 0)
             transform.localScale = new Vector3(startScale.x * movement.normalized.x, startScale.y);
+        
         return movement.normalized;
     }
 
@@ -165,9 +183,26 @@ public class PlayerMovement : MonoBehaviour
     {
         IsTouchingFront = Physics2D.OverlapCircle(FrontalCheck.position, CheckRadius, 7);
         var move = Input.GetAxisRaw("Horizontal");
-        if(IsTouchingFront && !isGrounded && move != 0)
+        bool WallSliding = IsTouchingFront && !isGrounded;        
+        if(WallSliding)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
         }
+
+        if(Input.GetButtonDown("Jump") && WallSliding)
+        {
+            WallJumping = true;
+            Invoke("SetWallJumpingToFalse", WallJumpTime);
+        }
+
+        if (WallJumping)
+        {
+            rb.velocity = new Vector2(xWallForce * -move, yWallForce);
+        }
+    }
+
+    void SetWallJumpingToFalse()
+    {
+        WallJumping = false;
     }
 }
