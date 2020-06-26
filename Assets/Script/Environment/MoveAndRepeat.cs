@@ -37,7 +37,8 @@ public class MoveAndRepeat : MonoBehaviour
         if (Mathf.Abs(transform.position.x - startX) > spriteSize * 2)
         {            
             startX = camera.transform.position.x;
-            transform.position = new Vector3(startX + (moved < 0?originalOffset:-originalOffset), transform.position.y);
+            transform.position = new Vector3(startX + (moved < 0?originalOffset:-
+                originalOffset), transform.position.y);
             moved = 0;
         }
         else
