@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveAndRepeat : MonoBehaviour
 {
     public float spriteSize;
-    public float moved;
+    public float moved, startX, originalOffset;
     public GameObject camera;
     
     public float speedFactor;
@@ -15,6 +15,8 @@ public class MoveAndRepeat : MonoBehaviour
     {
         var bounds = GetComponent<SpriteRenderer>().sprite.bounds;
         spriteSize = (bounds.max.x - bounds.min.x);
+        startX = transform.position.x;
+        originalOffset = camera.transform.position.x - startX;
     }
 
     // Update is called once per frame
@@ -32,10 +34,12 @@ public class MoveAndRepeat : MonoBehaviour
                 break;
         }
 
-        if (moved > spriteSize)
-        {
+        if (Mathf.Abs(transform.position.x - startX) > spriteSize * 2)
+        {            
+            startX = camera.transform.position.x;
+            transform.position = new Vector3(startX + (moved < 0?originalOffset:-
+                originalOffset), transform.position.y);
             moved = 0;
-            transform.position = new Vector3(camera.transform.position.x, transform.position.y);
         }
         else
             transform.position = new Vector3(transform.position.x + moved, transform.position.y);
