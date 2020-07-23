@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     #region shared movement fields
 
     private Rigidbody2D rb;
+    private Animator PlayerAC;
 
     public SpriteRenderer sprite;
 
@@ -76,7 +77,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();        
+        rb = GetComponent<Rigidbody2D>();
+        PlayerAC = GetComponent<Animator>();
 
         startScale = new Vector2
         {
@@ -104,10 +106,16 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         var currentDirection = movement.normalized.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
-        if (!IsTouchingFront)
-            transform.position += movement * Time.deltaTime * moveSpeed;
-        else if (currentDirection != prevDirection)        
-            transform.position += movement * Time.deltaTime * moveSpeed;
+        if (movement.x != 0)
+        {
+            if (!IsTouchingFront)
+                transform.position += movement * Time.deltaTime * moveSpeed;
+            else if (currentDirection != prevDirection)
+                transform.position += movement * Time.deltaTime * moveSpeed;
+            PlayerAC.SetBool("IsRunning", true);
+        }
+        else
+            PlayerAC.SetBool("IsRunning", false);
 
         prevDirection = currentDirection;
         //change the player orientation
@@ -141,6 +149,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                PlayerAC.SetTrigger("TakeOff");
+                PlayerAC.SetBool("IsJumping", true);
                 rb.AddForce(new Vector2(0f, jumpForce * jumpMultiplier), ForceMode2D.Impulse);
                 jumpMultiplier = 1;
                 jumpStart = false;
@@ -156,6 +166,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*1.05f);
         }
+        if (isGrounded)
+            PlayerAC.SetBool("IsJumping", false);
     }
 
     void HandleDash(DirectionEnum dir)
