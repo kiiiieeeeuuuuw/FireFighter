@@ -1,6 +1,7 @@
 ﻿using Assets.Script.General;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -190,8 +191,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void WallGlide()
-    {
-        IsTouchingFront = Physics2D.OverlapCircle(FrontalCheck.position, CheckRadius, 7);
+    {         
+        IsTouchingFront = Physics2D.OverlapCircleAll(FrontalCheck.position, CheckRadius).Any(x => x.CompareTag("Wall"));
         var move = Input.GetAxisRaw("Horizontal");
         bool WallSliding = IsTouchingFront && !isGrounded;
         PlayerAC.SetBool("IsWallHugging", WallSliding);
