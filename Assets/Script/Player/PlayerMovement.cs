@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         WallGlide();
         Fall();
+        PlayerAC.SetBool("IsJumping", !isGrounded);
     }
 
     void FixedUpdate()
@@ -149,7 +150,6 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 PlayerAC.SetTrigger("TakeOff");
-                PlayerAC.SetBool("IsJumping", true);
                 rb.AddForce(new Vector2(0f, jumpForce * jumpMultiplier), ForceMode2D.Impulse);
                 jumpMultiplier = 1;
                 jumpStart = false;
@@ -165,8 +165,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*1.05f);
         }
-        if (isGrounded)
-            PlayerAC.SetBool("IsJumping", false);
     }
 
     void HandleDash(DirectionEnum dir)
@@ -195,7 +193,8 @@ public class PlayerMovement : MonoBehaviour
     {
         IsTouchingFront = Physics2D.OverlapCircle(FrontalCheck.position, CheckRadius, 7);
         var move = Input.GetAxisRaw("Horizontal");
-        bool WallSliding = IsTouchingFront && !isGrounded;        
+        bool WallSliding = IsTouchingFront && !isGrounded;
+        PlayerAC.SetBool("IsWallHugging", WallSliding);
         if(WallSliding)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
