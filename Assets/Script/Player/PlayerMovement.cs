@@ -187,7 +187,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (direction == DirectionEnum.Right) rb.velocity = Vector2.right * dashSpeed;
             if (direction == DirectionEnum.Left) rb.velocity = Vector2.left * dashSpeed;            
-        }                
+        }
+
+        PlayerAC.SetTrigger("Dash");
     }
 
     void WallGlide()
