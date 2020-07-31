@@ -3650,7 +3650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2052352766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,7 +3664,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberOfSpawns: 1
-  Flame: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a, type: 3}
+  Flame: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
+  xForce: 50
+  yForce: 50
 --- !u!4 &2052352767
 Transform:
   m_ObjectHideFlags: 0
@@ -3967,12 +3969,12 @@ PrefabInstance:
     - target: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a,
         type: 3}
       propertyPath: m_Name
-      value: Flame
+      value: Ember
       objectReference: {fileID: 0}
     - target: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5464461055311406257, guid: 28bcf7f9088a8214cbfbbd7230f56d4a,
         type: 3}
