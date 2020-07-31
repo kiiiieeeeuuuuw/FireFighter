@@ -9633,6 +9633,7 @@ GameObject:
   - component: {fileID: 5549323352275273709}
   - component: {fileID: 5549323352275273708}
   - component: {fileID: 5549323352275273710}
+  - component: {fileID: 6267173596261129442}
   m_Layer: 0
   m_Name: ThrowableFlame
   m_TagString: Untagged
@@ -9693,3 +9694,18 @@ CircleCollider2D:
   m_Offset: {x: -0.015431166, y: -0.07715607}
   serializedVersion: 2
   m_Radius: 0.76233053
+--- !u!114 &6267173596261129442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549323352275273707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f70cbc445fea0c4ba1cfe9508b7f589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xForce: 50
+  yForce: 50
+  apply: 0
