@@ -1,0 +1,436 @@
+fileFormatVersion: 2
+guid: 84bcf32e4cc9948a7816507e13a74ea2
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: 'Clouds #3'
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3852
+      y: 3451
+      width: 3840
+      height: 1344
+    spriteID: d2ccd73270f5c444e9dd8340ff6b4f3e
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3852, y: 3451}
+  - name: "Achtergrond kopi\xEBren #2"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 3840
+      height: 2160
+    spriteID: 4d1e8de8733704987923ee8cf7e1a8f6
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+  - name: 'Buildings #2'
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 14286
+      width: 3208
+      height: 1844
+    spriteID: 7c0164c08088043f9a6d465121c95c0f
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -104, y: 14286}
+  - name: 'Clouds #2'
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3852
+      y: 2012
+      width: 3840
+      height: 1431
+    spriteID: 12afdd6d31218492485ce56ef58d25c3
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3852, y: 2012}
+  - name: "Achtergrond kopi\xEBren #1"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2172
+      width: 3840
+      height: 2160
+    spriteID: 5f3312440a6b648abbf5efbf869ee6a4
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 2172}
+  - name: 'Buildings #1'
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 10710
+      width: 3688
+      height: 1984
+    spriteID: 78ea0db3e95d942c9b83ad9cfc6c96a1
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -72, y: 10710}
+  - name: 'Clouds #1'
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 12702
+      width: 3840
+      height: 1576
+    spriteID: ad2213b7b91684ec886346763a3767db
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 12702}
+  - name: "Achtergrond kopi\xEBren"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4340
+      width: 3840
+      height: 2160
+    spriteID: 81cd5f2ef51b2457a88ad99c7c5f0afd
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4340}
+  - name: Buildings
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3852
+      y: 4
+      width: 2880
+      height: 2000
+    spriteID: c35464a37688d4b8495e860c2ae02d03
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3628, y: 4}
+  - name: Clouds
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 8676
+      width: 3840
+      height: 2026
+    spriteID: 33c4e01e36a324f66adca7b530f38a08
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 8676}
+  - name: Achtergrond
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 6508
+      width: 3840
+      height: 2160
+    spriteID: f1d99f0f1ac364f90a1edc0a0cdd273c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 6508}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 2048
+  documentSize: {x: 3840, y: 2160}
+  paperDollMode: 0
+  keepDupilcateSpriteName: 0
+  spriteCategoryList:
+    categories: []
+  textureActualWidth: 8192
+  textureActualHeight: 16384
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: 'Clouds #3'
+    spriteName: 'Clouds #3'
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d2ccd73270f5c444e9dd8340ff6b4f3e
+    layerID: -1724416710
+    mosaicPosition: {x: 3852, y: 3451}
+  - name: "Achtergrond kopi\xEBren #2"
+    spriteName: "Achtergrond kopi\xEBren #2"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4d1e8de8733704987923ee8cf7e1a8f6
+    layerID: -1147481637
+    mosaicPosition: {x: 4, y: 4}
+  - name: 'Buildings #2'
+    spriteName: 'Buildings #2'
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7c0164c08088043f9a6d465121c95c0f
+    layerID: -644255084
+    mosaicPosition: {x: 4, y: 14286}
+  - name: 'Clouds #2'
+    spriteName: 'Clouds #2'
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 12afdd6d31218492485ce56ef58d25c3
+    layerID: -1724416709
+    mosaicPosition: {x: 3852, y: 2012}
+  - name: "Achtergrond kopi\xEBren #1"
+    spriteName: "Achtergrond kopi\xEBren #1"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5f3312440a6b648abbf5efbf869ee6a4
+    layerID: -1147481638
+    mosaicPosition: {x: 4, y: 2172}
+  - name: 'Buildings #1'
+    spriteName: 'Buildings #1'
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 78ea0db3e95d942c9b83ad9cfc6c96a1
+    layerID: -240970557
+    mosaicPosition: {x: 4, y: 10710}
+  - name: 'Clouds #1'
+    spriteName: 'Clouds #1'
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ad2213b7b91684ec886346763a3767db
+    layerID: -1724416712
+    mosaicPosition: {x: 4, y: 12702}
+  - name: "Achtergrond kopi\xEBren"
+    spriteName: "Achtergrond kopi\xEBren"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 81cd5f2ef51b2457a88ad99c7c5f0afd
+    layerID: -267477778
+    mosaicPosition: {x: 4, y: 4340}
+  - name: Buildings
+    spriteName: Buildings
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c35464a37688d4b8495e860c2ae02d03
+    layerID: 1660445297
+    mosaicPosition: {x: 3852, y: 4}
+  - name: Clouds
+    spriteName: Clouds
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 33c4e01e36a324f66adca7b530f38a08
+    layerID: 840910424
+    mosaicPosition: {x: 4, y: 8676}
+  - name: Achtergrond
+    spriteName: Achtergrond
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f1d99f0f1ac364f90a1edc0a0cdd273c
+    layerID: 0
+    mosaicPosition: {x: 4, y: 6508}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+  boneGOs: []
+  generateGOHierarchy: 0
+  textureAssetName: skyline Texture
+  prefabAssetName: skyline Prefab
+  spriteLibAssetName: skyline Sprite Lib
