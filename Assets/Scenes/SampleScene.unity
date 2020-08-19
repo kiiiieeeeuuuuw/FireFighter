@@ -1586,11 +1586,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Building: {fileID: 1412096619997438389, guid: c947d19e47193a043a128cf449fca7c7,
     type: 3}
-  NumberOfBuidings: 0
+  NumberOfBuidings: 3
   PlayerOffset: 20
   MaxBuildingOffsetX: 20
   MinBuildingOffsetX: 7
-  MaxBuildingOffsetY: 12
+  MaxBuildingOffsetY: 8
   MinBuildingOffsetY: 0
   Player: {fileID: 1957270051}
 --- !u!4 &679873883

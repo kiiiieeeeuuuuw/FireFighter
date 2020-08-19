@@ -13,18 +13,38 @@ public class GenerateBuilding : MonoBehaviour
     public float MaxBuildingOffsetY;
     public float MinBuildingOffsetY;
 
+    private float[] LeftOrRight = { -1, 1 };
+    private float[] LowerOrHigher = { -1, 1 };
+
     public GameObject Player;
     // Start is called before the first frame update
     void Start()
     {
         var playerPos = Player.GetComponent<Transform>().position;
-        var b = Instantiate(Building,
+        var startBuilding = Instantiate(Building,
             new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z),
             Quaternion.identity);
-        playerPos = b.transform.position;
-        Instantiate(Building,
-            new Vector3(playerPos.x - MaxBuildingOffsetX, playerPos.y - MaxBuildingOffsetY, playerPos.z),
-            Quaternion.identity);
+
+        List<GameObject> buildings = new List<GameObject> { startBuilding };
+        var leftB = startBuilding;
+        var rightB = startBuilding;
+        System.Random rng = new System.Random();
+
+        for (int i = 0; i < NumberOfBuidings - 1; i++)
+        {            
+            var lOrRMultiplier = LeftOrRight[rng.Next(0, 2)];
+            var lOrHMultiplier = LowerOrHigher[rng.Next(0, 2)];
+            var refBuilding = lOrRMultiplier == 1 ? rightB : leftB;
+            var refPos = refBuilding.transform.position;
+
+            var deltaX = rng.Next((int)MinBuildingOffsetX, (int)MaxBuildingOffsetX) * lOrRMultiplier;
+            var deltaY = rng.Next((int)MinBuildingOffsetY, (int)MaxBuildingOffsetY) * lOrHMultiplier;
+
+            var building = Instantiate(Building, new Vector3(refPos.x + deltaX, refPos.y + deltaY, refPos.z), Quaternion.identity, this.transform);            
+
+            if (lOrRMultiplier == -1) leftB = building;
+            if (lOrRMultiplier == 1) rightB = building;
+        }
 
     }
 
