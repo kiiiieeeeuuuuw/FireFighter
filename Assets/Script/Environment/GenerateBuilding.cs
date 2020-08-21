@@ -22,8 +22,7 @@ public class GenerateBuilding : MonoBehaviour
     {
         var playerPos = Player.GetComponent<Transform>().position;
         var startBuilding = Instantiate(Building,
-            new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z),
-            Quaternion.identity);
+            new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z), Quaternion.identity, this.transform);
 
         List<GameObject> buildings = new List<GameObject> { startBuilding };
         var leftB = startBuilding;
