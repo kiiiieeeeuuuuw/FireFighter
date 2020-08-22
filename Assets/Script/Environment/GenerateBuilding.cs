@@ -16,15 +16,17 @@ public class GenerateBuilding : MonoBehaviour
     private float[] LeftOrRight = { -1, 1 };
     private float[] LowerOrHigher = { -1, 1 };
 
+    private List<GameObject> Buildings;
+
     public GameObject Player;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         var playerPos = Player.GetComponent<Transform>().position;
         var startBuilding = Instantiate(Building,
             new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z), Quaternion.identity, this.transform);
 
-        List<GameObject> buildings = new List<GameObject> { startBuilding };
+        Buildings = new List<GameObject> { startBuilding };
         var leftB = startBuilding;
         var rightB = startBuilding;
         System.Random rng = new System.Random();
@@ -43,13 +45,13 @@ public class GenerateBuilding : MonoBehaviour
 
             if (lOrRMultiplier == -1) leftB = building;
             if (lOrRMultiplier == 1) rightB = building;
+            Buildings.Add(building);
         }
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public List<GameObject> GetBuildings()
     {
-        
+        return Buildings;
     }
 }
