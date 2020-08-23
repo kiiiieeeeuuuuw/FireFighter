@@ -40,7 +40,7 @@ public class SpawnMeteor : MonoBehaviour
             var rb = fb.GetComponent<Rigidbody2D>();
             var direction = new Vector2(xTarget - transform.position.x, yTarget - transform.position.y);
             rb.AddForce(direction * MeteorForce, ForceMode2D.Impulse);
-            MaxTime = 0;
+            PassedTime = 0;
         }
     }
 }
