@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7224513059486681014}
   - component: {fileID: 3278161296063801116}
   - component: {fileID: 3278161296063801117}
+  - component: {fileID: 6162048321017672048}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Wall
@@ -84,6 +85,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2687559, y: 7.113306}
   m_EdgeRadius: 0
+--- !u!114 &6162048321017672048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929198703130397360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53488df3f444b4794b77cab6fb9a7140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 2771719670596812456, guid: 28e367cfb7e3744e6855ddbe9d2a51db,
+    type: 3}
 --- !u!1 &1412096619997438389
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4679240263913289548}
   - component: {fileID: 2768786716281560457}
+  - component: {fileID: 1746900238956241307}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Ground
@@ -176,6 +192,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.3501735, y: 0.4060912}
   m_EdgeRadius: 0
+--- !u!114 &1746900238956241307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057910586214445949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53488df3f444b4794b77cab6fb9a7140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 2771719670596812456, guid: 28e367cfb7e3744e6855ddbe9d2a51db,
+    type: 3}
 --- !u!1 &4031179943895552723
 GameObject:
   m_ObjectHideFlags: 0
