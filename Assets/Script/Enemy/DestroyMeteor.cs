@@ -23,7 +23,7 @@ public class DestroyMeteor : MonoBehaviour
         {
             PassedTime += Time.deltaTime;
             if (PassedTime > LifeTime)
-                Destroy(this);
+                Destroy(this.gameObject);
         }
     }
 
@@ -31,5 +31,6 @@ public class DestroyMeteor : MonoBehaviour
     {
         Destroy = true;
         GetComponent<TrailRenderer>().enabled = false;
+        Destroy(GetComponent<Rigidbody2D>());
     }
 }
