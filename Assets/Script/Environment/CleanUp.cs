@@ -16,6 +16,6 @@ public class CleanUp : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Application.LoadLevel(Application.loadedLevel);
-        }
+        }        
     }
 }

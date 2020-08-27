@@ -13,11 +13,13 @@ public class SpawnMeteor : MonoBehaviour
     private float PassedTime;
 
     public float MeteorForce;
+    private float index;
 
     // Start is called before the first frame update
     void Start()
     {
         Targets = Gb.GetBuildings();
+        index = 0;
     }
 
     // Update is called once per frame
@@ -27,6 +29,8 @@ public class SpawnMeteor : MonoBehaviour
         if(PassedTime > MaxTime && Targets.Count > 0)
         {
             var fb = Instantiate(FireBall, transform.position, Quaternion.identity);
+            fb.name = "meteor_" + index;
+            index++;
 
             var rng = new System.Random();
             var targetBuilding = Targets[rng.Next(0, Targets.Count)];

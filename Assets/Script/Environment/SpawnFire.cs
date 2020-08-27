@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,12 +18,20 @@ public class SpawnFire : MonoBehaviour
             Vector3 impactPos = collision.transform.position;
             if (xDelta)
                 impactPos.x -= delta;
-            if (yDelta)
+            else if (yDelta)
                 impactPos.y -= delta;
             else return;
             Instantiate(Explosion,impactPos, Quaternion.identity, this.transform);
             Instantiate(Fire, impactPos, Quaternion.identity, this.transform);
-            Destroy(collision.gameObject);
+            try
+            {
+                collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
+            }
+            catch(NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            //Destroy(collision.gameObject);
         }
-    }
+    }    
 }
