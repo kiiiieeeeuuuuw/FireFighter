@@ -32,5 +32,6 @@ public class DestroyMeteor : MonoBehaviour
         Destroy = true;
         GetComponent<TrailRenderer>().enabled = false;
         Destroy(GetComponent<Rigidbody2D>());
+        GetComponent<Collider2D>().enabled = false;
     }
 }

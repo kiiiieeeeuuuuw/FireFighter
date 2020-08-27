@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator PlayerAC;
 
-    public SpriteRenderer sprite;
-
     private Color yellow = new Color(255, 255, 0);
     private Color red = new Color(255, 0, 0);
     private Color blue = new Color(0, 0, 255);
@@ -141,12 +139,6 @@ public class PlayerMovement : MonoBehaviour
             if (!jumpStop)
             {
                 if (jumpMultiplier < maxJumpMultiplier) jumpMultiplier += jumpIncrement;
-                if(sprite.color != red)
-                {
-                    float g = sprite.color.g;
-                    g = g - 255 * jumpIncrement < 0 ? 0 : g - 255 * jumpIncrement;
-                    sprite.color = new Color(sprite.color.r, g, sprite.color.b);
-                }
             }
             else
             {
@@ -155,7 +147,6 @@ public class PlayerMovement : MonoBehaviour
                 jumpMultiplier = 1;
                 jumpStart = false;
                 jumpStop = false;
-                sprite.color = yellow;
             }
         }
     }

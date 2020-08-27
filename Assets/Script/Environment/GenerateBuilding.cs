@@ -17,6 +17,8 @@ public class GenerateBuilding : MonoBehaviour
     private float[] LowerOrHigher = { -1, 1 };
 
     private List<GameObject> Buildings;
+    private GameObject LeftBuilding;
+    private GameObject RightBuilding;
 
     public GameObject Player;
 
@@ -27,15 +29,15 @@ public class GenerateBuilding : MonoBehaviour
             new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z), Quaternion.identity, this.transform);
 
         Buildings = new List<GameObject> { startBuilding };
-        var leftB = startBuilding;
-        var rightB = startBuilding;
+        LeftBuilding = startBuilding;
+        RightBuilding = startBuilding;
         System.Random rng = new System.Random();
 
         for (int i = 0; i < NumberOfBuidings - 1; i++)
         {            
             var lOrRMultiplier = LeftOrRight[rng.Next(0, 2)];
             var lOrHMultiplier = LowerOrHigher[rng.Next(0, 2)];
-            var refBuilding = lOrRMultiplier == 1 ? rightB : leftB;
+            var refBuilding = lOrRMultiplier == 1 ? RightBuilding : LeftBuilding;
             var refPos = refBuilding.transform.position;
 
             var deltaX = rng.Next((int)MinBuildingOffsetX, (int)MaxBuildingOffsetX) * lOrRMultiplier;
@@ -43,8 +45,8 @@ public class GenerateBuilding : MonoBehaviour
 
             var building = Instantiate(Building, new Vector3(refPos.x + deltaX, refPos.y + deltaY, refPos.z), Quaternion.identity, this.transform);            
 
-            if (lOrRMultiplier == -1) leftB = building;
-            if (lOrRMultiplier == 1) rightB = building;
+            if (lOrRMultiplier == -1) LeftBuilding = building;
+            if (lOrRMultiplier == 1) RightBuilding = building;
             Buildings.Add(building);
         }
 
@@ -53,5 +55,15 @@ public class GenerateBuilding : MonoBehaviour
     public List<GameObject> GetBuildings()
     {
         return Buildings;
+    }
+
+    public Vector3 GetLeftLimit()
+    {
+        return LeftBuilding.transform.position;
+    }
+
+    public Vector3 GetRightLimit()
+    {
+        return RightBuilding.transform.position;
     }
 }
