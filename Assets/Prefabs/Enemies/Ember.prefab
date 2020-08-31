@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2083708452}
   - component: {fileID: 2083708454}
   - component: {fileID: 2083708453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4822,7 +4822,7 @@ GameObject:
   - component: {fileID: 5464461055215148880}
   - component: {fileID: 5464461055215148887}
   - component: {fileID: 5464461055215148886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9633,8 +9633,8 @@ GameObject:
   - component: {fileID: 5464461055311406257}
   - component: {fileID: 5464461055311406256}
   - component: {fileID: 5464461055311406258}
-  m_Layer: 0
-  m_Name: Flame
+  m_Layer: 8
+  m_Name: Ember
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

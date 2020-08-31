@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5549323350883194698}
   - component: {fileID: 5549323350883194700}
   - component: {fileID: 5549323350883194699}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4822,7 +4822,7 @@ GameObject:
   - component: {fileID: 5549323351612174217}
   - component: {fileID: 5549323351612174219}
   - component: {fileID: 5549323351612174218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9635,7 +9635,7 @@ GameObject:
   - component: {fileID: 5549323352275273710}
   - component: {fileID: 6101271540194686179}
   - component: {fileID: 2903676001312848916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meteor
   m_TagString: Meteor
   m_Icon: {fileID: 0}
