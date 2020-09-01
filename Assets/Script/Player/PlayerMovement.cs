@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Horizontal movement")]
     public float moveSpeed = 5f;
 
+    public bool isAttacking = false;
+
     #endregion
 
     #region vertical movement fields
@@ -105,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         var currentDirection = movement.normalized.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
-        if (movement.x != 0)
+        if (movement.x != 0 && !isAttacking)
         {
             if (!IsTouchingFront)
                 transform.position += movement * Time.deltaTime * moveSpeed;
@@ -209,5 +211,10 @@ public class PlayerMovement : MonoBehaviour
     void SetWallJumpingToFalse()
     {
         WallJumping = false;
+    }
+
+    void EndAttack()
+    {
+        isAttacking = false;
     }
 }

@@ -680,7 +680,7 @@ MonoBehaviour:
   Meteor: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
   Gb: {fileID: 679873882}
   Targets: []
-  MaxTime: 0.5
+  MaxTime: 5
   MeteorForce: 0.5
 --- !u!1001 &277086727
 PrefabInstance:
@@ -5014,7 +5014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798598fca90ca42bf80b38257600cb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartTimeBtwAttack: 0.2
+  TimeBtwAttack: 0
+  StartTimeBtwAttack: 0.3
   AttackPos: {fileID: 1689713231}
   WhatIsFire:
     serializedVersion: 2

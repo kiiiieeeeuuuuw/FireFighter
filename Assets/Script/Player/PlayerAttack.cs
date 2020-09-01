@@ -15,10 +15,14 @@ public class PlayerAttack : MonoBehaviour
 
 
     private Animator PlayerAC;
+    private Rigidbody2D RB;
+    private PlayerMovement PM;
 
     private void Start()
     {
         PlayerAC = GetComponent<Animator>();
+        RB = GetComponent<Rigidbody2D>();
+        PM = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -26,16 +30,20 @@ public class PlayerAttack : MonoBehaviour
     {
         if(TimeBtwAttack <= 0)
         {
-            if (Input.GetKey(AttackCode))   
+            if (Input.GetKey(AttackCode) && PM.isGrounded)   
             {
-                PlayerAC.SetTrigger("Attack");                
+                RB.velocity = new Vector2(0, RB.velocity.y);
+                PM.isAttacking = true;
+                PlayerAC.SetTrigger("Attack");                                  
+
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
                 foreach(var flame in flamesToDouse)
                 {
                     //to do
                 }
-            }
-            TimeBtwAttack = StartTimeBtwAttack;
+                TimeBtwAttack = StartTimeBtwAttack;
+                PM.isAttacking = false;
+            }            
         }
         else
         {
