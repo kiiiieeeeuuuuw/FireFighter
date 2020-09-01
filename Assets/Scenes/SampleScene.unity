@@ -4834,6 +4834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
+  isAttacking: 0
   jumpForce: 10
   isGrounded: 0
   jumpMultiplier: 1
@@ -5016,6 +5017,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeBtwAttack: 0
   StartTimeBtwAttack: 0.3
+  PassedTime: 0
+  MaxPassedTime: 5
   AttackPos: {fileID: 1689713231}
   WhatIsFire:
     serializedVersion: 2

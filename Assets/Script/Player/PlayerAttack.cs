@@ -7,6 +7,10 @@ public class PlayerAttack : MonoBehaviour
     public float TimeBtwAttack;
     public float StartTimeBtwAttack;
 
+    public float PassedTime;
+    private bool FirstAttackPassed = false;
+    public float MaxPassedTime;
+
     private KeyCode AttackCode = KeyCode.J;
 
     public Transform AttackPos;
@@ -32,8 +36,18 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetKey(AttackCode) && PM.isGrounded)   
             {
-                RB.velocity = new Vector2(0, RB.velocity.y);                
-                PlayerAC.SetTrigger("Attack");                                  
+                RB.velocity = new Vector2(0, RB.velocity.y);
+                if (!FirstAttackPassed)
+                {
+                    PlayerAC.SetTrigger("Attack1");
+                    FirstAttackPassed = true;
+                }
+                else if(PassedTime < MaxPassedTime)
+                {
+                    PassedTime = 0;
+                    FirstAttackPassed = false;
+                    PlayerAC.SetTrigger("Attack2");
+                }
 
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
                 foreach(var flame in flamesToDouse)
@@ -47,6 +61,12 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             TimeBtwAttack -= Time.deltaTime;
+            PassedTime += Time.deltaTime;
+        }
+        if (PassedTime > MaxPassedTime)
+        {
+            PassedTime = 0;
+            FirstAttackPassed = false;
         }
     }
 
@@ -54,5 +74,10 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(AttackPos.position, AttackRange);
+    }
+
+    public void TestEvent()
+    {
+
     }
 }
