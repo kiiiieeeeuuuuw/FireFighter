@@ -213,6 +213,11 @@ public class PlayerMovement : MonoBehaviour
         WallJumping = false;
     }
 
+    void StartAttack()
+    {
+        isAttacking = true;
+    }
+
     void EndAttack()
     {
         isAttacking = false;

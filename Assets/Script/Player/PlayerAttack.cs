@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private float TimeBtwAttack;
+    public float TimeBtwAttack;
     public float StartTimeBtwAttack;
 
     private KeyCode AttackCode = KeyCode.J;
@@ -32,8 +32,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetKey(AttackCode) && PM.isGrounded)   
             {
-                RB.velocity = new Vector2(0, RB.velocity.y);
-                PM.isAttacking = true;
+                RB.velocity = new Vector2(0, RB.velocity.y);                
                 PlayerAC.SetTrigger("Attack");                                  
 
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
