@@ -5018,7 +5018,8 @@ MonoBehaviour:
   TimeBtwAttack: 0
   StartTimeBtwAttack: 0.3
   PassedTime: 0
-  MaxPassedTime: 5
+  FirstAttackPassed: 0
+  MaxPassedTime: 1
   AttackPos: {fileID: 1689713231}
   WhatIsFire:
     serializedVersion: 2

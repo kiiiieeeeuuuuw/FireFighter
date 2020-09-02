@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public float StartTimeBtwAttack;
 
     public float PassedTime;
-    private bool FirstAttackPassed = false;
+    public bool FirstAttackPassed = false;
     public float MaxPassedTime;
 
     private KeyCode AttackCode = KeyCode.J;
@@ -60,9 +60,10 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            TimeBtwAttack -= Time.deltaTime;
-            PassedTime += Time.deltaTime;
+            TimeBtwAttack -= Time.deltaTime;            
         }
+        if(FirstAttackPassed)
+            PassedTime += Time.deltaTime;
         if (PassedTime > MaxPassedTime)
         {
             PassedTime = 0;

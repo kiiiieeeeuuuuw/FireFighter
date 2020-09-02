@@ -11,6 +11,13 @@ public class SpawnFire : MonoBehaviour
     public bool xDelta;
     public bool yDelta;
 
+    private float index;
+
+    private void Start()
+    {
+        index = 0;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Meteor"))
@@ -22,7 +29,9 @@ public class SpawnFire : MonoBehaviour
                 impactPos.y -= delta;
             else return;
             Instantiate(Explosion,impactPos, Quaternion.identity, this.transform);
-            Instantiate(Fire, impactPos, Quaternion.identity, this.transform);
+            var fire = Instantiate(Fire, impactPos, Quaternion.identity, this.transform);
+            fire.name = "Ember_" + index;
+            index++;
             try
             {
                 collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
