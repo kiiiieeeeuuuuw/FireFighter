@@ -11,7 +11,7 @@ public class SpawnFire : MonoBehaviour
     public bool xDelta;
     public bool yDelta;
 
-    private float index;
+    private float index;    
 
     private void Start()
     {
@@ -28,8 +28,8 @@ public class SpawnFire : MonoBehaviour
             else if (yDelta)
                 impactPos.y -= delta;
             else return;
-            Instantiate(Explosion,impactPos, Quaternion.identity, this.transform);
-            var fire = Instantiate(Fire, impactPos, Quaternion.identity, this.transform);
+            Instantiate(Explosion,impactPos, Quaternion.identity, transform);
+            var fire = Instantiate(Fire, impactPos, Quaternion.identity, transform);
             fire.name = "Ember_" + index;
             index++;
             try

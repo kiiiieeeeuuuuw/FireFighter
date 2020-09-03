@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
                 foreach(var flame in flamesToDouse)
                 {
-                    //to do
+                    flame.GetComponent<ExtinguishFlame>()?.Extinguish();
                 }
                 TimeBtwAttack = StartTimeBtwAttack;
                 PM.isAttacking = false;

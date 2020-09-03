@@ -9633,6 +9633,7 @@ GameObject:
   - component: {fileID: 5464461055311406257}
   - component: {fileID: 5464461055311406256}
   - component: {fileID: 5464461055311406258}
+  - component: {fileID: 3089825585328233892}
   m_Layer: 8
   m_Name: Ember
   m_TagString: Untagged
@@ -9685,3 +9686,17 @@ CircleCollider2D:
   m_Offset: {x: -0.050679624, y: 0}
   serializedVersion: 2
   m_Radius: 0.7618446
+--- !u!114 &3089825585328233892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464461055311406263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ae3062a79df134fb86e8bbd3337b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExtinguishEffect: {fileID: 5971875562553296715, guid: 7d008deddadc6c54c804d2669ce154b2,
+    type: 3}

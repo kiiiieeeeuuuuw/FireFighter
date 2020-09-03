@@ -21,12 +21,13 @@ public class GenerateBuilding : MonoBehaviour
     private GameObject RightBuilding;
 
     public GameObject Player;
+    public GameObject EmberCounter;
 
     private void Awake()
     {
         var playerPos = Player.GetComponent<Transform>().position;
         var startBuilding = Instantiate(Building,
-            new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z), Quaternion.identity, this.transform);
+            new Vector3(playerPos.x, playerPos.y - PlayerOffset, playerPos.z), Quaternion.identity, this.transform);        
 
         Buildings = new List<GameObject> { startBuilding };
         LeftBuilding = startBuilding;
