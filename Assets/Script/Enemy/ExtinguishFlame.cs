@@ -5,18 +5,16 @@ using Unity.Mathematics;
 using UnityEngine;
 
 public class ExtinguishFlame : MonoBehaviour
-{
-    private float LifeTime;
-    private float PassedTime;
+{    
     private bool Doused;
 
     public GameObject ExtinguishEffect;
+    private List<ParticleSystem> Particles;
 
     // Start is called before the first frame update
     void Start()
-    {
-        LifeTime = GetComponentInChildren<ParticleSystem>().main.startLifetimeMultiplier;
-        PassedTime = 0;
+    {        
+        Particles = GetComponentsInChildren<ParticleSystem>().ToList();
         Doused = false;
     }
 
@@ -25,22 +23,23 @@ public class ExtinguishFlame : MonoBehaviour
     {
         if (Doused)
         {
-            PassedTime += Time.deltaTime;
-            if (PassedTime > LifeTime)
-                Destroy(gameObject);
+            if (!Particles.Any(x => x.IsAlive()))
+                Destroy(gameObject);            
         }
     }
 
     public void Extinguish()
     {
-        var particles = GetComponentsInChildren<ParticleSystem>().ToList();
-        if (particles.Count == 0)
-            Debug.LogError("no children for " + gameObject.name);
-        foreach (var particle in particles)
+        if (!Doused)
         {
-            particle.Stop();
-            Instantiate(ExtinguishEffect, particle.transform.position, Quaternion.identity, particle.transform);
+            if (Particles.Count == 0)
+                Debug.LogError("no children for " + gameObject.name);
+            foreach (var particle in Particles)
+            {
+                particle.Stop();                
+            }
+            Instantiate(ExtinguishEffect, Particles.First().transform.position, Quaternion.identity, Particles.First().transform);
+            Doused = true;
         }
-        Doused = true;                 
     }
 }

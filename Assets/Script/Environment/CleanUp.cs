@@ -13,7 +13,7 @@ public class CleanUp : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Meteor"))
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
         }
     }
 }

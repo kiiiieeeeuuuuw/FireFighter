@@ -1,37 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DestroyMeteor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private float LifeTime;
-    private float PassedTime;
+    // Start is called before the first frame update    
 
     private bool Destroy;
+    private List<ParticleSystem> Particles;
 
     void Start()
     {
-        LifeTime = GetComponentInChildren<ParticleSystem>().main.startLifetimeMultiplier;
-        PassedTime = 0;
+        Particles = GetComponentsInChildren<ParticleSystem>().ToList();        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Destroy)
-        {
-            PassedTime += Time.deltaTime;
-            if (PassedTime > LifeTime)
-                Destroy(this.gameObject);
-        }
+        if (Destroy && !Particles.Any(x => x.IsAlive()))        
+            Destroy(gameObject);        
     }
 
     public void DestroyMe()
     {
         Destroy = true;
+        // Stop meteor effect
         GetComponent<TrailRenderer>().enabled = false;
+
+        // Stop meteor from moving
         Destroy(GetComponent<Rigidbody2D>());
+
+        // Stop meteor from spawning more fires
         GetComponent<Collider2D>().enabled = false;
+
+        // Stop particleSystems from emitting more
+        Particles.ForEach(x => x.Stop());
     }
 }

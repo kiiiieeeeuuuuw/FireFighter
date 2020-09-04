@@ -15,8 +15,8 @@ public class SpawnFire : MonoBehaviour
 
     private void Start()
     {
-        index = 0;
-    }
+        index = 0;                
+    }    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
