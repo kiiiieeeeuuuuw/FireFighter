@@ -23,11 +23,6 @@ public class SpawnFire : MonoBehaviour
         if (collision.collider.CompareTag("Meteor"))
         {
             Vector3 impactPos = collision.transform.position;
-            //if (xDelta)
-            //    impactPos.x -= delta;
-            //else if (yDelta)
-            //    impactPos.y -= delta;
-            //else return;
             Instantiate(Explosion,impactPos, Quaternion.identity, transform);
             var fire = Instantiate(Fire, impactPos, Quaternion.identity, transform);
             fire.name = "Ember_" + index;
@@ -40,7 +35,6 @@ public class SpawnFire : MonoBehaviour
             {
                 Console.WriteLine(e.Message);
             }
-            //Destroy(collision.gameObject);
         }
     }    
 }
