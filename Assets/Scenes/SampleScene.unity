@@ -816,7 +816,7 @@ MonoBehaviour:
   Meteor: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
   Gb: {fileID: 679873882}
   Targets: []
-  MaxTime: 5
+  MaxTime: 2
   MeteorForce: 0.5
 --- !u!1001 &277086727
 PrefabInstance:
@@ -1308,7 +1308,7 @@ PrefabInstance:
     - target: {fileID: 3072663987033484236, guid: 1eade8061ef3b534c8d440a05f4df1e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 97.21
+      value: 52.6
       objectReference: {fileID: 0}
     - target: {fileID: 3072663987033484236, guid: 1eade8061ef3b534c8d440a05f4df1e7,
         type: 3}

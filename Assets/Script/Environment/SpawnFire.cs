@@ -8,8 +8,6 @@ public class SpawnFire : MonoBehaviour
     public ParticleSystem Explosion;
     public GameObject Fire;
     public float delta;
-    public bool xDelta;
-    public bool yDelta;
 
     private float index;    
 
@@ -22,11 +20,20 @@ public class SpawnFire : MonoBehaviour
     {
         if (collision.collider.CompareTag("Meteor"))
         {
-            Vector3 impactPos = collision.transform.position;
+            var impactPos = collision.transform.position;
+            var top = gameObject.transform.parent.Find("TopLocation").transform.position;
+            if (impactPos.x > top.x)
+                impactPos.x -= delta;
+            if (impactPos.x < top.x)
+                impactPos.x += delta;
+            if (impactPos.y > top.y)
+                impactPos.y -= delta;
+
+
             Instantiate(Explosion,impactPos, Quaternion.identity, transform);
             var fire = Instantiate(Fire, impactPos, Quaternion.identity, transform);
             fire.name = "Ember_" + index;
-            index++;
+            index++;            
             try
             {
                 collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();

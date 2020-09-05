@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
     {         
         IsTouchingFront = Physics2D.OverlapCircleAll(FrontalCheck.position, CheckRadius).Any(x => x.CompareTag("Wall"));
         var move = Input.GetAxisRaw("Horizontal");
-        bool WallSliding = IsTouchingFront && !isGrounded;
+        bool WallSliding = IsTouchingFront && !isGrounded && move != 0;
         PlayerAC.SetBool("IsWallHugging", WallSliding);
         if(WallSliding)
         {

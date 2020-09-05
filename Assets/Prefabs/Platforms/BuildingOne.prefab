@@ -335,7 +335,7 @@ MonoBehaviour:
   Explosion: {fileID: 2771719670596812456, guid: 28e367cfb7e3744e6855ddbe9d2a51db,
     type: 3}
   Fire: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a, type: 3}
-  delta: 0
+  delta: 0.5
   xDelta: 0
   yDelta: 0
 --- !u!1 &4031179943895552723
@@ -472,7 +472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508102760917831109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.054, z: 0}
+  m_LocalPosition: {x: 0, y: 3.468, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7633910127214745743}
