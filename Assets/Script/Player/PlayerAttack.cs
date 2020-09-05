@@ -9,11 +9,13 @@ public class PlayerAttack : MonoBehaviour
 
     public float PassedTime;
     public bool FirstAttackPassed = false;
+    public bool FirstUpAttackPassed = false;
     public float MaxPassedTime;
 
     private KeyCode AttackCode = KeyCode.J;
 
     public Transform AttackPos;
+    public Transform UpAttackPos;
     public LayerMask WhatIsFire;
     public float AttackRange;
 
@@ -36,17 +38,34 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetKey(AttackCode) && PM.isGrounded)   
             {
-                RB.velocity = new Vector2(0, RB.velocity.y);
-                if (!FirstAttackPassed)
+                if (Input.GetAxis("Vertical") > 0)
                 {
-                    PlayerAC.SetTrigger("Attack1");
-                    FirstAttackPassed = true;
+                    if (!FirstUpAttackPassed)
+                    {
+                        PlayerAC.SetTrigger("UpAttack1");
+                        FirstUpAttackPassed = true;
+                    }
+                    else if (PassedTime < MaxPassedTime)
+                    {
+                        PassedTime = 0;
+                        FirstUpAttackPassed = false;
+                        PlayerAC.SetTrigger("UpAttack2");
+                    }
                 }
-                else if(PassedTime < MaxPassedTime)
+                else
                 {
-                    PassedTime = 0;
-                    FirstAttackPassed = false;
-                    PlayerAC.SetTrigger("Attack2");
+                    RB.velocity = new Vector2(0, RB.velocity.y);
+                    if (!FirstAttackPassed)
+                    {
+                        PlayerAC.SetTrigger("Attack1");
+                        FirstAttackPassed = true;
+                    }
+                    else if (PassedTime < MaxPassedTime)
+                    {
+                        PassedTime = 0;
+                        FirstAttackPassed = false;
+                        PlayerAC.SetTrigger("Attack2");
+                    }
                 }
 
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
@@ -62,12 +81,13 @@ public class PlayerAttack : MonoBehaviour
         {
             TimeBtwAttack -= Time.deltaTime;            
         }
-        if(FirstAttackPassed)
+        if(FirstAttackPassed || FirstUpAttackPassed)
             PassedTime += Time.deltaTime;
         if (PassedTime > MaxPassedTime)
         {
             PassedTime = 0;
             FirstAttackPassed = false;
+            FirstUpAttackPassed = false;
         }
     }
 
@@ -75,6 +95,8 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(AttackPos.position, AttackRange);
+        Gizmos.DrawSphere(UpAttackPos.position, AttackRange);
+
     }
 
     public void TestEvent()
