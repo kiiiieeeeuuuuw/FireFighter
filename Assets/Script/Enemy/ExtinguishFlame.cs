@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ExtinguishFlame : MonoBehaviour
 {    
-    private bool Doused;
+    public bool Doused;
 
     public GameObject ExtinguishEffect;
     private List<ParticleSystem> Particles;

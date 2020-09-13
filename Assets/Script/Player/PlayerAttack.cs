@@ -13,6 +13,8 @@ public class PlayerAttack : MonoBehaviour
     public float MaxPassedTime;
 
     private KeyCode AttackCode = KeyCode.J;
+    private KeyCode UpCode = KeyCode.Z;
+
 
     public Transform AttackPos;
     public Transform UpAttackPos;
@@ -38,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetKey(AttackCode) && PM.isGrounded)   
             {
-                if (Input.GetAxis("Vertical") > 0)
+                if (Input.GetKey(UpCode))
                 {
                     if (!FirstUpAttackPassed)
                     {

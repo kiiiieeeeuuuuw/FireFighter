@@ -9634,6 +9634,7 @@ GameObject:
   - component: {fileID: 5464461055311406256}
   - component: {fileID: 5464461055311406258}
   - component: {fileID: 3089825585328233892}
+  - component: {fileID: -2303661627235369938}
   m_Layer: 8
   m_Name: Ember
   m_TagString: Untagged
@@ -9683,9 +9684,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.050679624, y: 0}
+  m_Offset: {x: 0.001597131, y: 0.018245138}
   serializedVersion: 2
-  m_Radius: 0.7618446
+  m_Radius: 0.2388173
 --- !u!114 &3089825585328233892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9700,3 +9701,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExtinguishEffect: {fileID: 5971875562553296715, guid: 7d008deddadc6c54c804d2669ce154b2,
     type: 3}
+--- !u!114 &-2303661627235369938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464461055311406263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854a0b2d008df4fa9882e14134c52456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
