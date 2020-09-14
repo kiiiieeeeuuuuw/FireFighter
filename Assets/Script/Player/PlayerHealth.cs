@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public float Health = 100;
     public GameObject PlayerSprite;
     public List<GameObject> Glows;
+    private Rigidbody2D Rb;
+    public float force;    
 
     public Color FullHealth;
     public Color Q3Health;
@@ -21,12 +23,19 @@ public class PlayerHealth : MonoBehaviour
             if (t.name.ToLower().Contains("glow"))
                 Glows.Add(t.gameObject);
         }
+
+        Rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void Damage(float dmg)
+    public void Damage(float dmg, Vector3 enemyPos)
     {
         Health -= dmg;
         HandleColor();
+
+        var playerPos = GetComponent<Transform>().position;
+        var direction = new Vector2(playerPos.x - enemyPos.x, playerPos.y).normalized;
+        var direction2 = direction / direction;
+        Rb.AddForce(direction2 * force, ForceMode2D.Impulse);                
     }
 
     private void HandleColor()
