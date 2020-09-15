@@ -50,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash Movement")]
     public float dashSpeed;
 
-    private float dashTime;    
+    private float dashTime;
+    private bool dashStopped;
 
     private DirectionEnum direction = DirectionEnum.None;
     private DirectionEnum prevDirection;
@@ -169,8 +170,11 @@ public class PlayerMovement : MonoBehaviour
 
         // End dash
         dashTime -= Time.deltaTime;
-        if (dashTime <= 0)        
-            rb.velocity = new Vector2(0f, rb.velocity.y);                                
+        if (dashTime <= 0 && !dashStopped)
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+            dashStopped = true;
+        }
     }
 
     void DashMove(DirectionEnum direction)
@@ -179,7 +183,8 @@ public class PlayerMovement : MonoBehaviour
         if(direction != DirectionEnum.None)
         {
             if (direction == DirectionEnum.Right) rb.velocity = Vector2.right * dashSpeed;
-            if (direction == DirectionEnum.Left) rb.velocity = Vector2.left * dashSpeed;            
+            if (direction == DirectionEnum.Left) rb.velocity = Vector2.left * dashSpeed;
+            dashStopped = false;
         }
 
         PlayerAC.SetTrigger("Dash");
