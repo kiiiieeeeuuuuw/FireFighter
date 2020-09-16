@@ -35,8 +35,7 @@ public class PlayerHealth : MonoBehaviour
         var playerPos = GetComponent<Transform>().position;
         var direction = new Vector2(playerPos.x - enemyPos.x, 1).normalized;
         var vel = direction * force;
-        Rb.velocity = vel;
-        //Rb.AddForce(direction2 * force, ForceMode2D.Impulse);                
+        Rb.velocity = vel;                       
     }
 
     private void HandleColor()

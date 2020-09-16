@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     public float WallSlidingSpeed;
     public float CheckRadius = 0.1f;
 
-    bool WallJumping;
+    public bool WallJumping;
     public float xWallForce;
     public float yWallForce;
     public float WallJumpTime;
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isGrounded && rb.velocity.y < 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*1.05f);
+            SetVelocity(new Vector2(rb.velocity.x, rb.velocity.y*1.05f), "fall");
         }
     }
 
@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
         dashTime -= Time.deltaTime;
         if (dashTime <= 0 && !dashStopped)
         {
-            rb.velocity = new Vector2(0f, rb.velocity.y);
+            SetVelocity(new Vector2(0f, rb.velocity.y), "handledash");
             dashStopped = true;
         }
     }
@@ -182,8 +182,8 @@ public class PlayerMovement : MonoBehaviour
         dashTime = 0.1f;
         if(direction != DirectionEnum.None)
         {
-            if (direction == DirectionEnum.Right) rb.velocity = Vector2.right * dashSpeed;
-            if (direction == DirectionEnum.Left) rb.velocity = Vector2.left * dashSpeed;
+            if (direction == DirectionEnum.Right) SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
+            if (direction == DirectionEnum.Left) SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
             dashStopped = false;
         }
 
@@ -204,18 +204,19 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && WallSliding)
         {
             WallJumping = true;
-            Invoke("SetWallJumpingToFalse", WallJumpTime);
+            Invoke("EndWallJump", WallJumpTime);
         }
 
         if (WallJumping)
         {
-            rb.velocity = new Vector2(xWallForce * -move, yWallForce);
+            SetVelocity(new Vector2(xWallForce * -move, yWallForce), "walljump");
         }
     }
 
-    void SetWallJumpingToFalse()
+    void EndWallJump()
     {
-        WallJumping = false;
+        WallJumping = false; 
+        SetVelocity(new Vector2(0f, rb.velocity.y), "EndWallJump");
     }
 
     void StartAttack()
@@ -226,5 +227,11 @@ public class PlayerMovement : MonoBehaviour
     void EndAttack()
     {
         isAttacking = false;
+    }
+
+    void SetVelocity(Vector2 velocity, string origin)
+    {
+        rb.velocity = velocity;
+        Debug.Log(origin);
     }
 }

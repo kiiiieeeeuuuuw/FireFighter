@@ -1765,7 +1765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.27533, y: -0.77094436, z: 53.445656}
+  m_LocalPosition: {x: 16.275328, y: -0.77094436, z: 53.445656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1983626207}
@@ -4806,7 +4806,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813041288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.27533, y: -0.77094436, z: 53.445656}
+  m_LocalPosition: {x: 16.275328, y: -0.77094436, z: 53.445656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 310901159}
@@ -5026,7 +5026,8 @@ MonoBehaviour:
   WallSliding: 0
   WallSlidingSpeed: 5
   CheckRadius: 0.1
-  xWallForce: 20
+  WallJumping: 0
+  xWallForce: 30
   yWallForce: 20
   WallJumpTime: 0.1
 --- !u!114 &1957270056
