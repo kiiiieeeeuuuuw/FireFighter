@@ -20,17 +20,20 @@ public class PlayerAttack : MonoBehaviour
     public Transform UpAttackPos;
     public LayerMask WhatIsFire;
     public float AttackRange;
+    public float xForce;
 
 
     private Animator PlayerAC;
     private Rigidbody2D RB;
     private PlayerMovement PM;
+    private Transform PlayerScale;
 
     private void Start()
     {
         PlayerAC = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
         PM = GetComponent<PlayerMovement>();
+        PlayerScale = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -68,6 +71,8 @@ public class PlayerAttack : MonoBehaviour
                         FirstAttackPassed = false;
                         PlayerAC.SetTrigger("Attack2");
                     }
+                    var xDir = PlayerScale.localScale.x > 0 ? 1 : -1;
+                    RB.AddForce(new Vector2(xDir * xForce, 0), ForceMode2D.Impulse);
                 }
 
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
