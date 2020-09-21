@@ -596,7 +596,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1957270052}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &214654673
 TrailRenderer:
@@ -2666,6 +2666,36 @@ PrefabInstance:
     - {fileID: 3072663987033484237, guid: 1eade8061ef3b534c8d440a05f4df1e7, type: 3}
     - {fileID: 3072663987033484239, guid: 1eade8061ef3b534c8d440a05f4df1e7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1eade8061ef3b534c8d440a05f4df1e7, type: 3}
+--- !u!1 &932187729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 932187730}
+  m_Layer: 0
+  m_Name: DownAttackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &932187730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932187729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1957270052}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &942032966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1313509438635541965, guid: a25741422182d4d9daf6cea9ce3a876b,
@@ -4720,7 +4750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1689713231}
   m_Layer: 0
-  m_Name: AttackPos
+  m_Name: ForwardAttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4738,7 +4768,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1957270052}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1755083781 stripped
 Transform:
@@ -4948,9 +4978,10 @@ Transform:
   - {fileID: 1180100926}
   - {fileID: 952956029}
   - {fileID: 530756667}
-  - {fileID: 1689713231}
   - {fileID: 214654672}
+  - {fileID: 1689713231}
   - {fileID: 75731403}
+  - {fileID: 932187730}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5046,6 +5077,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   Health: 100
+  StartTimeBetweenDamage: 1
   PlayerSprite: {fileID: 1367116289}
   Glows: []
   force: 20
@@ -5213,13 +5245,16 @@ MonoBehaviour:
   FirstAttackPassed: 0
   FirstUpAttackPassed: 0
   MaxPassedTime: 1
-  AttackPos: {fileID: 1689713231}
+  ForwardAttackPos: {fileID: 1689713231}
   UpAttackPos: {fileID: 75731403}
+  DownAttackPos: {fileID: 932187730}
+  BounceOnDownAttack: 0
   WhatIsFire:
     serializedVersion: 2
     m_Bits: 256
   AttackRange: 1.09
   xForce: 5
+  bounceForce: 20
 --- !u!1 &1983626206
 GameObject:
   m_ObjectHideFlags: 0

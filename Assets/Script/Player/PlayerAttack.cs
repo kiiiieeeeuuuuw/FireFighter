@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -14,13 +15,17 @@ public class PlayerAttack : MonoBehaviour
 
     private KeyCode AttackCode = KeyCode.J;
     private KeyCode UpCode = KeyCode.Z;
+    private KeyCode DownCode = KeyCode.S;
 
 
-    public Transform AttackPos;
+    public Transform ForwardAttackPos;
     public Transform UpAttackPos;
+    public Transform DownAttackPos;
+    public bool BounceOnDownAttack;
     public LayerMask WhatIsFire;
     public float AttackRange;
     public float xForce;
+    public float bounceForce;
 
 
     private Animator PlayerAC;
@@ -39,9 +44,11 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        BounceOnDownAttack = false;
+        Vector3 AttackPosToCheck;
         if(TimeBtwAttack <= 0)
         {
-            if (Input.GetKey(AttackCode) && PM.isGrounded)   
+            if (Input.GetKey(AttackCode))   
             {
                 if (Input.GetKey(UpCode))
                 {
@@ -56,6 +63,13 @@ public class PlayerAttack : MonoBehaviour
                         FirstUpAttackPassed = false;
                         PlayerAC.SetTrigger("UpAttack2");
                     }
+                    AttackPosToCheck = UpAttackPos.position;
+                }
+                if (Input.GetKey(DownCode) && !PM.isGrounded)
+                {
+                    PlayerAC.SetTrigger("DownAttack");
+                    AttackPosToCheck = DownAttackPos.position;
+                    BounceOnDownAttack = true;
                 }
                 else
                 {
@@ -71,11 +85,17 @@ public class PlayerAttack : MonoBehaviour
                         FirstAttackPassed = false;
                         PlayerAC.SetTrigger("Attack2");
                     }
+                    AttackPosToCheck = ForwardAttackPos.position;
+
                     var xDir = PlayerScale.localScale.x > 0 ? 1 : -1;
                     RB.AddForce(new Vector2(xDir * xForce, 0), ForceMode2D.Impulse);
                 }
 
-                Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, WhatIsFire);
+                Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPosToCheck, AttackRange, WhatIsFire);   
+                if(BounceOnDownAttack && flamesToDouse.Length > 0)
+                {
+                    RB.velocity = new Vector2(RB.velocity.x, bounceForce);
+                }
                 foreach(var flame in flamesToDouse)
                 {
                     flame.GetComponent<ExtinguishFlame>()?.Extinguish();
@@ -101,8 +121,9 @@ public class PlayerAttack : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(AttackPos.position, AttackRange);
+        Gizmos.DrawSphere(ForwardAttackPos.position, AttackRange);
         Gizmos.DrawSphere(UpAttackPos.position, AttackRange);
+        Gizmos.DrawSphere(DownAttackPos.position, AttackRange);
 
     }
 
