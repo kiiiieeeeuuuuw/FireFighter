@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     public LayerMask WhatIsFire;
     public float Health = 100;
+    private float TimeBetweenDamage;
+    private bool DamageTaken;
+    public float StartTimeBetweenDamage;
     public GameObject PlayerSprite;
-    public List<GameObject> Glows;
+    public List<GameObject> Glows;    
     private Rigidbody2D Rb;
     public float force;    
 
@@ -16,27 +20,41 @@ public class PlayerHealth : MonoBehaviour
     public Color HalfHealth;
     public Color Q1Health;
 
+    private TrailRenderer TR;
+
     private void Start()
     {
-        foreach(Transform t in PlayerSprite.transform)
+        foreach (Transform t in PlayerSprite.transform)
         {
             if (t.name.ToLower().Contains("glow"))
                 Glows.Add(t.gameObject);
         }
 
-        Rb = GetComponent<Rigidbody2D>();        
+        Rb = GetComponent<Rigidbody2D>();
+        TR = GetComponent<TrailRenderer>();
+    }
+
+    private void Update()
+    {
+        if (DamageTaken)
+            TimeBetweenDamage -= Time.deltaTime;
     }
 
     public void Damage(float dmg, Vector3 enemyPos)
     {
-        Health -= dmg;
-        HandleColor();
+        if(TimeBetweenDamage <= 0) { 
+            Health -= dmg;
+            HandleColor();
 
-        var playerPos = GetComponent<Transform>().position;
-        var direction = new Vector2(playerPos.x - enemyPos.x, 1).normalized;
-        var vel = direction * force;
-        Rb.velocity = vel;                       
-        //Rb.AddForce(vel, ForceMode2D.Impulse);
+            var playerPos = GetComponent<Transform>().position;
+            var direction = new Vector2(playerPos.x - enemyPos.x, 1).normalized;
+            var vel = direction * force;
+            Rb.velocity = vel;
+
+            TimeBetweenDamage = StartTimeBetweenDamage;
+        }
+        else        
+            DamageTaken = true;        
     }
 
     private void HandleColor()
@@ -65,5 +83,6 @@ public class PlayerHealth : MonoBehaviour
         {
             glow.GetComponent<SpriteRenderer>().color = visibleColor;
         }
+        TR.startColor = visibleColor;
     }
 }
