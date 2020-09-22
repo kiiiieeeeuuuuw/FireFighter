@@ -17,6 +17,9 @@ public class SpawnMeteor : MonoBehaviour
     private Vector2 SpawnLeftLimit;
     private Vector2 SpawnRightLimit;
 
+    public bool AimForPlayer;
+    public GameObject Player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,16 +45,26 @@ public class SpawnMeteor : MonoBehaviour
             fb.name = "Meteor_" + index;
             index++;
 
+            float xTarget;
+            float yTarget;
             // Determine target location
-            var targetBuilding = Targets[rng.Next(0, Targets.Count)];
-            var top = targetBuilding.transform.Find("TopLocation").transform.position;
-            var bottom = targetBuilding.transform.Find("BottomLocation").transform.position;
-            var xTarget = rng.Next((int)bottom.x, (int)top.x);
-            var yTarget = rng.Next((int)bottom.y, (int)top.y);
+            if (AimForPlayer)
+            {
+                xTarget = Player.transform.position.x;
+                yTarget = Player.transform.position.y;
+            }
+            else
+            {
+                var targetBuilding = Targets[rng.Next(0, Targets.Count)];
+                var top = targetBuilding.transform.Find("TopLocation").transform.position;
+                var bottom = targetBuilding.transform.Find("BottomLocation").transform.position;
+                xTarget = rng.Next((int)bottom.x, (int)top.x);
+                yTarget = rng.Next((int)bottom.y, (int)top.y);
+            }
 
             // Shoot meteor towards target
             var rb = fb.GetComponent<Rigidbody2D>();
-            var direction = new Vector2(xTarget - transform.position.x, yTarget - transform.position.y);
+            var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);
             rb.AddForce(direction * MeteorForce, ForceMode2D.Impulse);
             PassedTime = 0;
         }

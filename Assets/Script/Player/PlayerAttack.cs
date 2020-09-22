@@ -44,10 +44,13 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BounceOnDownAttack = false;
+        // bugfix, otherwise animation will be triggered twice
+        PlayerAC.ResetTrigger("DownAttack");
+
         Vector3 AttackPosToCheck;
-        if(TimeBtwAttack <= 0)
-        {
+        BounceOnDownAttack = false;
+        if (TimeBtwAttack <= 0)
+        {            
             if (Input.GetKey(AttackCode))   
             {
                 if (Input.GetKey(UpCode))
@@ -95,13 +98,15 @@ public class PlayerAttack : MonoBehaviour
                 if(BounceOnDownAttack && flamesToDouse.Length > 0)
                 {
                     RB.velocity = new Vector2(RB.velocity.x, bounceForce);
+                    TimeBtwAttack = 0;
                 }
                 foreach(var flame in flamesToDouse)
                 {
+                    // to do: handle meteor destruction, add specific component to meteor
                     flame.GetComponent<ExtinguishFlame>()?.Extinguish();
                 }
                 TimeBtwAttack = StartTimeBtwAttack;
-                PM.isAttacking = false;
+                PM.isAttacking = false;                
             }            
         }
         else

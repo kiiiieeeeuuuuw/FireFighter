@@ -848,6 +848,8 @@ MonoBehaviour:
   Targets: []
   MaxTime: 2
   MeteorForce: 0.5
+  AimForPlayer: 0
+  Player: {fileID: 1957270051}
 --- !u!1001 &277086727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5051,6 +5053,7 @@ MonoBehaviour:
   jumpMultiplier: 1
   maxJumpMultiplier: 3
   jumpIncrement: 0.1
+  FallMultiplier: 1.03
   dashSpeed: 40
   FrontalCheck: {fileID: 530756667}
   IsTouchingFront: 0

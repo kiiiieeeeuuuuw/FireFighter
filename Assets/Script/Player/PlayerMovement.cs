@@ -33,16 +33,12 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 5f;
 
     public bool isGrounded = false;
-
     private bool jumpStart = false;
-
     private bool jumpStop = false;
-
     public float jumpMultiplier = 1;
-
     public float maxJumpMultiplier = 3;
-
     public float jumpIncrement = 0.5f;
+    public float FallMultiplier;
 
     #endregion
 
@@ -158,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isGrounded && rb.velocity.y < 0)
         {
-            SetVelocity(new Vector2(rb.velocity.x, rb.velocity.y*1.05f), "fall");
+            SetVelocity(new Vector2(rb.velocity.x, rb.velocity.y*FallMultiplier), "fall");
         }
     }
 
@@ -198,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerAC.SetBool("IsWallHugging", WallSliding);
         if(WallSliding)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
+            rb.velocity = new Vector2(0, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
         }
 
         if(Input.GetButtonDown("Jump") && WallSliding)
