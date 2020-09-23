@@ -102,7 +102,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 foreach(var flame in flamesToDouse)
                 {
-                    // to do: handle meteor destruction, add specific component to meteor
+                    flame.GetComponent<DestroyMeteor>()?.DestroyByPlayer();
                     flame.GetComponent<ExtinguishFlame>()?.Extinguish();
                 }
                 TimeBtwAttack = StartTimeBtwAttack;

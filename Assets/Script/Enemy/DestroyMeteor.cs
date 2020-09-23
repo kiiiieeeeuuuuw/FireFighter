@@ -9,6 +9,8 @@ public class DestroyMeteor : MonoBehaviour
     private bool Destroy;
     private List<ParticleSystem> Particles;
 
+    public ParticleSystem ExtinguishEffect;
+
     void Start()
     {
         Particles = GetComponentsInChildren<ParticleSystem>().ToList();        
@@ -35,5 +37,11 @@ public class DestroyMeteor : MonoBehaviour
 
         // Stop particleSystems from emitting more
         Particles.ForEach(x => x.Stop());
+    }
+
+    public void DestroyByPlayer()
+    {
+        Instantiate(ExtinguishEffect, transform.position, Quaternion.identity, transform);
+        DestroyMe();        
     }
 }
