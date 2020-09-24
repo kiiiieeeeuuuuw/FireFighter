@@ -9829,4 +9829,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingPoint: {x: 5, y: 25}
   TargetPoint: {x: 49, y: -29}
+  Trail: {fileID: 5843419984304444509, guid: b59c3e1d72f5d2e43891ad637014f70c, type: 3}
   draw: 1
