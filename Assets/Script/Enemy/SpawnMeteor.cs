@@ -38,16 +38,13 @@ public class SpawnMeteor : MonoBehaviour
             // Instantiate rng
             var rng = new System.Random();
 
-            // Instantiate meteor gameobject
+            // Instantiate spawnlocation
             var xSpawn = rng.Next((int)SpawnLeftLimit.x, (int)SpawnRightLimit.x);
             var spawnLocation = new Vector3(xSpawn, transform.position.y);
-            var fb = Instantiate(Meteor, spawnLocation, Quaternion.identity);
-            fb.name = "Meteor_" + index;
-            index++;
 
-            float xTarget;
-            float yTarget;
             // Determine target location
+            float xTarget;
+            float yTarget;            
             if (AimForPlayer)
             {
                 xTarget = Player.transform.position.x;
@@ -61,12 +58,20 @@ public class SpawnMeteor : MonoBehaviour
                 xTarget = rng.Next((int)bottom.x, (int)top.x);
                 yTarget = rng.Next((int)bottom.y, (int)top.y);
             }
+            
+            // Determine direction
+            var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);            
 
-            // Shoot meteor towards target
+            // Shoot meteor
+            var fb = Instantiate(Meteor, spawnLocation, Quaternion.identity);
+            fb.name = "Meteor_" + index;
+            index++;
             var rb = fb.GetComponent<Rigidbody2D>();
-            var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);
-            rb.AddForce(direction * MeteorForce, ForceMode2D.Impulse);
-            PassedTime = 0;
+            rb.velocity = direction * MeteorForce;
+
+            // Show direction
+            fb.GetComponent<ShowTrajectory>().StartDrawing(new Vector2(spawnLocation.x, spawnLocation.y), new Vector2(xTarget, yTarget));
+            PassedTime = 0;            
         }
     }
 }
