@@ -68,12 +68,15 @@ public class SpawnMeteor : MonoBehaviour
             // Shoot meteor
             var fb = Instantiate(Meteor, spawnLocation, Quaternion.identity, transform);
             fb.name = "Meteor_" + index;
-            index++;
+
             var rb = fb.GetComponent<Rigidbody2D>();
             rb.velocity = direction * MeteorForce;
 
             // Show direction
             ST.StartDrawing(new Vector2(spawnLocation.x, spawnLocation.y), new Vector2(xTarget, yTarget), index);
+
+            // Reset for next meteor
+            index++;
             PassedTime = 0;            
         }
     }

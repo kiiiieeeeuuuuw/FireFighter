@@ -11,7 +11,7 @@ public class DestroyMeteor : MonoBehaviour
 
     public ParticleSystem ExtinguishEffect;
 
-    private SpawnMeteorTrajectory SMT;;
+    private SpawnMeteorTrajectory SMT;
 
     void Start()
     {
@@ -38,8 +38,10 @@ public class DestroyMeteor : MonoBehaviour
         // Stop meteor from spawning more fires
         GetComponent<Collider2D>().enabled = false;
 
+        SMT.DestroyTrajectory(name);
+
         // Stop particleSystems from emitting more
-        Particles.ForEach(x => x.Stop());
+        Particles.ForEach(x => x.Stop());        
     }
 
     public void DestroyByPlayer()
