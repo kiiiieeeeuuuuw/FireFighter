@@ -11,9 +11,12 @@ public class DestroyMeteor : MonoBehaviour
 
     public ParticleSystem ExtinguishEffect;
 
+    private SpawnMeteorTrajectory SMT;;
+
     void Start()
     {
-        Particles = GetComponentsInChildren<ParticleSystem>().ToList();        
+        Particles = GetComponentsInChildren<ParticleSystem>().ToList();
+        SMT = GetComponentInParent<SpawnMeteorTrajectory>();
     }
 
     // Update is called once per frame

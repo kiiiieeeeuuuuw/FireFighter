@@ -6,6 +6,7 @@ public class SpawnMeteor : MonoBehaviour
 {
     public GameObject Meteor;
     public GenerateBuilding Gb;
+    public SpawnMeteorTrajectory ST;
     public List<GameObject> Targets;
 
     public float MaxTime;
@@ -27,6 +28,8 @@ public class SpawnMeteor : MonoBehaviour
         SpawnLeftLimit = new Vector2(Gb.GetLeftLimit().x, transform.position.y);
         SpawnRightLimit = new Vector2(Gb.GetRightLimit().x, transform.position.y);
         index = 0;
+
+        ST = GetComponent<SpawnMeteorTrajectory>();
     }
 
     // Update is called once per frame
@@ -63,14 +66,14 @@ public class SpawnMeteor : MonoBehaviour
             var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);            
 
             // Shoot meteor
-            var fb = Instantiate(Meteor, spawnLocation, Quaternion.identity);
+            var fb = Instantiate(Meteor, spawnLocation, Quaternion.identity, transform);
             fb.name = "Meteor_" + index;
             index++;
             var rb = fb.GetComponent<Rigidbody2D>();
             rb.velocity = direction * MeteorForce;
 
             // Show direction
-            fb.GetComponent<ShowTrajectory>().StartDrawing(new Vector2(spawnLocation.x, spawnLocation.y), new Vector2(xTarget, yTarget));
+            ST.StartDrawing(new Vector2(spawnLocation.x, spawnLocation.y), new Vector2(xTarget, yTarget), index);
             PassedTime = 0;            
         }
     }
