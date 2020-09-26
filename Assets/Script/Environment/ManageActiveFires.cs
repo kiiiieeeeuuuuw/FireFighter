@@ -7,6 +7,8 @@ public class ManageActiveFires : MonoBehaviour
     public GameObject camera;
     public GameObject[] CleanupFires;
 
+    public float activeFires;
+
     // Start is called before the first frame update
     void Start()
     {
