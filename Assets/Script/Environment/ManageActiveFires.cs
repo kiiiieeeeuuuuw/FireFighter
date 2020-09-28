@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class ManageActiveFires : MonoBehaviour
 {
-    public GameObject camera;
-    public GameObject[] CleanupFires;
+    [Header("Parameters")]
+    public GameObject Player;
+    public float ActiveFiresEachSideOfMiddle;
 
-    public float activeFires;
-    public int CameraIndex;
 
-    public float currentDelta;
-    public float leftDelta;
-    public float rightDelta;
+    private GameObject[] CleanupFires;
+    private Dictionary<string, int> FireNameIndex;    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,28 +36,37 @@ public class ManageActiveFires : MonoBehaviour
             }
             CleanupFires[j + 1] = h;
         }
-
-        // Get fire closest to camera
-        CameraIndex = 0;
-        float xVal = CleanupFires[CameraIndex].transform.position.x;
-        while(xVal < camera.transform.position.x)
+        // Store them for easy handling and find closest fire at start
+        float distance = float.MaxValue;
+        int closest = 0;
+        FireNameIndex = new Dictionary<string, int>();
+        for (int i = 0; i < numberOfFires; i++)
         {
-            xVal = CleanupFires[CameraIndex].transform.position.x;
-            CameraIndex++;
+            FireNameIndex.Add(CleanupFires[i].name, i);
+
+            // Check which one is closest
+            var distanceI = Vector2.Distance(Player.transform.position, CleanupFires[i].transform.position);
+            if (distanceI < distance)
+            {
+                distance = distanceI;
+                closest = i;
+            }
         }
+
+        // Disable outer fires
+        ChangeMiddleFire(CleanupFires[closest].name);        
     }
 
-    // Update is called once per frame
-    void Update()
+    // Enable or disable fires based on name of fire
+    public void ChangeMiddleFire(string name)
     {
-        /*float cameraX = camera.transform.position.x;
-        currentDelta =  cameraX - CleanupFires[CameraIndex].transform.position.x;
-        leftDelta = cameraX - CleanupFires[CameraIndex - 1].transform.position.x;
-        rightDelta = cameraX - CleanupFires[CameraIndex + 1].transform.position.x;
-
-        if (currentDelta < rightDelta)
-            CameraIndex++;
-        else if (currentDelta < leftDelta)
-            CameraIndex--;*/
+        var middle = FireNameIndex[name];
+        
+        for(int i = 0; i < CleanupFires.Length; i++)
+        {
+            if (i < middle - ActiveFiresEachSideOfMiddle || i > middle + ActiveFiresEachSideOfMiddle)
+                CleanupFires[i].SetActive(false);
+            else CleanupFires[i].SetActive(true);
+        }
     }
 }
