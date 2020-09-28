@@ -6,7 +6,7 @@ public class SpawnMeteor : MonoBehaviour
 {
     public GameObject Meteor;
     public GenerateBuilding Gb;
-    public SpawnMeteorTrajectory ST;
+    private SpawnMeteorTrajectory ST;
     public List<GameObject> Targets;
 
     public float MaxTime;

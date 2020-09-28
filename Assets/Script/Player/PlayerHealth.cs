@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
 
     private TrailRenderer TR;
 
+    public ParticleSystem Explosion;
+
     private void Start()
     {
         foreach (Transform t in PlayerSprite.transform)
@@ -40,11 +42,24 @@ public class PlayerHealth : MonoBehaviour
             TimeBetweenDamage -= Time.deltaTime;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Meteor"))
+        {
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            Damage(25, collision.transform.position);
+            collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
+        }
+    }
+
     public void Damage(float dmg, Vector3 enemyPos)
     {
-        if(TimeBetweenDamage <= 0) { 
-            Health -= dmg;
-            HandleColor();
+        if(TimeBetweenDamage <= 0) {
+            if (Health > 0)
+            {
+                Health -= dmg;
+                HandleColor();
+            }
 
             var playerPos = GetComponent<Transform>().position;
             var direction = new Vector2(playerPos.x - enemyPos.x, 1).normalized;
@@ -55,6 +70,13 @@ public class PlayerHealth : MonoBehaviour
         }
         else        
             DamageTaken = true;        
+    }
+
+    public void Heal(float healing)
+    {        
+        Health += healing;
+        if (Health > 100) Health = 100;
+        HandleColor();
     }
 
     private void HandleColor()

@@ -643,11 +643,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Meteor: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
   Gb: {fileID: 679873882}
-  ST: {fileID: 0}
   Targets: []
   MaxTime: 2
   MeteorForce: 0.5
-  AimForPlayer: 0
+  AimForPlayer: 1
   Player: {fileID: 1957270051}
 --- !u!114 &228472592
 MonoBehaviour:
@@ -4037,6 +4036,8 @@ MonoBehaviour:
   Q3Health: {r: 0, g: 1, b: 0.0027880669, a: 1}
   HalfHealth: {r: 0.9716981, g: 0.6524524, b: 0, a: 1}
   Q1Health: {r: 1, g: 0, b: 0.07898474, a: 1}
+  Explosion: {fileID: 2771719670596812456, guid: 28e367cfb7e3744e6855ddbe9d2a51db,
+    type: 3}
 --- !u!114 &1957270057
 MonoBehaviour:
   m_ObjectHideFlags: 0
