@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Wall
   - Meteor
+  - Building
   layers:
   - Default
   - TransparentFX

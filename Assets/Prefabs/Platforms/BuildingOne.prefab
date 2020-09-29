@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5306409907437968266}
   m_Layer: 0
   m_Name: FireSpawner
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,8 +336,6 @@ MonoBehaviour:
     type: 3}
   Fire: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a, type: 3}
   delta: 0.5
-  xDelta: 0
-  yDelta: 0
 --- !u!1 &4031179943895552723
 GameObject:
   m_ObjectHideFlags: 0

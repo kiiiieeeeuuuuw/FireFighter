@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using UnityEngine;
 
@@ -25,12 +26,12 @@ public class SpawnMeteorTrajectory : MonoBehaviour
         TargetPoint = target;
         DrawGizmos = true;
 
-        var t = Instantiate(Trail, StartingPoint, Quaternion.identity);
+        var t = Instantiate(Trail, TargetPoint, Quaternion.identity);
         t.name = "MeteorTrail_" + index;
         var p1 = StartingPoint;
         var p2 = TargetPoint;
         Angle = (Mathf.Atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Mathf.PI);
-        t.transform.RotateAround(StartingPoint, Vector3.forward, Angle);
+        t.transform.RotateAround(TargetPoint, Vector3.forward, Angle);
         SpawnedTrails.Add(index, t);
     }
 

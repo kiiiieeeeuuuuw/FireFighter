@@ -55,6 +55,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (Input.GetKey(UpCode))
                 {
+                    AttackPosToCheck = UpAttackPos.position;
                     if (!FirstUpAttackPassed)
                     {
                         PlayerAC.SetTrigger("UpAttack1");
@@ -65,10 +66,9 @@ public class PlayerAttack : MonoBehaviour
                         PassedTime = 0;
                         FirstUpAttackPassed = false;
                         PlayerAC.SetTrigger("UpAttack2");
-                    }
-                    AttackPosToCheck = UpAttackPos.position;
+                    }                    
                 }
-                if (Input.GetKey(DownCode) && !PM.isGrounded)
+                else if (Input.GetKey(DownCode) && !PM.isGrounded)
                 {
                     PlayerAC.SetTrigger("DownAttack");
                     AttackPosToCheck = DownAttackPos.position;

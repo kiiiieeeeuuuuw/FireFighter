@@ -5,27 +5,29 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public LayerMask WhatIsFire;
-    public float Health = 100;
-    private float TimeBetweenDamage;
-    private bool DamageTaken;
-    public float StartTimeBetweenDamage;
+    [Header("Parameters")]
+    public ParticleSystem Explosion;
     public GameObject PlayerSprite;
-    public List<GameObject> Glows;    
-    private Rigidbody2D Rb;
-    public float force;    
+    public LayerMask WhatIsFire;
+    public float Health = 100;    
+    public float StartTimeBetweenDamage;          
+    public float KnockBackForce;    
 
+    [Header("Damage color codes")]
     public Color FullHealth;
     public Color Q3Health;
     public Color HalfHealth;
     public Color Q1Health;
-
+    
     private TrailRenderer TR;
-
-    public ParticleSystem Explosion;
+    private List<GameObject> Glows;
+    private Rigidbody2D Rb;
+    private float TimeBetweenDamage;
+    private Animator PlayerAC;
 
     private void Start()
     {
+        Glows = new List<GameObject>();
         foreach (Transform t in PlayerSprite.transform)
         {
             if (t.name.ToLower().Contains("glow"))
@@ -34,11 +36,12 @@ public class PlayerHealth : MonoBehaviour
 
         Rb = GetComponent<Rigidbody2D>();
         TR = GetComponent<TrailRenderer>();
+        PlayerAC = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (DamageTaken)
+        if (TimeBetweenDamage > 0)
             TimeBetweenDamage -= Time.deltaTime;
     }
 
@@ -58,18 +61,17 @@ public class PlayerHealth : MonoBehaviour
             if (Health > 0)
             {
                 Health -= dmg;
+                PlayerAC.SetTrigger("Damage");
                 HandleColor();
             }
 
             var playerPos = GetComponent<Transform>().position;
             var direction = new Vector2(playerPos.x - enemyPos.x, 1).normalized;
-            var vel = direction * force;
-            Rb.velocity = vel;
+            var velocity = direction * KnockBackForce;
+            Rb.velocity = velocity;
 
             TimeBetweenDamage = StartTimeBetweenDamage;
-        }
-        else        
-            DamageTaken = true;        
+        }               
     }
 
     public void Heal(float healing)
@@ -101,10 +103,9 @@ public class PlayerHealth : MonoBehaviour
                 break;
         }
 
-        foreach(var glow in Glows)
-        {
+        foreach(var glow in Glows)        
             glow.GetComponent<SpriteRenderer>().color = visibleColor;
-        }
+        
         TR.startColor = visibleColor;
     }
 }
