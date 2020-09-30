@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     public float AttackRange;
     public float xForce;
     public float bounceForce;
+    public float AnimationLength;
 
 
     private Animator PlayerAC;
@@ -53,6 +54,8 @@ public class PlayerAttack : MonoBehaviour
         {            
             if (Input.GetKey(AttackCode))   
             {
+                PM.isAttacking = true;
+                StartCoroutine(Attacking());
                 if (Input.GetKey(UpCode))
                 {
                     AttackPosToCheck = UpAttackPos.position;
@@ -109,8 +112,7 @@ public class PlayerAttack : MonoBehaviour
                     }
                     flame.GetComponent<ExtinguishFlame>()?.Extinguish();
                 }
-                TimeBtwAttack = StartTimeBtwAttack;
-                PM.isAttacking = false;                
+                TimeBtwAttack = StartTimeBtwAttack;                               
             }            
         }
         else
@@ -136,8 +138,9 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    public void TestEvent()
+    IEnumerator Attacking()
     {
-
+        yield return new WaitForSeconds(AnimationLength);
+        PM.isAttacking = false;
     }
 }

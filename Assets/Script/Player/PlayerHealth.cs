@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Parameters")]
-    public ParticleSystem Explosion;
+    [Header("Parameters")]    
     public GameObject PlayerSprite;
     public LayerMask WhatIsFire;
     public float Health = 100;    
     public float StartTimeBetweenDamage;          
-    public float KnockBackForce;    
+    public float KnockBackForce;  
+    
+    [Header("Effects")]
+    public ParticleSystem Explosion;
+    public ParticleSystem HealingEffect;
 
     [Header("Damage color codes")]
     public Color FullHealth;
@@ -49,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.collider.CompareTag("Meteor"))
         {
-            Instantiate(Explosion, transform.position, Quaternion.identity);
+            Instantiate(Explosion, transform.position, Quaternion.identity, transform);
             Damage(25, collision.transform.position);
             collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
         }
@@ -75,7 +78,8 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void Heal(float healing)
-    {        
+    {
+        Instantiate(HealingEffect, transform.position, Quaternion.identity,transform);
         Health += healing;
         if (Health > 100) Health = 100;
         HandleColor();

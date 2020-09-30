@@ -39,8 +39,14 @@ public class SpawnMeteorTrajectory : MonoBehaviour
     {
         string strMeteor = "Meteor_";
         float index = float.Parse(name.Substring(strMeteor.Length));
-
-        Destroy(SpawnedTrails[index]);
+        try
+        {
+            Destroy(SpawnedTrails[index]);
+        }
+        catch(KeyNotFoundException e)
+        {
+            Debug.Log(e.Message);
+        }
         SpawnedTrails.Remove(index);
     }
 
