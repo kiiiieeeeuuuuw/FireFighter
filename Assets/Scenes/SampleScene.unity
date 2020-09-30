@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277086728}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
   m_Name: 
@@ -3285,7 +3285,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AllIn1SpriteShader/AllIn1SpriteShader
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA HITEFFECT_ON OUTBASE8DIR_ON _OUTLINE8DIRECTIONS_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -3369,9 +3369,9 @@ Material:
     - _GhostTransparency: 0
     - _GlitchAmount: 16.4
     - _GlitchSize: 4.11
-    - _Glow: 10
+    - _Glow: 0
     - _GlowTexUsed: 0
-    - _GradBlend: 0.182
+    - _GradBlend: 0
     - _GrassManualAnim: 1
     - _GrassManualToggle: 0
     - _GrassSpeed: 6.1
@@ -3380,16 +3380,16 @@ Material:
     - _GreyscaleOutline: 0
     - _HandDrawnAmount: 4.8
     - _HandDrawnSpeed: 5
-    - _HitEffectBlend: 1
+    - _HitEffectBlend: 0
     - _HitEffectGlow: 1
     - _HologramMaxAlpha: 1
     - _HologramMinAlpha: 0
     - _HologramStripesAmount: 0.2
     - _HologramStripesSpeed: 5
     - _HologramUnmodAmount: 0.4
-    - _HsvBright: 1.18
-    - _HsvSaturation: 2
-    - _HsvShift: 360
+    - _HsvBright: 0.92
+    - _HsvSaturation: 1.84
+    - _HsvShift: 195
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 250
     - _InnerOutlineThickness: 3
@@ -3406,20 +3406,20 @@ Material:
     - _OffsetUvY: 0
     - _OnlyInnerOutline: 0
     - _OnlyOutline: 0
-    - _Outline8Directions: 0
+    - _Outline8Directions: 1
     - _OutlineAlpha: 1
     - _OutlineDistortAmount: 0.5
     - _OutlineDistortTexXSpeed: 5
     - _OutlineDistortTexYSpeed: 5
     - _OutlineDistortToggle: 0
-    - _OutlineGlow: 1.5
+    - _OutlineGlow: 1
     - _OutlineIsPixel: 0
-    - _OutlinePixelWidth: 1
+    - _OutlinePixelWidth: 3.02
     - _OutlineTexGrey: 0
     - _OutlineTexToggle: 0
     - _OutlineTexXSpeed: 10
     - _OutlineTexYSpeed: 0
-    - _OutlineWidth: 0.004
+    - _OutlineWidth: 0.2
     - _PinchUvAmount: 0.35
     - _PixelateSize: 512
     - _PosterizeGamma: 2.3
@@ -3445,9 +3445,9 @@ Material:
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.75
-    - _WaveAmount: 21.9
-    - _WaveSpeed: 10
-    - _WaveStrength: 7.5
+    - _WaveAmount: 22.3
+    - _WaveSpeed: 25
+    - _WaveStrength: 10.4
     - _WaveX: 0
     - _WaveY: 0.5
     - _ZTestMode: 4
@@ -3467,9 +3467,9 @@ Material:
     - _GradTopLeftCol: {r: 1, g: 0, b: 0, a: 1}
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HitEffectColor: {r: 1, g: 0.042452812, b: 0.042452812, a: 1}
+    - _HitEffectColor: {r: 1, g: 0.63387996, b: 0.043137252, a: 1}
     - _InnerOutlineColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.18039216, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1347710009
