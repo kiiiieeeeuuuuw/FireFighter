@@ -5,29 +5,30 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float TimeBtwAttack;
+    [Header("Parameters")]
     public float StartTimeBtwAttack;
-
-    public float PassedTime;
-    public bool FirstAttackPassed = false;
-    public bool FirstUpAttackPassed = false;
     public float MaxPassedTime;
+    public LayerMask WhatIsFire;
+    public float AttackRange;
+    public float KnockBackForce;
+    public float BounceForce;
+    public float AnimationLength;
 
-    private KeyCode AttackCode = KeyCode.J;
-    private KeyCode UpCode = KeyCode.Z;
-    private KeyCode DownCode = KeyCode.S;
-
-
+    [Header("Attack positions")]
     public Transform ForwardAttackPos;
     public Transform UpAttackPos;
     public Transform DownAttackPos;
-    public bool BounceOnDownAttack;
-    public LayerMask WhatIsFire;
-    public float AttackRange;
-    public float xForce;
-    public float bounceForce;
-    public float AnimationLength;
 
+    [Header("KeyBindings")]
+    public KeyCode AttackCode = KeyCode.J;
+    public KeyCode UpCode = KeyCode.Z;
+    public KeyCode DownCode = KeyCode.S;
+
+    private float TimeBtwAttack;    
+    private float PassedTime;
+    private bool FirstAttackPassed = false;
+    private bool FirstUpAttackPassed = false;        
+    private bool BounceOnDownAttack;    
 
     private Animator PlayerAC;
     private Rigidbody2D RB;
@@ -94,13 +95,13 @@ public class PlayerAttack : MonoBehaviour
                     AttackPosToCheck = ForwardAttackPos.position;
 
                     var xDir = PlayerScale.localScale.x > 0 ? 1 : -1;
-                    RB.AddForce(new Vector2(xDir * xForce, 0), ForceMode2D.Impulse);
+                    RB.AddForce(new Vector2(xDir * KnockBackForce, 0), ForceMode2D.Impulse);
                 }
 
                 Collider2D[] flamesToDouse = Physics2D.OverlapCircleAll(AttackPosToCheck, AttackRange, WhatIsFire);   
                 if(BounceOnDownAttack && flamesToDouse.Length > 0)
                 {
-                    RB.velocity = new Vector2(RB.velocity.x, bounceForce);
+                    RB.velocity = new Vector2(RB.velocity.x, BounceForce);
                     TimeBtwAttack = 0;
                 }
                 foreach(var flame in flamesToDouse)
@@ -135,7 +136,6 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.DrawSphere(ForwardAttackPos.position, AttackRange);
         Gizmos.DrawSphere(UpAttackPos.position, AttackRange);
         Gizmos.DrawSphere(DownAttackPos.position, AttackRange);
-
     }
 
     IEnumerator Attacking()
