@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,7 +12,12 @@ public class PlayerHealth : MonoBehaviour
     public LayerMask WhatIsFire;
     public float Health = 100;    
     public float StartTimeBetweenDamage;          
-    public float KnockBackForce;  
+    public float KnockBackForce;
+
+    [Header("CameraEffects")]
+    public GameObject CinemachineCamera;
+    public GameObject PostProcessing;
+    public float HitEffectDuration;
     
     [Header("Effects")]
     public ParticleSystem Explosion;
@@ -39,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
 
         Rb = GetComponent<Rigidbody2D>();
         TR = GetComponent<TrailRenderer>();
-        PlayerAC = GetComponent<Animator>();
+        PlayerAC = GetComponent<Animator>();        
     }
 
     private void Update()
@@ -64,8 +71,9 @@ public class PlayerHealth : MonoBehaviour
             if (Health > 0)
             {
                 Health -= dmg;
+                CinemachineCamera.GetComponent<CameraShake>().StartCameraShake();
                 PlayerAC.SetTrigger("Damage");
-                HandleColor();
+                HandleColor();                
             }
 
             var playerPos = GetComponent<Transform>().position;
@@ -111,5 +119,5 @@ public class PlayerHealth : MonoBehaviour
             glow.GetComponent<SpriteRenderer>().color = visibleColor;
         
         TR.startColor = visibleColor;
-    }
+    }    
 }

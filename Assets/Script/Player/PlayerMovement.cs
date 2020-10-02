@@ -45,12 +45,13 @@ public class PlayerMovement : MonoBehaviour
     #region dash movement fields
     [Header("Dash Movement")]
     public float dashSpeed;
+    public float InvincibleTime;
 
-    private float dashTime;
+    private float currentDashTime;
     private bool dashStopped;
-
     private DirectionEnum direction = DirectionEnum.None;
     private DirectionEnum prevDirection;
+    private Collider2D PlayerColider;
 
     #endregion
 
@@ -76,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         PlayerAC = GetComponent<Animator>();
+        PlayerColider = GetComponent<Collider2D>();
 
         startScale = new Vector2
         {
@@ -165,22 +167,24 @@ public class PlayerMovement : MonoBehaviour
             DashMove(dir);                                
 
         // End dash
-        dashTime -= Time.deltaTime;
-        if (dashTime <= 0 && !dashStopped)
+        currentDashTime -= Time.deltaTime;
+        if (currentDashTime <= 0 && !dashStopped)
         {
             SetVelocity(new Vector2(0f, rb.velocity.y), "handledash");
-            dashStopped = true;
+            dashStopped = true;            
         }
     }
 
     void DashMove(DirectionEnum direction)
     {
-        dashTime = 0.1f;
+        currentDashTime = 0.1f;
         if(direction != DirectionEnum.None)
         {
             if (direction == DirectionEnum.Right) SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
             if (direction == DirectionEnum.Left) SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
             dashStopped = false;
+            PlayerColider.enabled = false;
+            StartCoroutine(Dashing());
         }
 
         PlayerAC.SetTrigger("Dash");
@@ -215,19 +219,15 @@ public class PlayerMovement : MonoBehaviour
         SetVelocity(new Vector2(0f, rb.velocity.y), "EndWallJump");
     }
 
-    void StartAttack()
-    {
-        isAttacking = true;
-    }
-
-    void EndAttack()
-    {
-        isAttacking = false;
-    }
-
     void SetVelocity(Vector2 velocity, string origin)
     {
         rb.velocity = velocity;
         Debug.Log(origin);
+    }
+
+    IEnumerator Dashing()
+    {
+        yield return new WaitForSeconds(InvincibleTime);
+        PlayerColider.enabled = true;
     }
 }

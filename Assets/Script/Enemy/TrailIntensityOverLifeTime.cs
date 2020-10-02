@@ -7,6 +7,7 @@ public class TrailIntensityOverLifeTime : MonoBehaviour
     [Header("Parameters")]
     public float Duration;
     public float IntensityMultiplier;
+    public float MaxIntensity;
     public GameObject TrailSprite;
 
     private float TimePassed;    
@@ -22,7 +23,7 @@ public class TrailIntensityOverLifeTime : MonoBehaviour
         var renderer = TrailSprite.GetComponent<SpriteRenderer>();
         var spriteColor = renderer.color;
         float intensity = IntensityMultiplier * (TimePassed / Duration);
-        spriteColor.a = intensity;
+        spriteColor.a = intensity < MaxIntensity? intensity : MaxIntensity;
         renderer.color = spriteColor;
     }
 }

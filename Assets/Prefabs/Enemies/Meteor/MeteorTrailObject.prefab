@@ -126,4 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duration: 5
   IntensityMultiplier: 3
+  MaxIntensity: 180
   TrailSprite: {fileID: 225295078206664044}
