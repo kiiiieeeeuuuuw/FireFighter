@@ -1934,7 +1934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.275328, y: -0.77094436, z: 53.445656}
+  m_LocalPosition: {x: 16.27533, y: -0.77094436, z: 53.445656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1547580070}
@@ -4626,6 +4626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637b67a9fe3f32542a0d4e9e5b233dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Profile: {fileID: 11400000, guid: e82b1d15d58877541b1e4e4bc99a84ba, type: 2}
   VgIntensity: 0
   HitEffectDuration: 0
 --- !u!1 &1636561259
@@ -4833,7 +4834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813041288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.275328, y: -0.77094436, z: 53.445656}
+  m_LocalPosition: {x: 16.27533, y: -0.77094436, z: 53.445656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 310901159}

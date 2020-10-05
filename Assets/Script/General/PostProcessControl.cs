@@ -5,27 +5,24 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PostProcessControl : MonoBehaviour
 {
-    private PostProcessVolume Volume;
-    private Vignette Vg;
+    public PostProcessProfile Profile;
+    private Vignette ogVign;
     public float VgIntensity;
     public float HitEffectDuration;
     // Start is called before the first frame update
     void Start()
     {
-        Volume = GetComponent<PostProcessVolume>();
-        Vg = Volume.GetComponent<Vignette>();
-        VgIntensity = Vg.intensity.value;
+        Profile.TryGetSettings(out ogVign);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Vg.intensity.value = VgIntensity;
     }
 
-    private IEnumerator ShowHitVignette()
+    public IEnumerator ShowHitVignette()
     {
         yield return new WaitForSeconds(HitEffectDuration);
-        Vg.intensity.value = VgIntensity;
+        ogVign.intensity.value = 1;
     }
 }

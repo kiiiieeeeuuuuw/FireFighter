@@ -72,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 Health -= dmg;
                 CinemachineCamera.GetComponent<CameraShake>().StartCameraShake();
+                PostProcessing.GetComponent<PostProcessControl>().ShowHitVignette();
                 PlayerAC.SetTrigger("Damage");
                 HandleColor();                
             }
