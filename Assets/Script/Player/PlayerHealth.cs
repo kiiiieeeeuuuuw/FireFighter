@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 Health -= dmg;
                 CinemachineCamera.GetComponent<CameraShake>().StartCameraShake();
-                PostProcessing.GetComponent<PostProcessControl>().ShowHitVignette();
+                PostProcessing.GetComponent<PostProcessControl>().ShowVignetteEffect(true, false);
                 PlayerAC.SetTrigger("Damage");
                 HandleColor();                
             }
@@ -89,6 +89,7 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float healing)
     {
         Instantiate(HealingEffect, transform.position, Quaternion.identity,transform);
+        PostProcessing.GetComponent<PostProcessControl>().ShowVignetteEffect(false, true);
         Health += healing;
         if (Health > 100) Health = 100;
         HandleColor();
