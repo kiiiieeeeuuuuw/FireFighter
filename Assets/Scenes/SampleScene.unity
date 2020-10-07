@@ -2561,6 +2561,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &713424992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713424993}
+  m_Layer: 0
+  m_Name: DustEffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &713424993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713424992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1957270052}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &752118166
 Material:
   serializedVersion: 6
@@ -5101,6 +5131,7 @@ Transform:
   - {fileID: 1689713231}
   - {fileID: 75731403}
   - {fileID: 932187730}
+  - {fileID: 713424993}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5165,6 +5196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   isAttacking: 0
+  DustEffect: {fileID: 7226455622272871308, guid: 4f12a12a950bf5243b7ed12279b52ddc,
+    type: 3}
+  DustEffectLocation: {fileID: 713424993}
   jumpForce: 10
   isGrounded: 0
   jumpMultiplier: 1

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -22,8 +23,11 @@ public class PlayerMovement : MonoBehaviour
     #region horizontal movement fields
     [Header("Horizontal movement")]
     public float moveSpeed = 5f;
-
     public bool isAttacking = false;
+    public ParticleSystem DustEffect;
+    public Transform DustEffectLocation;
+    public float DustInterval;
+    private float CurrentDustTimePassed;
 
     #endregion
 
@@ -229,5 +233,10 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(InvincibleTime);
         PlayerColider.enabled = true;
+    }
+
+    public void StartDustEffect()
+    {
+        Instantiate(DustEffect, DustEffectLocation.position, quaternion.identity);
     }
 }
