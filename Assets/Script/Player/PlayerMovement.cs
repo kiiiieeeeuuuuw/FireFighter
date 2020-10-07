@@ -117,6 +117,13 @@ public class PlayerMovement : MonoBehaviour
             else if (currentDirection != prevDirection)
                 transform.position += movement * Time.deltaTime * moveSpeed;
             PlayerAC.SetBool("IsRunning", true);
+            if (CurrentDustTimePassed <= 0 && isGrounded)
+            {
+                StartDustEffect();
+                CurrentDustTimePassed = DustInterval;
+            }
+            else
+                CurrentDustTimePassed -= Time.deltaTime;
         }
         else
             PlayerAC.SetBool("IsRunning", false);
