@@ -39,10 +39,11 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = false;
     private bool jumpStart = false;
     private bool jumpStop = false;
+    private bool jumped = false;
     public float jumpMultiplier = 1;
     public float maxJumpMultiplier = 3;
     public float jumpIncrement = 0.5f;
-    public float FallMultiplier;
+    public float FallMultiplier;    
 
     #endregion
 
@@ -50,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash Movement")]
     public float dashSpeed;
     public float InvincibleTime;
+    public ParticleSystem DashEffect;
+    public Transform DashEffectPos;
 
     private float currentDashTime;
     private bool dashStopped;
@@ -159,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpMultiplier = 1;
                 jumpStart = false;
                 jumpStop = false;
+                jumped = true;
             }
         }
     }
@@ -199,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         PlayerAC.SetTrigger("Dash");
+        Instantiate(DashEffect, DashEffectPos.position, DashEffect.transform.rotation);
     }
 
     void WallGlide()
@@ -244,6 +249,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartDustEffect()
     {
-        Instantiate(DustEffect, DustEffectLocation.position, quaternion.identity);
+        if (!jumped)
+            Instantiate(DustEffect, DustEffectLocation.position, quaternion.identity);
+        else
+        {
+            jumped = false;
+            CurrentDustTimePassed = DustInterval;
+        }
     }
 }
