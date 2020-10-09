@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D Rb;
     private float TimeBetweenDamage;
     private Animator PlayerAC;
+    private PlayerMovement PM;
 
     private void Start()
     {
@@ -46,7 +47,8 @@ public class PlayerHealth : MonoBehaviour
 
         Rb = GetComponent<Rigidbody2D>();
         TR = GetComponent<TrailRenderer>();
-        PlayerAC = GetComponent<Animator>();        
+        PlayerAC = GetComponent<Animator>();
+        PM = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -121,5 +123,6 @@ public class PlayerHealth : MonoBehaviour
             glow.GetComponent<SpriteRenderer>().color = visibleColor;
         
         TR.startColor = visibleColor;
+        PM.SetDashColor(visibleColor);
     }    
 }

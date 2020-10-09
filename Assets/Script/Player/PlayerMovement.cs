@@ -51,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash Movement")]
     public float dashSpeed;
     public float InvincibleTime;
-    public ParticleSystem DashEffect;
+    public ParticleSystem LeftDashEffect;
+    public ParticleSystem RightDashEffect;
     public Transform DashEffectPos;
 
     private float currentDashTime;
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     private DirectionEnum direction = DirectionEnum.None;
     private DirectionEnum prevDirection;
     private Collider2D PlayerColider;
+    private Color DashColor;
 
     #endregion
 
@@ -175,6 +177,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SetDashColor(Color color)
+    {
+        DashColor = color;
+    }
+
     void HandleDash(DirectionEnum dir)
     {
         // Initiate dash        
@@ -192,17 +199,27 @@ public class PlayerMovement : MonoBehaviour
 
     void DashMove(DirectionEnum direction)
     {
+        ParticleSystem DashEffect = new ParticleSystem();
         currentDashTime = 0.1f;
         if(direction != DirectionEnum.None)
         {
-            if (direction == DirectionEnum.Right) SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
-            if (direction == DirectionEnum.Left) SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
+            if (direction == DirectionEnum.Right)
+            {
+                SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
+                DashEffect = RightDashEffect;
+            }
+            if (direction == DirectionEnum.Left)
+            {
+                SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
+                DashEffect = LeftDashEffect;
+            }
             dashStopped = false;
             PlayerColider.enabled = false;
             StartCoroutine(Dashing());
         }
 
         PlayerAC.SetTrigger("Dash");
+        DashEffect.startColor = DashColor;
         Instantiate(DashEffect, DashEffectPos.position, DashEffect.transform.rotation);
     }
 
