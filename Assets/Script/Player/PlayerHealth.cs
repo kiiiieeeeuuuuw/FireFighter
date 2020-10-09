@@ -49,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
         TR = GetComponent<TrailRenderer>();
         PlayerAC = GetComponent<Animator>();
         PM = GetComponent<PlayerMovement>();
+        HandleColor();
     }
 
     private void Update()
