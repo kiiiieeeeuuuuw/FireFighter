@@ -31,10 +31,11 @@ public class PlayerHealth : MonoBehaviour
     
     private TrailRenderer TR;
     private List<GameObject> Glows;
-    private Rigidbody2D Rb;
+    private Rigidbody2D RB;
     private float TimeBetweenDamage;
     private Animator PlayerAC;
     private PlayerMovement PM;
+    private bool Death;
 
     private void Start()
     {
@@ -45,10 +46,11 @@ public class PlayerHealth : MonoBehaviour
                 Glows.Add(t.gameObject);
         }
 
-        Rb = GetComponent<Rigidbody2D>();
+        RB = GetComponent<Rigidbody2D>();
         TR = GetComponent<TrailRenderer>();
         PlayerAC = GetComponent<Animator>();
         PM = GetComponent<PlayerMovement>();
+        Death = false;
         HandleColor();
     }
 
@@ -56,6 +58,18 @@ public class PlayerHealth : MonoBehaviour
     {
         if (TimeBetweenDamage > 0)
             TimeBetweenDamage -= Time.deltaTime;
+    }
+
+    private void LateUpdate()
+    {
+        if (Death)
+        {
+            PlayerAC.Play("PlayerDeath");
+            PM.enabled = false;
+            RB.velocity = new Vector2(0, 0);
+            RB.isKinematic = true;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -71,19 +85,23 @@ public class PlayerHealth : MonoBehaviour
     public void Damage(float dmg, Vector3 enemyPos)
     {
         if(TimeBetweenDamage <= 0) {
-            if (Health > 0)
+            Health -= dmg;
+            if (Health <= 0)
             {
-                Health -= dmg;
+                Death = true;
+            }
+            if (Health > 0)
+            {                
                 CinemachineCamera.GetComponent<CameraShake>().StartCameraShake();
                 PostProcessing.GetComponent<PostProcessControl>().ShowVignetteEffect(true, false);
                 PlayerAC.SetTrigger("Damage");
                 HandleColor();                
-            }
+            }            
 
             var playerPos = GetComponent<Transform>().position;
             var direction = new Vector2(playerPos.x - enemyPos.x, 1).normalized;
             var velocity = direction * KnockBackForce;
-            Rb.velocity = velocity;
+            RB.velocity = velocity;
 
             TimeBetweenDamage = StartTimeBetweenDamage;
         }               
