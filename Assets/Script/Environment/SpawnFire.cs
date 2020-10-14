@@ -7,6 +7,7 @@ public class SpawnFire : MonoBehaviour
 {
     public ParticleSystem Explosion;
     public GameObject Fire;
+    public GameObject CrackSpawner;
     public float delta;
 
     private float index;    
@@ -20,12 +21,16 @@ public class SpawnFire : MonoBehaviour
     {
         if (collision.collider.CompareTag("Meteor"))
         {
+            bool flipCrack = false;
             var impactPos = collision.transform.position;
             var top = gameObject.transform.parent.Find("TopLocation").transform.position;
             if (impactPos.x > top.x)
                 impactPos.x -= delta;
             if (impactPos.x < top.x)
+            {
                 impactPos.x += delta;
+                flipCrack = true;
+            }
             if (impactPos.y > top.y)
                 impactPos.y -= delta;
 
@@ -42,6 +47,13 @@ public class SpawnFire : MonoBehaviour
             {
                 Console.WriteLine(e.Message);
             }
+
+            var crack = Instantiate(CrackSpawner, impactPos, Quaternion.identity);
+            var rootScale = collision.transform.root.localScale;
+            if (flipCrack) {
+                var scale = crack.transform.localScale;                
+                crack.transform.localScale = new Vector3(-scale.x , scale.y, scale.z);
+            }            
         }
     }    
 }
