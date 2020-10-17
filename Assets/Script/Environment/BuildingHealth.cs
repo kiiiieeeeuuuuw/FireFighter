@@ -4,11 +4,36 @@ using UnityEngine;
 
 public class BuildingHealth : MonoBehaviour
 {
-    public float Health;
+    public const float StartHealth = 400;
+    public float CurrentHealth;
     public GameObject BuildingCrack;
+    public List<GameObject> SpawnedBCs;
+
+    public void Start()
+    {
+        CurrentHealth = StartHealth;
+    }
 
     public void Damage()
     {
-        Health -= 25;
+        CurrentHealth -= 25;
+
+        if(CurrentHealth < StartHealth * (3 / 4))
+        {
+
+        }
+        else if(CurrentHealth < StartHealth * (1 / 2))
+        {
+
+        }
+        else if(CurrentHealth < StartHealth * (1 / 4))
+        {
+
+        }
+        else if(CurrentHealth == 0)
+        {
+
+        }
+            
     }
 }
