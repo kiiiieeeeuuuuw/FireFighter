@@ -5,7 +5,7 @@ using UnityEngine;
 public class CrackSpawner : MonoBehaviour
 {
     public GameObject Crack;
-    private Transform[] Locs;
+    private Vector2[] Locs;
 
     private const int TL = 0;
     private const int TR = 1;
@@ -14,19 +14,36 @@ public class CrackSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Locs = new Transform[4];
-
-
-        /*foreach (Transform t in transform)
+        Locs = new Vector2[4];
+        foreach (Transform t in transform)
         {
-            if (t.name.ToLower().Contains("glow"))
-                Glows.Add(t.gameObject);
-        }*/
+            string name = t.name;
+            switch (name)
+            {
+                case "LocTopLeft":
+                    Locs[TL] = t.position;
+                    break;
+                case "LocTopRight":
+                    Locs[TR] = t.position;
+                    break;
+                case "LocBottomLeft":
+                    Locs[BL] = t.position;
+                    break;
+                case "LocBottomRight":
+                    Locs[BR] = t.position;
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SpawnCrack()
+    {
+
     }
 }
