@@ -8,6 +8,9 @@ public class CrackSpawner : MonoBehaviour
     public GameObject Crack;
     private Vector2[] LocsLeft;
     private Vector2[] LocsRight;
+    private List<GameObject> SpawnedCracks;
+    private GameObject LastSpawned;
+    private int xScale;
 
     private const int TL = 0;
     private const int TR = 0;
@@ -37,40 +40,50 @@ public class CrackSpawner : MonoBehaviour
                     break;
             }
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SpawnedCracks = new List<GameObject>();
     }
 
     public void SpawnCrack()
     {
-        // Determine side of building
-        var rng = new System.Random();
-        var side = rng.Next(2);
-        Vector2[] loc;
-        int xScale = 1;
-        if(side == 0)
+        if (SpawnedCracks.Count < 3)
         {
-            loc = LocsLeft;
-            xScale = -1;
+            // Determine side of building
+            var rng = new System.Random();
+            var side = rng.Next(2);
+            Vector2[] loc;
+
+            if (SpawnedCracks.Count == 0)
+            {
+                xScale = 1;
+                if (side == 0)
+                {
+                    loc = LocsLeft;
+                    xScale = -1;
+                }
+                else
+                    loc = LocsRight;
+            }
+            else
+            {
+                xScale *= -1;
+                loc = xScale > 0 ? LocsRight : LocsLeft;
+            }
+
+
+            // Determine location
+            var top = (int)loc[TL].y;
+            var bottom = (int)loc[BR].y;
+            var yPos = rng.Next(bottom, top);
+            var xPos = loc[TL].x;
+
+            // Spawn crack with correct scale and rotation
+            LastSpawned = Instantiate(Crack, new Vector2(xPos, yPos), Quaternion.identity, transform);
+            var rootScale = transform.parent.localScale;
+            var crackScale = LastSpawned.transform.localScale;
+            LastSpawned.transform.localScale = new Vector3((crackScale.x / rootScale.x) * xScale, crackScale.y / rootScale.y, crackScale.z / rootScale.z);
+
+            SpawnedCracks.Add(LastSpawned);
         }
-        else
-            loc = LocsRight;
-
-
-        // Determine location
-        var top = (int)loc[TL].y;
-        var bottom = (int)loc[BR].y;
-        var yPos = rng.Next(bottom, top);
-        var xPos = loc[TL].x;
-
-        // Spawn crack
-        var crack = Instantiate(Crack,new Vector2(xPos, yPos), Quaternion.identity, transform);
-        var rootScale = transform.parent.localScale;
-        var crackScale = crack.transform.localScale;
-        crack.transform.localScale = new Vector3((crackScale.x/rootScale.x) * xScale, crackScale.y/rootScale.y, crackScale.z/rootScale.z);
     }
 }
