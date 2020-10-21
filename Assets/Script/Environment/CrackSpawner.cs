@@ -59,15 +59,18 @@ public class CrackSpawner : MonoBehaviour
         }
         else
             loc = LocsRight;
-        
+
 
         // Determine location
-        var yPos = rng.Next((int)loc[TL].y, (int)loc[BR].y);
+        var top = (int)loc[TL].y;
+        var bottom = (int)loc[BR].y;
+        var yPos = rng.Next(bottom, top);
         var xPos = loc[TL].x;
 
         // Spawn crack
         var crack = Instantiate(Crack,new Vector2(xPos, yPos), Quaternion.identity, transform);
-        var rootScale = transform.root.localScale;
-        crack.transform.localScale = rootScale;
+        var rootScale = transform.parent.localScale;
+        var crackScale = crack.transform.localScale;
+        crack.transform.localScale = new Vector3((crackScale.x/rootScale.x) * xScale, crackScale.y/rootScale.y, crackScale.z/rootScale.z);
     }
 }
