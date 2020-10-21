@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64f77591966144fc94e1577ba0d42e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Crack: {fileID: 3006162759397705060, guid: 507e4cc8ac882844a9491d1feee66eb4, type: 3}
 --- !u!1 &1412096619997438389
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,8 +444,7 @@ MonoBehaviour:
   Explosion: {fileID: 2771719670596812456, guid: 28e367cfb7e3744e6855ddbe9d2a51db,
     type: 3}
   Fire: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a, type: 3}
-  CrackSpawner: {fileID: 3006162759397705060, guid: 507e4cc8ac882844a9491d1feee66eb4,
-    type: 3}
+  CrackSpawner: {fileID: 1097250961650093257}
   delta: 0.5
 --- !u!1 &4031179943895552723
 GameObject:

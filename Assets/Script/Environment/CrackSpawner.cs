@@ -1,36 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Playables;
 
 public class CrackSpawner : MonoBehaviour
 {
     public GameObject Crack;
-    private Vector2[] Locs;
+    private Vector2[] LocsLeft;
+    private Vector2[] LocsRight;
 
     private const int TL = 0;
-    private const int TR = 1;
-    private const int BL = 2;
-    private const int BR = 3;
+    private const int TR = 0;
+    private const int BL = 1;
+    private const int BR = 1;
     // Start is called before the first frame update
     void Start()
     {
-        Locs = new Vector2[4];
+        LocsLeft = new Vector2[2];
+        LocsRight = new Vector2[2];
         foreach (Transform t in transform)
         {
             string name = t.name;
             switch (name)
             {
                 case "LocTopLeft":
-                    Locs[TL] = t.position;
+                    LocsLeft[TL] = t.position;
                     break;
                 case "LocTopRight":
-                    Locs[TR] = t.position;
+                    LocsRight[TR] = t.position;
                     break;
                 case "LocBottomLeft":
-                    Locs[BL] = t.position;
+                    LocsLeft[BL] = t.position;
                     break;
                 case "LocBottomRight":
-                    Locs[BR] = t.position;
+                    LocsRight[BR] = t.position;
                     break;
             }
         }
@@ -44,6 +47,27 @@ public class CrackSpawner : MonoBehaviour
 
     public void SpawnCrack()
     {
+        // Determine side of building
+        var rng = new System.Random();
+        var side = rng.Next(2);
+        Vector2[] loc;
+        int xScale = 1;
+        if(side == 0)
+        {
+            loc = LocsLeft;
+            xScale = -1;
+        }
+        else
+            loc = LocsRight;
+        
 
+        // Determine location
+        var yPos = rng.Next((int)loc[TL].y, (int)loc[BR].y);
+        var xPos = loc[TL].x;
+
+        // Spawn crack
+        var crack = Instantiate(Crack,new Vector2(xPos, yPos), Quaternion.identity, transform);
+        var rootScale = transform.root.localScale;
+        crack.transform.localScale = rootScale;
     }
 }
