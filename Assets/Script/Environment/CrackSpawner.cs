@@ -85,5 +85,12 @@ public class CrackSpawner : MonoBehaviour
 
             SpawnedCracks.Add(LastSpawned);
         }
+        else
+        {
+            foreach(var crack in SpawnedCracks)
+            {
+                crack.GetComponent<CrackManager>().InCreaseCrack();
+            }
+        }
     }
 }
