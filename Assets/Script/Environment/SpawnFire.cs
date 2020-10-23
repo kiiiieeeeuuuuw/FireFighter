@@ -20,17 +20,13 @@ public class SpawnFire : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Meteor"))
-        {
-            bool flipCrack = false;
+        {            
             var impactPos = collision.transform.position;
             var top = gameObject.transform.parent.Find("TopLocation").transform.position;
             if (impactPos.x > top.x)
                 impactPos.x -= delta;
-            if (impactPos.x < top.x)
-            {
-                impactPos.x += delta;
-                flipCrack = true;
-            }
+            if (impactPos.x < top.x)            
+                impactPos.x += delta;                            
             if (impactPos.y > top.y)
                 impactPos.y -= delta;
 
@@ -46,15 +42,7 @@ public class SpawnFire : MonoBehaviour
             catch(NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
-            }
-
-            CrackSpawner.GetComponent<CrackSpawner>().SpawnCrack();
-            /*var crack = Instantiate(CrackSpawner, impactPos, Quaternion.identity);
-            var rootScale = collision.transform.root.localScale;
-            if (flipCrack) {
-                var scale = crack.transform.localScale;                
-                crack.transform.localScale = new Vector3(-scale.x , scale.y, scale.z);
-            }*/
+            }                       
         }
     }    
 }

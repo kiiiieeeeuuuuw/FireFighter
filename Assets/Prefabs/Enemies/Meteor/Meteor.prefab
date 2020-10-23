@@ -9635,6 +9635,7 @@ GameObject:
   - component: {fileID: 5549323352275273710}
   - component: {fileID: 6101271540194686179}
   - component: {fileID: 2903676001312848916}
+  - component: {fileID: 7083941207772847878}
   m_Layer: 8
   m_Name: Meteor
   m_TagString: Meteor
@@ -9814,3 +9815,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExtinguishEffect: {fileID: 5971875562553296713, guid: 7d008deddadc6c54c804d2669ce154b2,
     type: 3}
+--- !u!114 &7083941207772847878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549323352275273707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43127337144b1f1469a9ea7a7a72d3c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 25

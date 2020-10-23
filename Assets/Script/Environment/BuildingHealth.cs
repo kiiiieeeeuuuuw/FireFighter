@@ -1,38 +1,64 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingHealth : MonoBehaviour
 {
     public const float StartHealth = 400;
-    public float CurrentHealth;
-    public GameObject BuildingCrack;
-    public List<GameObject> SpawnedBCs;
+    public GameObject CrackManager;    
+    
+    [SerializeField]
+    private float CurrentHealth;
+    private List<CrackThreshold> CrackThresholds;
+
+    private class CrackThreshold
+    {
+        public double Threshold { get; set; }
+        public bool Passed { get; set; }
+
+        public CrackThreshold(double threshhold)
+        {
+            Threshold = threshhold;
+            Passed = false;
+        }
+    }
 
     public void Start()
     {
         CurrentHealth = StartHealth;
+
+        CrackThresholds = new List<CrackThreshold>(){
+            new CrackThreshold(StartHealth),
+            new CrackThreshold(StartHealth * 3/4),
+            new CrackThreshold(StartHealth * 2/4)            
+        };
     }
 
-    public void Damage()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        CurrentHealth -= 25;
-
-        if(CurrentHealth < StartHealth * (3 / 4))
-        {
-
+        if (collision.collider.CompareTag("Meteor"))
+        {            
+            Damage(collision.gameObject.GetComponent<DoesDamage>().GetDamage());
         }
-        else if(CurrentHealth < StartHealth * (1 / 2))
-        {
+    }
 
-        }
-        else if(CurrentHealth < StartHealth * (1 / 4))
-        {
-
-        }
-        else if(CurrentHealth == 0)
-        {
-
+    public void Damage(int damage)
+    {
+        CurrentHealth -= damage;
+        bool spawn = false;
+        int i = 0;
+        while(i < CrackThresholds.Count && !spawn)
+        {            
+            if (CrackThresholds[i].Passed == false && CrackThresholds[i].Threshold> CurrentHealth)
+            {
+                CrackManager.GetComponent<CrackSpawner>().SpawnCrack();
+                CrackThresholds[i].Passed = true;
+            }
+            else            
+                CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();            
+            
+            i++;
         }
             
     }

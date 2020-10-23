@@ -44,6 +44,14 @@ public class CrackSpawner : MonoBehaviour
         SpawnedCracks = new List<GameObject>();
     }
 
+    public void TriggerCrack(int index)
+    {
+        if (SpawnedCracks.Count < index + 1)
+            SpawnCrack();
+        else
+            InCreaseCrack();
+    }
+
     public void SpawnCrack()
     {
         if (SpawnedCracks.Count < 3)
@@ -85,12 +93,10 @@ public class CrackSpawner : MonoBehaviour
 
             SpawnedCracks.Add(LastSpawned);
         }
-        else
-        {
-            foreach(var crack in SpawnedCracks)
-            {
-                crack.GetComponent<CrackManager>().InCreaseCrack();
-            }
-        }
+    }
+
+    public void InCreaseCrack()
+    {
+        LastSpawned.GetComponent<CrackManager>().InCreaseCrack();
     }
 }

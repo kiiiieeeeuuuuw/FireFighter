@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 5164482787638421130}
   - component: {fileID: 1363495534754613239}
   - component: {fileID: 5306409907437968266}
+  - component: {fileID: 7578549965719510199}
   m_Layer: 0
   m_Name: CollisionHandler
   m_TagString: Building
@@ -446,6 +447,20 @@ MonoBehaviour:
   Fire: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a, type: 3}
   CrackSpawner: {fileID: 1097250961650093257}
   delta: 0.5
+--- !u!114 &7578549965719510199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514992702552963517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a1bb7cce81041da96c42ba2966962b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrackManager: {fileID: 1097250961650093257}
+  CurrentHealth: 0
 --- !u!1 &4031179943895552723
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6643956797868888659}
   - component: {fileID: 5482028943018673309}
+  - component: {fileID: 3419641808035165148}
   m_Layer: 0
   m_Name: square
   m_TagString: Untagged
@@ -554,7 +570,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cc460e5b1c6c0bd498b44195a0c3da99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -576,7 +592,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 4cb8d9cc7256c754facf427a8b9e411e, type: 3}
-  m_Color: {r: 0.06336775, g: 0.077195466, b: 0.1509434, a: 1}
+  m_Color: {r: 0.11974902, g: 0.12027844, b: 0.122641504, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -586,6 +602,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &3419641808035165148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802427457705276368}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6508102760917831109
 GameObject:
   m_ObjectHideFlags: 0
