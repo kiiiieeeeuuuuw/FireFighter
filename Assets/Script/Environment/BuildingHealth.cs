@@ -46,17 +46,21 @@ public class BuildingHealth : MonoBehaviour
     public void Damage(int damage)
     {
         CurrentHealth -= damage;
-        bool spawn = false;
+        bool triggered = false;
         int i = 0;
-        while(i < CrackThresholds.Count && !spawn)
-        {            
-            if (CrackThresholds[i].Passed == false && CrackThresholds[i].Threshold> CurrentHealth)
+        while(i < CrackThresholds.Count && !triggered)
+        {
+            if (CrackThresholds[i].Passed == false && CrackThresholds[i].Threshold > CurrentHealth)
             {
                 CrackManager.GetComponent<CrackSpawner>().SpawnCrack();
                 CrackThresholds[i].Passed = true;
+                triggered = true;
             }
-            else            
-                CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();            
+            else
+            {
+                CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();
+                triggered = true;
+            }
             
             i++;
         }

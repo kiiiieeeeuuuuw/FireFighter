@@ -6,44 +6,67 @@ using UnityEngine;
 
 public class CrackManager : MonoBehaviour
 {
-    public ParticleSystem DebreeEffect;
+    public ParticleSystem LeftDebreeEffect;
+    public ParticleSystem RightDebreeEffect;
 
     private List<GameObject> Cracks;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         Cracks = new List<GameObject>();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {        
         foreach (Transform t in transform)
         {
-            if (t.name.ToLower().Contains("crack"))
-            {
-                Cracks.Add(t.gameObject);
-            }
+            if (t.name.ToLower().Contains("crack"))            
+                Cracks.Add(t.gameObject);            
         }
+        SpawnDebree();
     }
 
     public void InCreaseCrack()
     {
         try
         {
-            DebreeEffect.Play();
+            bool deepenedCrack = false;
+            foreach (var crack in Cracks)
+            {
+                if (crack.name.Contains("1") && !crack.activeSelf)
+                {
+                    crack.SetActive(true);
+                    deepenedCrack = true;
+                    break;
+                }
+                else
+                {
+                    if (crack.name.Contains("2") && !crack.activeSelf)
+                    {
+                        crack.SetActive(true);
+                        deepenedCrack = true;
+                        break;
+                    }
+                }
+            }
+
+            if (deepenedCrack)
+            {
+                SpawnDebree();
+            }
         }
-        catch(NullReferenceException exce)
+
+        catch (NullReferenceException exce)
         {
             Debug.LogError(exce.Message);
         }
-        foreach(var crack in Cracks)
-        {
-            if(crack.name.Contains("1") && !crack.activeSelf)
-            {
-                crack.SetActive(true);
-                break;
-            }
-            if (crack.name.Contains("2") && !crack.activeSelf)
-            {
-                crack.SetActive(true);
-                break;
-            }
-        }
+    }
+
+    public void SpawnDebree()
+    {
+        if (transform.localScale.x > 0)        
+            Instantiate(RightDebreeEffect, transform.position, Quaternion.identity);        
+        else        
+            Instantiate(LeftDebreeEffect, transform.position, Quaternion.identity);        
     }
 }
