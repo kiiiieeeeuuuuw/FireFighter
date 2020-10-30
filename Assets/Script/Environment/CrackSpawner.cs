@@ -5,7 +5,8 @@ using UnityEngine.Experimental.Playables;
 
 public class CrackSpawner : MonoBehaviour
 {
-    public GameObject Crack;
+    public GameObject Crack;    
+
     private Vector2[] LocsLeft;
     private Vector2[] LocsRight;
     private List<GameObject> SpawnedCracks;

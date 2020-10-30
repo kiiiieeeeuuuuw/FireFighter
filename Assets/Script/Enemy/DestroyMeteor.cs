@@ -22,6 +22,12 @@ public class DestroyMeteor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Destroy)
+        {
+            var pumpkin = transform.Find("pumpkin");
+            if (pumpkin != null)
+                pumpkin.gameObject.SetActive(false);
+        }
         if (Destroy && !Particles.Any(x => x.IsAlive()))        
             Destroy(gameObject);        
     }

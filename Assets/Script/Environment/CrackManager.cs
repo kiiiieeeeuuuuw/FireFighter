@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class CrackManager : MonoBehaviour
 {
+    public ParticleSystem DebreeEffect;
+
     private List<GameObject> Cracks;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,14 @@ public class CrackManager : MonoBehaviour
 
     public void InCreaseCrack()
     {
+        try
+        {
+            DebreeEffect.Play();
+        }
+        catch(NullReferenceException exce)
+        {
+            Debug.LogError(exce.Message);
+        }
         foreach(var crack in Cracks)
         {
             if(crack.name.Contains("1") && !crack.activeSelf)
