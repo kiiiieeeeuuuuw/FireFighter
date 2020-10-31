@@ -10,7 +10,8 @@ public class DestroyMeteor : MonoBehaviour
     private List<ParticleSystem> Particles;
 
     public ParticleSystem ExtinguishEffect;
-
+    public GameObject BreakableObject;
+    private bool broken;
     private SpawnMeteorTrajectory SMT;
 
     void Start()
@@ -27,6 +28,11 @@ public class DestroyMeteor : MonoBehaviour
             var pumpkin = transform.Find("pumpkin");
             if (pumpkin != null)
                 pumpkin.gameObject.SetActive(false);
+            if (BreakableObject != null && !broken)
+            {
+                Instantiate(BreakableObject, transform.position, Quaternion.identity);
+                broken = true;
+            }
         }
         if (Destroy && !Particles.Any(x => x.IsAlive()))        
             Destroy(gameObject);        

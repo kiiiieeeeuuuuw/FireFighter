@@ -274,6 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExtinguishEffect: {fileID: 5971875562553296713, guid: 7d008deddadc6c54c804d2669ce154b2,
     type: 3}
+  BreakableObject: {fileID: 7057196541983682919, guid: 608449ef1880d40b4ba344194f036d56,
+    type: 3}
 --- !u!114 &7787153046163946894
 MonoBehaviour:
   m_ObjectHideFlags: 0
