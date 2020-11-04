@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce3e5335dfb7bb4798a7ace6873d9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Meteor: {fileID: 4854203919734891875, guid: 55bc92c7d47ed234284bbabd0ec079b5, type: 3}
+  Meteor: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
   Gb: {fileID: 679873882}
   Targets: []
   MaxTime: 2
@@ -768,7 +768,7 @@ MonoBehaviour:
   StartingPoint: {x: 0, y: 0}
   TargetPoint: {x: 0, y: 0}
   Angle: 0
-  Trail: {fileID: 2731644669677737677, guid: 7d810d2c536c4fb4bb145430dd247fa7, type: 3}
+  Trail: {fileID: 5924370042949926278, guid: df96c43a50f419e4eae7b7926c7c833b, type: 3}
   DrawGizmos: 0
 --- !u!1001 &246687656
 PrefabInstance:
