@@ -26,40 +26,33 @@ public class CrackManager : MonoBehaviour
         SpawnDebree();
     }
 
-    public void InCreaseCrack()
+    public bool InCreaseCrack()
     {
-        try
+        bool deepenedCrack = false;
+        foreach (var crack in Cracks)
         {
-            bool deepenedCrack = false;
-            foreach (var crack in Cracks)
+            if (crack.name.Contains("1") && !crack.activeSelf)
             {
-                if (crack.name.Contains("1") && !crack.activeSelf)
+                crack.SetActive(true);
+                deepenedCrack = true;
+                break;
+            }
+            else
+            {
+                if (crack.name.Contains("2") && !crack.activeSelf)
                 {
                     crack.SetActive(true);
                     deepenedCrack = true;
                     break;
                 }
-                else
-                {
-                    if (crack.name.Contains("2") && !crack.activeSelf)
-                    {
-                        crack.SetActive(true);
-                        deepenedCrack = true;
-                        break;
-                    }
-                }
-            }
-
-            if (deepenedCrack)
-            {
-                SpawnDebree();
             }
         }
 
-        catch (NullReferenceException exce)
+        if (deepenedCrack)
         {
-            Debug.LogError(exce.Message);
+            SpawnDebree();
         }
+        return deepenedCrack;
     }
 
     public void SpawnDebree()

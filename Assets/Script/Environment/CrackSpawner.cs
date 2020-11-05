@@ -98,6 +98,10 @@ public class CrackSpawner : MonoBehaviour
 
     public void InCreaseCrack()
     {
-        LastSpawned.GetComponent<CrackManager>().InCreaseCrack();
+        var crackDeepened = LastSpawned.GetComponent<CrackManager>().InCreaseCrack();
+        if (!crackDeepened)
+        {
+            SpawnCrack();
+        }
     }
 }

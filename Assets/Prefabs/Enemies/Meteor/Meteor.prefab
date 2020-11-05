@@ -9817,7 +9817,8 @@ MonoBehaviour:
   ExtinguishEffect: {fileID: 5971875562553296713, guid: 7d008deddadc6c54c804d2669ce154b2,
     type: 3}
   Comet: {fileID: 5845304538927280611}
-  BreakableObject: {fileID: 0}
+  BreakableObject: {fileID: 2309816047251596315, guid: dda6ad3aef1d593498f7458c30a9ab45,
+    type: 3}
 --- !u!114 &7083941207772847878
 MonoBehaviour:
   m_ObjectHideFlags: 0
