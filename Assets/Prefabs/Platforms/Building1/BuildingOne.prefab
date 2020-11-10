@@ -114,6 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7633910127214745743}
+  - component: {fileID: 1253782222218129882}
   m_Layer: 0
   m_Name: BuildingOne
   m_TagString: Ground
@@ -144,6 +145,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1253782222218129882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412096619997438389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde69a24fc62944f5b5f8a3be5d204bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2402025994972885071
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a1bb7cce81041da96c42ba2966962b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartHealth: 25
   CrackManager: {fileID: 1097250961650093257}
+  Building: {fileID: 5186393439316607310}
+  CollapsableBuilding: {fileID: 9061692906392451533, guid: e1129f6f722f2408a9011f8c7262b5b8,
+    type: 3}
   CurrentHealth: 0
 --- !u!1 &4031179943895552723
 GameObject:

@@ -99,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
     {
         var moveDirection = MoveHorizontal();
         direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
-        HandleDash(direction);
+        if(Input.GetAxis("Horizontal") != 0)
+            HandleDash(direction);
         Jump();
         WallGlide();
         Fall();

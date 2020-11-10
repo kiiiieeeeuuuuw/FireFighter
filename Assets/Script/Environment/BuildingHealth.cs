@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class BuildingHealth : MonoBehaviour
 {
-    public const float StartHealth = 400;
-    public GameObject CrackManager;    
+    public float StartHealth = 400;
+    public GameObject CrackManager;
+    public GameObject Building;
+    public GameObject CollapsableBuilding;
     
     [SerializeField]
     private float CurrentHealth;
     private List<CrackThreshold> CrackThresholds;
+    private bool broken;
 
     private class CrackThreshold
     {
@@ -46,23 +49,32 @@ public class BuildingHealth : MonoBehaviour
     public void Damage(int damage)
     {
         CurrentHealth -= damage;
-        bool triggered = false;
-        int i = 0;
-        while(i < CrackThresholds.Count && !triggered)
+        if (CurrentHealth > 0)
         {
-            if (CrackThresholds[i].Passed == false && CrackThresholds[i].Threshold > CurrentHealth)
+            bool triggered = false;
+            int i = 0;
+            while (i < CrackThresholds.Count && !triggered)
             {
-                CrackManager.GetComponent<CrackSpawner>().SpawnCrack();
-                CrackThresholds[i].Passed = true;
-                triggered = true;
+                if (CrackThresholds[i].Passed == false && CrackThresholds[i].Threshold > CurrentHealth)
+                {
+                    CrackManager.GetComponent<CrackSpawner>().SpawnCrack();
+                    CrackThresholds[i].Passed = true;
+                    triggered = true;
+                }
+                else
+                {
+                    CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();
+                    triggered = true;
+                }
+
+                i++;
             }
-            else
-            {
-                CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();
-                triggered = true;
-            }
-            
-            i++;
+        }
+        else if(!broken)
+        {
+            Instantiate(CollapsableBuilding, transform.position, Quaternion.identity);
+            broken = true;
+            Building.GetComponent<DestroyGameObject>().DestroyObject();
         }
             
     }
