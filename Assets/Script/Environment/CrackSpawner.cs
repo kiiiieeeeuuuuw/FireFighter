@@ -45,14 +45,6 @@ public class CrackSpawner : MonoBehaviour
         SpawnedCracks = new List<GameObject>();
     }
 
-    public void TriggerCrack(int index)
-    {
-        if (SpawnedCracks.Count < index + 1)
-            SpawnCrack();
-        else
-            InCreaseCrack();
-    }
-
     public void SpawnCrack()
     {
         if (SpawnedCracks.Count < 3)
@@ -98,10 +90,9 @@ public class CrackSpawner : MonoBehaviour
 
     public void InCreaseCrack()
     {
-        var crackDeepened = LastSpawned.GetComponent<CrackManager>().InCreaseCrack();
-        if (!crackDeepened)
+        if (LastSpawned != null)
         {
-            SpawnCrack();
+            LastSpawned.GetComponent<CrackManager>().InCreaseCrack();
         }
     }
 }

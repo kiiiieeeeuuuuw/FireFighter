@@ -9635,6 +9635,7 @@ GameObject:
   - component: {fileID: 5464461055311406258}
   - component: {fileID: 3089825585328233892}
   - component: {fileID: -2303661627235369938}
+  - component: {fileID: -5168786000504992637}
   m_Layer: 8
   m_Name: Ember
   m_TagString: Untagged
@@ -9714,3 +9715,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854a0b2d008df4fa9882e14134c52456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5168786000504992637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464461055311406263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43127337144b1f1469a9ea7a7a72d3c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 5

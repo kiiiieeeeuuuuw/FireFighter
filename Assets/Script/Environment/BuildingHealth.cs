@@ -38,6 +38,17 @@ public class BuildingHealth : MonoBehaviour
         };
     }
 
+    public void Update()
+    {
+        foreach(Transform t in transform)
+        {
+            if (t.name.Contains("Ember"))
+            {
+                Damage(t.gameObject.GetComponent<DoesDamage>().GetDamage() * Time.deltaTime);
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Meteor"))
@@ -46,7 +57,7 @@ public class BuildingHealth : MonoBehaviour
         }
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         CurrentHealth -= damage;
         if (CurrentHealth > 0)

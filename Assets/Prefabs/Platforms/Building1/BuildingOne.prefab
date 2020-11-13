@@ -473,9 +473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a1bb7cce81041da96c42ba2966962b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartHealth: 25
+  StartHealth: 400
   CrackManager: {fileID: 1097250961650093257}
-  Building: {fileID: 5186393439316607310}
+  Building: {fileID: 1412096619997438389}
   CollapsableBuilding: {fileID: 9061692906392451533, guid: e1129f6f722f2408a9011f8c7262b5b8,
     type: 3}
   CurrentHealth: 0
