@@ -12,15 +12,19 @@ public class BuildingHealth : MonoBehaviour
     
     [SerializeField]
     private float CurrentHealth;
-    private List<CrackThreshold> CrackThresholds;
+    [SerializeField]
+    private List<ThresholdTracker> CrackSpawnThresholds;
+    private double UpperCrackHealth;
+    private double LowerCrackHealth;
+    private List<ThresholdTracker> CrackIncreaseThresholds;
     private bool broken;
 
-    private class CrackThreshold
+    private class ThresholdTracker
     {
         public double Threshold { get; set; }
         public bool Passed { get; set; }
 
-        public CrackThreshold(double threshhold)
+        public ThresholdTracker(double threshhold)
         {
             Threshold = threshhold;
             Passed = false;
@@ -31,11 +35,11 @@ public class BuildingHealth : MonoBehaviour
     {
         CurrentHealth = StartHealth;
 
-        CrackThresholds = new List<CrackThreshold>(){
-            new CrackThreshold(StartHealth),
-            new CrackThreshold(StartHealth * 3/4),
-            new CrackThreshold(StartHealth * 2/4)            
-        };
+        CrackSpawnThresholds = new List<ThresholdTracker>(){
+            new ThresholdTracker(StartHealth),
+            new ThresholdTracker(StartHealth * 3/4),
+            new ThresholdTracker(StartHealth * 2/4)            
+        };        
     }
 
     public void Update()
@@ -64,18 +68,30 @@ public class BuildingHealth : MonoBehaviour
         {
             bool triggered = false;
             int i = 0;
-            while (i < CrackThresholds.Count && !triggered)
+            while (i < CrackSpawnThresholds.Count && !triggered)
             {
-                if (CrackThresholds[i].Passed == false && CrackThresholds[i].Threshold > CurrentHealth)
+                if (CrackSpawnThresholds[i].Passed == false && CrackSpawnThresholds[i].Threshold > CurrentHealth)
                 {
                     CrackManager.GetComponent<CrackSpawner>().SpawnCrack();
-                    CrackThresholds[i].Passed = true;
-                    triggered = true;
+                    CrackSpawnThresholds[i].Passed = true;
+                    // init crack tracker
+                    UpperCrackHealth = CrackSpawnThresholds[i].Threshold;
+                    LowerCrackHealth = i+1 < CrackSpawnThresholds.Count? CrackSpawnThresholds[i+1].Threshold : 0;
+                    CrackIncreaseThresholds = new List<ThresholdTracker>()
+                    {
+                        new ThresholdTracker((UpperCrackHealth - LowerCrackHealth) * 2/3 + LowerCrackHealth),
+                        new ThresholdTracker((UpperCrackHealth - LowerCrackHealth) * 1/3 + LowerCrackHealth)
+                    };
                 }
-                else
+                else if(CrackIncreaseThresholds != null)
                 {
-                    CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();
-                    triggered = true;
+                    for(int j = 0; j < CrackIncreaseThresholds.Count; j++)
+                    {
+                        if (CrackSpawnThresholds[j].Passed == false && CrackSpawnThresholds[j].Threshold > CurrentHealth)
+                        {
+                            CrackManager.GetComponent<CrackSpawner>().InCreaseCrack();
+                        }
+                    }                                        
                 }
 
                 i++;
