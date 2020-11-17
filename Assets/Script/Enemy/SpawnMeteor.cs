@@ -56,6 +56,7 @@ public class SpawnMeteor : MonoBehaviour
             else
             {
                 var targetBuilding = Targets[rng.Next(0, Targets.Count)];
+                if (targetBuilding == null) return;
                 var top = targetBuilding.transform.Find("TopLocation").transform.position;
                 var bottom = targetBuilding.transform.Find("BottomLocation").transform.position;
                 xTarget = rng.Next((int)bottom.x, (int)top.x);

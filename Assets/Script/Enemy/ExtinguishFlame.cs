@@ -40,6 +40,7 @@ public class ExtinguishFlame : MonoBehaviour
             }
             Instantiate(ExtinguishEffect, Particles.First().transform.position, Quaternion.identity, Particles.First().transform);
             Doused = true;
+            gameObject.GetComponent<DoesDamage>().Damage = 0;
         }
     }
 }
