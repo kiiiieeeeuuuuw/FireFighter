@@ -478,6 +478,7 @@ MonoBehaviour:
   CollapsableBuilding: {fileID: 9061692906392451533, guid: e1129f6f722f2408a9011f8c7262b5b8,
     type: 3}
   SpriteObject: {fileID: 5186393439316607310}
+  HitAnimationInterval: 0.5
   CurrentHealth: 0
 --- !u!1 &4031179943895552723
 GameObject:

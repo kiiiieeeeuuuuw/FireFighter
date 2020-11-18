@@ -2830,7 +2830,7 @@ MonoBehaviour:
   NumberOfBuidings: 5
   PlayerOffset: 20
   MaxBuildingOffsetX: 20
-  MinBuildingOffsetX: 7
+  MinBuildingOffsetX: 9
   MaxBuildingOffsetY: 8
   MinBuildingOffsetY: 0
   Player: {fileID: 1957270051}

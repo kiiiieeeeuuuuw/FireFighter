@@ -36,18 +36,18 @@ public class GenerateBuilding : MonoBehaviour
 
         for (int i = 0; i < NumberOfBuidings - 1; i++)
         {            
-            var lOrRMultiplier = LeftOrRight[rng.Next(0, 2)];
-            var lOrHMultiplier = LowerOrHigher[rng.Next(0, 2)];
-            var refBuilding = lOrRMultiplier == 1 ? RightBuilding : LeftBuilding;
-            var refPos = refBuilding.transform.position;
+            var leftOrRightMultiplier = LeftOrRight[rng.Next(0, 2)];
+            var lowerOrHigherMultiplier = LowerOrHigher[rng.Next(0, 2)];
+            var referenceBuilding = leftOrRightMultiplier == 1 ? RightBuilding : LeftBuilding;
+            var referencePosition = referenceBuilding.transform.position;
 
-            var deltaX = rng.Next((int)MinBuildingOffsetX, (int)MaxBuildingOffsetX) * lOrRMultiplier;
-            var deltaY = rng.Next((int)MinBuildingOffsetY, (int)MaxBuildingOffsetY) * lOrHMultiplier;
+            var deltaX = rng.Next((int)MinBuildingOffsetX, (int)MaxBuildingOffsetX) * leftOrRightMultiplier;
+            var deltaY = rng.Next((int)MinBuildingOffsetY, (int)MaxBuildingOffsetY) * lowerOrHigherMultiplier;
 
-            var building = Instantiate(Building, new Vector3(refPos.x + deltaX, refPos.y + deltaY, refPos.z), Quaternion.identity, this.transform);            
+            var building = Instantiate(Building, new Vector3(referencePosition.x + deltaX, referencePosition.y + deltaY, referencePosition.z), Quaternion.identity, this.transform);            
 
-            if (lOrRMultiplier == -1) LeftBuilding = building;
-            if (lOrRMultiplier == 1) RightBuilding = building;
+            if (leftOrRightMultiplier == -1) LeftBuilding = building;
+            if (leftOrRightMultiplier == 1) RightBuilding = building;
             Buildings.Add(building);
         }
 

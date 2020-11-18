@@ -10,6 +10,7 @@ public class BuildingHealth : MonoBehaviour
     public GameObject Building;
     public GameObject CollapsableBuilding;
     public GameObject SpriteObject;
+    public float HitAnimationInterval;
 
 
     [SerializeField]
@@ -21,6 +22,7 @@ public class BuildingHealth : MonoBehaviour
     private List<ThresholdTracker> CrackIncreaseThresholds;
     private bool broken;
     private Animator BuildingAC;
+    private float CurrentTime;
 
     private class ThresholdTracker
     {
@@ -45,16 +47,23 @@ public class BuildingHealth : MonoBehaviour
         };
 
         BuildingAC = SpriteObject.GetComponent<Animator>();
+
+        CurrentTime = 0;
     }
 
     public void Update()
     {
         foreach(Transform t in transform)
         {
-            if (t.name.Contains("Ember"))
-            {
+            if (t.name.Contains("Ember") && !t.GetComponent<ExtinguishFlame>().Doused)
+            {                
                 Damage(t.gameObject.GetComponent<DoesDamage>().GetDamage() * Time.deltaTime);
             }
+        }
+
+        if(CurrentTime > 0)
+        {
+            CurrentTime -= Time.deltaTime;
         }
     }
 
@@ -71,7 +80,11 @@ public class BuildingHealth : MonoBehaviour
         CurrentHealth -= damage;
         if (CurrentHealth > 0)
         {
-            BuildingAC.SetTrigger("Hit");
+            if (CurrentTime <= 0)
+            {
+                BuildingAC.SetTrigger("Hit");
+                CurrentTime = HitAnimationInterval;
+            }
             bool triggered = false;
             int i = 0;
             while (i < CrackSpawnThresholds.Count && !triggered)
