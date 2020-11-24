@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CleanUp : MonoBehaviour
 {    
@@ -9,7 +7,7 @@ public class CleanUp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Application.LoadLevel(Application.loadedLevel);
+            collision.gameObject.GetComponent<PlayerHealth>().KillPlayer();
         }
         if (collision.gameObject.CompareTag("Meteor"))
         {

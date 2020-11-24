@@ -28,7 +28,10 @@ public class PlayerHealth : MonoBehaviour
     public Color Q3Health;
     public Color HalfHealth;
     public Color Q1Health;
-    
+
+    [Header("UI reference")]
+    public GameObject UI;
+
     private TrailRenderer TR;
     private List<GameObject> Glows;
     private Rigidbody2D RB;
@@ -68,6 +71,7 @@ public class PlayerHealth : MonoBehaviour
             PM.enabled = false;
             RB.velocity = new Vector2(0, 0);
             RB.isKinematic = true;
+            UI.SetActive(true);
         }
 
     }
@@ -144,4 +148,9 @@ public class PlayerHealth : MonoBehaviour
         TR.startColor = visibleColor;
         PM.SetDashColor(visibleColor);
     }    
+
+    public void KillPlayer()
+    {
+        Death = true;
+    }
 }
