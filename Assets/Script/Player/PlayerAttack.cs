@@ -106,11 +106,8 @@ public class PlayerAttack : MonoBehaviour
                 }
                 foreach(var flame in flamesToDouse)
                 {
-                    if (flame.GetComponent<DestroyMeteor>() != null)
-                    {
-                        flame.GetComponent<DestroyMeteor>().DestroyByPlayer();
-                        GetComponent<PlayerHealth>().Heal(50);
-                    }
+                    if (flame.GetComponent<DestroyMeteor>() != null)                    
+                        flame.GetComponent<DestroyMeteor>().DestroyByPlayer();                                            
                     flame.GetComponent<ExtinguishFlame>()?.Extinguish();
                 }
                 TimeBtwAttack = StartTimeBtwAttack;                               

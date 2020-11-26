@@ -9819,6 +9819,8 @@ MonoBehaviour:
   Comet: {fileID: 5845304538927280611}
   BreakableObject: {fileID: 2309816047251596315, guid: dda6ad3aef1d593498f7458c30a9ab45,
     type: 3}
+  HealthDrop: {fileID: 6236979589483072990, guid: 66e3fcd4e42b2244ba5460b774b31764,
+    type: 3}
 --- !u!114 &7083941207772847878
 MonoBehaviour:
   m_ObjectHideFlags: 0

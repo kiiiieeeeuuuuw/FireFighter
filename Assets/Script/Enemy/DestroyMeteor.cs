@@ -12,6 +12,7 @@ public class DestroyMeteor : MonoBehaviour
     public ParticleSystem ExtinguishEffect;
     public GameObject Comet;
     public GameObject BreakableObject;
+    public GameObject HealthDrop;
     private bool broken;
     private SpawnMeteorTrajectory SMT;
 
@@ -59,6 +60,7 @@ public class DestroyMeteor : MonoBehaviour
     public void DestroyByPlayer()
     {
         Instantiate(ExtinguishEffect, transform.position, Quaternion.identity, transform);
+        Instantiate(HealthDrop, transform.position, Quaternion.identity, transform);
         DestroyMe();        
     }
 }
