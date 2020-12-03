@@ -32,6 +32,11 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI reference")]
     public GameObject UI;
 
+    [Header("Death animations")]
+    public List<GameObject> DeathAnimations;
+    public List<string> DeathTexts;
+
+
     private TrailRenderer TR;
     private List<GameObject> Glows;
     private Rigidbody2D RB;
@@ -63,19 +68,6 @@ public class PlayerHealth : MonoBehaviour
             TimeBetweenDamage -= Time.deltaTime;
     }
 
-    private void LateUpdate()
-    {
-        if (Death)
-        {
-            PlayerAC.Play("PlayerDeath");
-            PM.enabled = false;
-            RB.velocity = new Vector2(0, 0);
-            RB.isKinematic = true;
-            UI.SetActive(true);
-        }
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Meteor"))
@@ -92,7 +84,7 @@ public class PlayerHealth : MonoBehaviour
             Health -= dmg;
             if (Health <= 0)
             {
-                Death = true;
+                KillPlayer();
             }
             if (Health > 0)
             {                
@@ -107,7 +99,7 @@ public class PlayerHealth : MonoBehaviour
             var velocity = direction * KnockBackForce;
             RB.velocity = velocity;
 
-            TimeBetweenDamage = StartTimeBetweenDamage;
+            TimeBetweenDamage = StartTimeBetweenDamage;            
         }               
     }
 
@@ -151,6 +143,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
-        Death = true;
+        PlayerAC.Play("PlayerDeath");
+        PM.enabled = false;
+        RB.velocity = new Vector2(0, 0);
+        RB.isKinematic = true;
+        UI.SetActive(true);
+        PlayerSprite.SetActive(false);
+
+        var rng = new System.Random();
+        var deathIndex = rng.Next(DeathAnimations.Count);
+        Instantiate(DeathAnimations[deathIndex], transform.position, Quaternion.identity, transform);
+        UI.GetComponent<ChangeDeathMessage>().SetDeathText(DeathTexts[deathIndex]);
     }
 }
