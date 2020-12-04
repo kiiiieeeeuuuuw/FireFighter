@@ -24,11 +24,18 @@ public class PlayerAttack : MonoBehaviour
     public KeyCode UpCode = KeyCode.Z;
     public KeyCode DownCode = KeyCode.S;
 
+    [Header("Scorekeeper")]
+    public GameObject SKObject;
+    public int MeteorScore;
+    public int FlameScore;
+    
+
     private float TimeBtwAttack;    
     private float PassedTime;
     private bool FirstAttackPassed = false;
     private bool FirstUpAttackPassed = false;        
-    private bool BounceOnDownAttack;    
+    private bool BounceOnDownAttack;
+    private ScoreKeeper SK;
 
     private Animator PlayerAC;
     private Rigidbody2D RB;
@@ -41,6 +48,7 @@ public class PlayerAttack : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         PM = GetComponent<PlayerMovement>();
         PlayerScale = GetComponent<Transform>();
+        SK = SKObject.GetComponent<ScoreKeeper>();
     }
 
     // Update is called once per frame
@@ -106,9 +114,13 @@ public class PlayerAttack : MonoBehaviour
                 }
                 foreach(var flame in flamesToDouse)
                 {
-                    if (flame.GetComponent<DestroyMeteor>() != null)                    
-                        flame.GetComponent<DestroyMeteor>().DestroyByPlayer();                                            
+                    if (flame.GetComponent<DestroyMeteor>() != null)
+                    {
+                        flame.GetComponent<DestroyMeteor>().DestroyByPlayer();
+                        SK.IncreaseScore(MeteorScore);
+                    }
                     flame.GetComponent<ExtinguishFlame>()?.Extinguish();
+                    SK.IncreaseScore(FlameScore);
                 }
                 TimeBtwAttack = StartTimeBtwAttack;                               
             }            

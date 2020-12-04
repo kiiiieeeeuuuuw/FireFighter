@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using Cinemachine;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -39,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
 
     private TrailRenderer TR;
     private List<GameObject> Glows;
-    private Rigidbody2D RB;
+    private Rigidbody2D RB;    
     private float TimeBetweenDamage;
     private Animator PlayerAC;
     private PlayerMovement PM;
@@ -149,10 +150,12 @@ public class PlayerHealth : MonoBehaviour
         RB.isKinematic = true;
         UI.SetActive(true);
         PlayerSprite.SetActive(false);
+        TR.startColor = new Color(0, 0, 0, 0);
 
         var rng = new System.Random();
         var deathIndex = rng.Next(DeathAnimations.Count);
-        Instantiate(DeathAnimations[deathIndex], transform.position, Quaternion.identity, transform);
+        var anim = Instantiate(DeathAnimations[deathIndex], transform.position, Quaternion.identity);
         UI.GetComponent<ChangeDeathMessage>().SetDeathText(DeathTexts[deathIndex]);
+        GetComponent<CinemachineVirtualCamera>().Follow = anim.transform;
     }
 }
