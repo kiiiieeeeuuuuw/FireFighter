@@ -1,10 +1,6 @@
 ﻿using Cinemachine;
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -35,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Death animations")]
     public List<GameObject> DeathAnimations;
-    public List<string> DeathTexts;
+    public List<string> DeathTexts;    
 
 
     private TrailRenderer TR;
@@ -156,6 +152,6 @@ public class PlayerHealth : MonoBehaviour
         var deathIndex = rng.Next(DeathAnimations.Count);
         var anim = Instantiate(DeathAnimations[deathIndex], transform.position, Quaternion.identity);
         UI.GetComponent<ChangeDeathMessage>().SetDeathText(DeathTexts[deathIndex]);
-        GetComponent<CinemachineVirtualCamera>().Follow = anim.transform;
+        CinemachineCamera.GetComponent<CinemachineVirtualCamera>().Follow = anim.transform;        
     }
 }

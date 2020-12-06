@@ -3,12 +3,16 @@ using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    public Text scoreText;
+    [Header("Animation")]
+    public Animator ScoreAC;
+
+    private Text scoreText;
     private int score;
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
+        scoreText = GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -16,5 +20,6 @@ public class ScoreKeeper : MonoBehaviour
     {
         score += extraScore;
         scoreText.text = score.ToString();
+        ScoreAC.SetTrigger("Score");
     }
 }
