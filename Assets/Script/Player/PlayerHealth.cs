@@ -27,7 +27,8 @@ public class PlayerHealth : MonoBehaviour
     public Color Q1Health;
 
     [Header("UI reference")]
-    public GameObject UI;
+    public GameObject DeathUI;
+    public GameObject AliveUI;
 
     [Header("Death animations")]
     public List<GameObject> DeathAnimations;
@@ -40,7 +41,6 @@ public class PlayerHealth : MonoBehaviour
     private float TimeBetweenDamage;
     private Animator PlayerAC;
     private PlayerMovement PM;
-    private bool Death;
 
     private void Start()
     {
@@ -55,7 +55,6 @@ public class PlayerHealth : MonoBehaviour
         TR = GetComponent<TrailRenderer>();
         PlayerAC = GetComponent<Animator>();
         PM = GetComponent<PlayerMovement>();
-        Death = false;
         HandleColor();
     }
 
@@ -144,14 +143,15 @@ public class PlayerHealth : MonoBehaviour
         PM.enabled = false;
         RB.velocity = new Vector2(0, 0);
         RB.isKinematic = true;
-        UI.SetActive(true);
+        DeathUI.SetActive(true);
         PlayerSprite.SetActive(false);
         TR.startColor = new Color(0, 0, 0, 0);
 
         var rng = new System.Random();
         var deathIndex = rng.Next(DeathAnimations.Count);
         var anim = Instantiate(DeathAnimations[deathIndex], transform.position, Quaternion.identity);
-        UI.GetComponent<ChangeDeathMessage>().SetDeathText(DeathTexts[deathIndex]);
+        DeathUI.GetComponent<ChangeDeathMessage>().SetDeathText(DeathTexts[deathIndex]);
+        AliveUI.SetActive(false);
         CinemachineCamera.GetComponent<CinemachineVirtualCamera>().Follow = anim.transform;        
     }
 }

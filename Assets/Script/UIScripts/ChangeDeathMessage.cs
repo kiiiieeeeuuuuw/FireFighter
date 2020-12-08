@@ -4,9 +4,12 @@ using UnityEngine.UI;
 public class ChangeDeathMessage : MonoBehaviour
 {
     public Text DeathText;
-
+    public Text DeathScoreText;
+    public GameObject ScoreKeeper;
     public void SetDeathText(string text)
     {
         DeathText.text = text;
+        DeathScoreText.text = "Score: " + ScoreKeeper.GetComponent<ScoreKeeper>().score.ToString();        
     }
+
 }

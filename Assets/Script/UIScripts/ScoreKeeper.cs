@@ -7,7 +7,7 @@ public class ScoreKeeper : MonoBehaviour
     public Animator ScoreAC;
 
     private Text scoreText;
-    private int score;
+    public int score;
     // Start is called before the first frame update
     void Start()
     {

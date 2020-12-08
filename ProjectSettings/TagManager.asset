@@ -43,6 +43,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3300525887
+    locked: 0
+  - name: Skyline
+    uniqueID: 1635687015
+    locked: 0
+  - name: Building
+    uniqueID: 760567621
+    locked: 0
+  - name: Fire
+    uniqueID: 2302101267
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1411507431
     locked: 0

@@ -119,8 +119,8 @@ public class PlayerAttack : MonoBehaviour
                         flame.GetComponent<DestroyMeteor>().DestroyByPlayer();
                         SK.IncreaseScore(MeteorScore);
                     }
-                    flame.GetComponent<ExtinguishFlame>()?.Extinguish();
-                    SK.IncreaseScore(FlameScore);
+                    else SK.IncreaseScore(FlameScore);
+                    flame.GetComponent<ExtinguishFlame>()?.Extinguish();                    
                 }
                 TimeBtwAttack = StartTimeBtwAttack;                               
             }            
