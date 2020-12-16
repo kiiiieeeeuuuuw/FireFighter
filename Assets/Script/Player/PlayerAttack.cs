@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -27,8 +25,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Scorekeeper")]
     public GameObject SKObject;
     public int MeteorScore;
-    public int FlameScore;
-    
+    public int FlameScore;     
 
     private float TimeBtwAttack;    
     private float PassedTime;
@@ -120,7 +117,8 @@ public class PlayerAttack : MonoBehaviour
                         SK.IncreaseScore(MeteorScore);
                     }
                     else SK.IncreaseScore(FlameScore);
-                    flame.GetComponent<ExtinguishFlame>()?.Extinguish();                    
+                    flame.GetComponent<ExtinguishFlame>()?.Extinguish();
+                    AudioManagerScript.PlaySound("extinguish");
                 }
                 TimeBtwAttack = StartTimeBtwAttack;                               
             }            
