@@ -217,6 +217,7 @@ public class PlayerMovement : MonoBehaviour
             dashStopped = false;
             PlayerColider.enabled = false;
             StartCoroutine(Dashing());
+            AudioManagerScript.PlaySound("woosh");
         }
 
         PlayerAC.SetTrigger("Dash");
