@@ -82,7 +82,14 @@ public class BuildingHealth : MonoBehaviour
         {
             if (CurrentTime <= 0)
             {
-                BuildingAC.SetTrigger("Hit");
+                string trigger = "Hit";
+                if (CurrentHealth > 3f / 4f * StartHealth)
+                    trigger += "3Q";
+                else if (CurrentHealth > 2f / 4f * StartHealth)
+                    trigger += "2Q";
+                else if (CurrentHealth > 1f / 4f * StartHealth)
+                    trigger += "1Q";
+                BuildingAC.SetTrigger(trigger);
                 CurrentTime = HitAnimationInterval;
             }
             bool triggered = false;

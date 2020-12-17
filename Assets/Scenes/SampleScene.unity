@@ -5697,7 +5697,7 @@ MonoBehaviour:
   Meteor: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
   Gb: {fileID: 679873882}
   Targets: []
-  MaxTime: 2
+  MaxTime: 1
   MeteorForce: 0.5
   AimForPlayer: 0
   Player: {fileID: 1957270051}
