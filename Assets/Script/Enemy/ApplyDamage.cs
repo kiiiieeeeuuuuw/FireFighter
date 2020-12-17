@@ -9,7 +9,7 @@ public class ApplyDamage : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !GetComponent<ExtinguishFlame>().Doused)
         {
-            collision.GetComponent<PlayerHealth>().Damage(25, GetComponent<Transform>().position);
+            collision.GetComponent<PlayerHealth>().Damage(25, GetComponent<Transform>().position, "fire");
         }
     }
 }

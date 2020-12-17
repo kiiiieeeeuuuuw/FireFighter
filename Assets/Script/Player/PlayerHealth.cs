@@ -69,15 +69,16 @@ public class PlayerHealth : MonoBehaviour
         if (collision.collider.CompareTag("Meteor"))
         {
             Instantiate(Explosion, transform.position, Quaternion.identity, transform);
-            Damage(25, collision.transform.position);
+            Damage(25, collision.transform.position, "meteor");
             collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
         }
     }
 
-    public void Damage(float dmg, Vector3 enemyPos)
+    public void Damage(float dmg, Vector3 enemyPos, string sound)
     {
         if(TimeBetweenDamage <= 0) {
             Health -= dmg;
+            AudioManagerScript.PlaySound(sound);
             if (Health <= 0)
             {
                 KillPlayer();
@@ -140,6 +141,7 @@ public class PlayerHealth : MonoBehaviour
     public void KillPlayer()
     {
         PlayerAC.Play("PlayerDeath");
+        AudioManagerScript.PlaySound("death");
         PM.enabled = false;
         RB.velocity = new Vector2(0, 0);
         RB.isKinematic = true;
