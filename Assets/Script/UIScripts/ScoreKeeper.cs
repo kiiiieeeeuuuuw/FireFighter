@@ -12,15 +12,22 @@ public class ScoreKeeper : MonoBehaviour
     public GameObject Player;
     public int HealthThreshold;
 
+    [Header("Difficulty")]
+    public int DifficultyThreshold;
+    public float deltaSpawnTime;
+    public GameObject MeteorSpawner;
 
-    private int CurrentThreshold;
+
+    private int CurrentHealthThreshold;
+    private int CurrentDifficultyThreshold;
     private Text scoreText;    
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
         scoreText = GetComponent<Text>();
-        CurrentThreshold = HealthThreshold;
+        CurrentHealthThreshold = HealthThreshold;
+        CurrentDifficultyThreshold = DifficultyThreshold;
     }
 
     public void IncreaseScore(int extraScore)
@@ -28,9 +35,9 @@ public class ScoreKeeper : MonoBehaviour
         score += extraScore;
         scoreText.text = score.ToString();        
 
-        if(score >= CurrentThreshold)
+        if(score >= CurrentHealthThreshold)
         {
-            CurrentThreshold += HealthThreshold;
+            CurrentHealthThreshold += HealthThreshold;
             HealingUIEffect.Play();
             ScoreAC.SetTrigger("HealthScore");
             Player.GetComponent<PlayerHealth>().Heal(25);
@@ -38,6 +45,12 @@ public class ScoreKeeper : MonoBehaviour
         else
         {
             ScoreAC.SetTrigger("Score");
+        }
+
+        if(score >= CurrentDifficultyThreshold)
+        {
+            CurrentDifficultyThreshold += DifficultyThreshold;
+            MeteorSpawner.GetComponent<SpawnMeteor>().DecreaseMaxSpawnTime(deltaSpawnTime);
         }
     }
 }

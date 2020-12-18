@@ -81,4 +81,9 @@ public class SpawnMeteor : MonoBehaviour
             PassedTime = 0;            
         }
     }
+
+    public void DecreaseMaxSpawnTime(float delta)
+    {
+        MaxTime -= delta;
+    }
 }

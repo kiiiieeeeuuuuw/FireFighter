@@ -5697,7 +5697,7 @@ MonoBehaviour:
   Meteor: {fileID: 5549323352275273707, guid: c6859717b36099e408f1425eca658a82, type: 3}
   Gb: {fileID: 679873882}
   Targets: []
-  MaxTime: 1
+  MaxTime: 2
   MeteorForce: 0.5
   AimForPlayer: 0
   Player: {fileID: 1957270051}
@@ -15371,6 +15371,9 @@ MonoBehaviour:
   score: 0
   Player: {fileID: 1957270051}
   HealthThreshold: 25
+  DifficultyThreshold: 25
+  deltaSpawnTime: 0.2
+  MeteorSpawner: {fileID: 228472589}
 --- !u!95 &1265097939
 Animator:
   serializedVersion: 3
