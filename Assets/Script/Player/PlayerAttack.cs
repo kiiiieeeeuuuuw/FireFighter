@@ -111,14 +111,18 @@ public class PlayerAttack : MonoBehaviour
                 }
                 foreach(var flame in flamesToDouse)
                 {
+                    var ext = flame.GetComponent<ExtinguishFlame>();
                     if (flame.GetComponent<DestroyMeteor>() != null)
                     {
                         flame.GetComponent<DestroyMeteor>().DestroyByPlayer();
                         SK.IncreaseScore(MeteorScore);
                     }
-                    else SK.IncreaseScore(FlameScore);
-                    flame.GetComponent<ExtinguishFlame>()?.Extinguish();
-                    AudioManagerScript.PlaySound("extinguish");
+                    else if (ext != null && !ext.Doused)
+                    {
+                        SK.IncreaseScore(FlameScore);
+                        AudioManagerScript.PlaySound("extinguish");
+                        ext.Extinguish();
+                    }                     
                 }
                 TimeBtwAttack = StartTimeBtwAttack;                               
             }            
