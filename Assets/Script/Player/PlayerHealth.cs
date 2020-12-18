@@ -102,6 +102,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float healing)
     {
+        AudioManagerScript.PlaySound("heal");
         Instantiate(HealingEffect, transform.position, Quaternion.identity,transform);
         PostProcessing.GetComponent<PostProcessControl>().ShowVignetteEffect(false, true);
         Health += healing;

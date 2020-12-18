@@ -8,6 +8,7 @@ public class AudioManagerScript : MonoBehaviour
     private static List<AudioClip> fireSounds;
     private static AudioClip meteorSound;
     private static List<AudioClip> deathSounds;
+    private static AudioClip healSound;
     static AudioSource src;
 
     // Start is called before the first frame update
@@ -30,14 +31,9 @@ public class AudioManagerScript : MonoBehaviour
         deathSounds.Add(Resources.Load<AudioClip>("Sound/deathSound1"));
         deathSounds.Add(Resources.Load<AudioClip>("Sound/deathSound2"));
 
+        healSound = Resources.Load<AudioClip>("Sound/healSound");
 
         src = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public static void PlaySound(string name)
@@ -59,6 +55,9 @@ public class AudioManagerScript : MonoBehaviour
                 break;
             case "death":
                 src.PlayOneShot(deathSounds[rng.Next(deathSounds.Count)]);
+                break;
+            case "heal":
+                src.PlayOneShot(healSound);
                 break;
         }
     }
