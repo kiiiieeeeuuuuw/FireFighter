@@ -9,12 +9,12 @@ public class AudioManagerScript : MonoBehaviour
     private static AudioClip meteorSound;
     private static List<AudioClip> deathSounds;
     private static AudioClip healSound;
-    static AudioSource src;
+    static AudioSource src;    
 
     // Start is called before the first frame update
     void Start()
     {
-        fireExtuingishSound = Resources.Load<AudioClip>("Sound/extinguish");
+        fireExtuingishSound = Resources.Load<AudioClip>("Sound/extinguish2");
 
         wooshSounds = new List<AudioClip>();
         wooshSounds.Add(Resources.Load<AudioClip>("Sound/woosh1"));
@@ -25,7 +25,7 @@ public class AudioManagerScript : MonoBehaviour
         fireSounds.Add(Resources.Load<AudioClip>("Sound/fire1"));
         fireSounds.Add(Resources.Load<AudioClip>("Sound/fire2"));
         
-        meteorSound = Resources.Load<AudioClip>("Sound/meteor");
+        meteorSound = Resources.Load<AudioClip>("Sound/meteor2");
 
         deathSounds = new List<AudioClip>();
         deathSounds.Add(Resources.Load<AudioClip>("Sound/deathSound1"));
@@ -33,12 +33,13 @@ public class AudioManagerScript : MonoBehaviour
 
         healSound = Resources.Load<AudioClip>("Sound/healSound");
 
-        src = GetComponent<AudioSource>();
+        src = GetComponent<AudioSource>();        
     }
 
     public static void PlaySound(string name)
     {
         var rng = new System.Random();
+        src.pitch = Random.Range(0.8f, 1.3f);
         switch (name)
         {
             case "extinguish":                
