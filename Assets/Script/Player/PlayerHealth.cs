@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI reference")]
     public GameObject DeathUI;
     public GameObject AliveUI;
+    public GameObject SKGameObject;
 
     [Header("Death animations")]
     public List<GameObject> DeathAnimations;
@@ -141,14 +142,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
+        SKGameObject.GetComponent<ScoreKeeper>().SetHighScore();
         PlayerAC.Play("PlayerDeath");
-        AudioManagerScript.PlaySound("death");
+        AudioManagerScript.PlaySound("death");        
         PM.enabled = false;
         RB.velocity = new Vector2(0, 0);
         RB.isKinematic = true;
         DeathUI.SetActive(true);
         PlayerSprite.SetActive(false);
-        TR.startColor = new Color(0, 0, 0, 0);
+        TR.startColor = new Color(0, 0, 0, 0);        
 
         var rng = new System.Random();
         var deathIndex = rng.Next(DeathAnimations.Count);
