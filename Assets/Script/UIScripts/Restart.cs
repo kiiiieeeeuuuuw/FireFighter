@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Script.UIScripts;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Restart : MonoBehaviour
+public class Restart : FireButton
 {
     public void RestartGame()
     {
