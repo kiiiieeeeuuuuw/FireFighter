@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnFire : MonoBehaviour
@@ -9,6 +7,7 @@ public class SpawnFire : MonoBehaviour
     public GameObject Fire;
     public GameObject CrackSpawner;
     public float delta;
+    public LayerMask WhatIsPlayer;
 
     private float index;    
 
@@ -22,6 +21,12 @@ public class SpawnFire : MonoBehaviour
         if (collision.collider.CompareTag("Meteor"))
         {            
             var impactPos = collision.transform.position;
+
+            Collider2D[] PlayerCloseToImpact = Physics2D.OverlapCircleAll(impactPos, 4, WhatIsPlayer);
+            if (PlayerCloseToImpact.Length > 0)
+                AudioManagerScript.PlaySound("impact");
+            
+
             var top = gameObject.transform.parent.Find("TopLocation").transform.position;
             if (impactPos.x > top.x)
                 impactPos.x -= delta;
@@ -29,8 +34,7 @@ public class SpawnFire : MonoBehaviour
                 impactPos.x += delta;                            
             if (impactPos.y > top.y)
                 impactPos.y -= delta;
-
-
+            
             Instantiate(Explosion,impactPos, Quaternion.identity, transform);
             var fire = Instantiate(Fire, impactPos, Quaternion.identity, transform);
             fire.name = "Ember_" + index;

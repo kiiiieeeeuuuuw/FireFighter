@@ -9,6 +9,8 @@ public class AudioManagerScript : MonoBehaviour
     private static AudioClip meteorSound;
     private static List<AudioClip> deathSounds;
     private static AudioClip healSound;
+    private static AudioClip meteorSliceSound;
+    private static AudioClip meteorImpactSound;
     static AudioSource src;    
 
     // Start is called before the first frame update
@@ -32,6 +34,10 @@ public class AudioManagerScript : MonoBehaviour
         deathSounds.Add(Resources.Load<AudioClip>("Sound/deathSound2"));
 
         healSound = Resources.Load<AudioClip>("Sound/healSound");
+
+        meteorSliceSound = Resources.Load<AudioClip>("Sound/meteorSlice");
+
+        meteorImpactSound = Resources.Load<AudioClip>("Sound/meteorImpact");
 
         src = GetComponent<AudioSource>();        
     }
@@ -59,6 +65,12 @@ public class AudioManagerScript : MonoBehaviour
                 break;
             case "heal":
                 src.PlayOneShot(healSound);
+                break;
+            case "slice":
+                src.PlayOneShot(meteorSliceSound);
+                break;
+            case "impact":
+                src.PlayOneShot(meteorImpactSound);
                 break;
         }
     }

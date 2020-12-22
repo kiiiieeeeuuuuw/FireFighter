@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 75731403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: UpAttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5239,7 +5239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5305,7 +5305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -125.9, y: 38.000008}
+  m_AnchoredPosition: {x: -179.5, y: 38.000008}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &163850496
@@ -5411,6 +5411,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuitButton: {fileID: 353184760}
+  ButtonFire: {fileID: 77408786}
+  HoverColor1: {r: 0.020273209, g: 0, b: 1, a: 1}
+  HoverColor2: {r: 0.990566, g: 0, b: 0, a: 1}
+  IdleColor1: {r: 0.9766219, g: 1, b: 0.042452812, a: 1}
+  IdleColor2: {r: 0.21603727, g: 1, b: 0, a: 1}
 --- !u!114 &163850500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5643,7 +5648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 214654672}
   - component: {fileID: 214654673}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WaterTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5922,6 +5927,71 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584057196290515078, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -7562178281892911669, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003411552254056814, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873611620431857918, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588126040095229512, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2034412431169880837, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1735838168004593078, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710759642352992407, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3294890781995044616, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6771764314812280281, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3259253800798573673, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900847483555670349, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184831204402565643, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3349764434178929923, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
         type: 3}
@@ -6443,6 +6513,36 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1881237114}
+    - target: {fileID: 3431036321095762271, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534847506999078481, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806523831571370063, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3302426093495566443, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -6807785082656011156, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323960586850920694, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -955843872256132538, guid: e5e39ce1f930f41d6b2028e5ccc7309b,
     type: 3}
@@ -6913,8 +7013,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353184760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.391, y: 10.391, z: 10.391}
+  m_LocalPosition: {x: 5.4, y: 0, z: 0}
+  m_LocalScale: {x: 13.386725, y: 13.386725, z: 13.386725}
   m_Children: []
   m_Father: {fileID: 163850495}
   m_RootOrder: 0
@@ -11931,7 +12031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &495763388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12468,7 +12568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530756667}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontalCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13181,7 +13281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 713424993}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustEffectPos
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -13503,7 +13603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791320940}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DashEffectPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18773,7 +18873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 932187730}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DownAttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18905,7 +19005,7 @@ GameObject:
   - component: {fileID: 952956029}
   - component: {fileID: 952956031}
   - component: {fileID: 952956030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19732,7 +19832,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AllIn1SpriteShader/AllIn1SpriteShader
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA HITEFFECT_ON
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -25783,7 +25883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -26841,7 +26941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1689713231}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ForwardAttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27430,7 +27530,7 @@ GameObject:
   - component: {fileID: 1957270058}
   - component: {fileID: 1957270059}
   - component: {fileID: 1957270060}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

@@ -59,6 +59,7 @@ public class DestroyMeteor : MonoBehaviour
 
     public void DestroyByPlayer()
     {
+        AudioManagerScript.PlaySound("slice");
         Instantiate(ExtinguishEffect, transform.position, Quaternion.identity, transform);
         Instantiate(HealthDrop, transform.position, Quaternion.identity, transform);
         DestroyMe();        

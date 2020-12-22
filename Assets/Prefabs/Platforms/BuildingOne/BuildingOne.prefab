@@ -463,6 +463,9 @@ MonoBehaviour:
   Fire: {fileID: 5464461055311406263, guid: 28bcf7f9088a8214cbfbbd7230f56d4a, type: 3}
   CrackSpawner: {fileID: 1097250961650093257}
   delta: 0.5
+  WhatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &7578549965719510199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,7 +615,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 760567621
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 5f411f148730da14bbc48e4999430839, type: 3}
   m_Color: {r: 0.5027661, g: 0.4960395, b: 0.6698113, a: 1}
