@@ -11,20 +11,23 @@ namespace Assets.Script.Items
             if (collision.collider.CompareTag("Player"))
             {
                 // Determine closest building
-                var buildings = BuildingManager.GetComponent<GenerateBuilding>().GetBuildings();
+                var buildingGen = BuildingManager.GetComponent<GenerateBuilding>();
+                var buildings = buildingGen.GetBuildings();
                 float minDistance = Mathf.Infinity;
-                GameObject closest = null;
-                foreach(var building in buildings)
+                int closest = 0;
+                for(int i = 1; i < buildings.Count; i++)
                 {
+                    var building = buildings[i];
                     var distance = Mathf.Abs(building.transform.position.x - gameObject.transform.position.x);
                     if (distance < minDistance)
                     {
                         minDistance = distance;
-                        closest = building;
+                        closest = i;
                     }
                 }
 
-                closest.GetComponentInChildren<BuildingHealth>().Repair();
+                //closest.GetComponentInChildren<BuildingHealth>().Repair();
+                buildingGen.ReplaceBuilding(closest);
                 Destroy(gameObject);
             }
         }

@@ -12,7 +12,12 @@ public class DestroyMeteor : MonoBehaviour
     public ParticleSystem ExtinguishEffect;
     public GameObject Comet;
     public GameObject BreakableObject;
+    
+    [Header("Playerdrops")]
     public GameObject HealthDrop;
+    public GameObject RepairDrop;
+    
+    
     private bool broken;
     private SpawnMeteorTrajectory SMT;
 
@@ -61,7 +66,11 @@ public class DestroyMeteor : MonoBehaviour
     {
         AudioManagerScript.PlaySound("slice");
         Instantiate(ExtinguishEffect, transform.position, Quaternion.identity, transform);
-        Instantiate(HealthDrop, transform.position, Quaternion.identity, transform);
+
+        var rng = new System.Random();
+        GameObject drop = rng.Next(5) == 1? RepairDrop : HealthDrop;        
+
+        Instantiate(drop, transform.position, Quaternion.identity, transform);
         DestroyMe();        
     }
 }

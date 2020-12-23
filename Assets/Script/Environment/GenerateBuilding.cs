@@ -67,4 +67,11 @@ public class GenerateBuilding : MonoBehaviour
     {
         return RightBuilding.transform.position;
     }
+
+    public void ReplaceBuilding(int index)
+    {
+        var pos = Buildings[index].transform.position;
+        Destroy(Buildings[index].gameObject);
+        Buildings[index] = Instantiate(Building, pos, Quaternion.identity, this.transform);
+    }
 }

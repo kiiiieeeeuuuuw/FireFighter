@@ -9821,6 +9821,8 @@ MonoBehaviour:
     type: 3}
   HealthDrop: {fileID: 6236979589483072990, guid: 66e3fcd4e42b2244ba5460b774b31764,
     type: 3}
+  RepairDrop: {fileID: 7461329993054378006, guid: cfaf75f39df632744969fc4ec9264507,
+    type: 3}
 --- !u!114 &7083941207772847878
 MonoBehaviour:
   m_ObjectHideFlags: 0
