@@ -15,7 +15,7 @@ namespace Assets.Script.Items
                 var buildings = buildingGen.GetBuildings();
                 float minDistance = Mathf.Infinity;
                 int closest = 0;
-                for(int i = 1; i < buildings.Count; i++)
+                for(int i = 0; i < buildings.Count; i++)
                 {
                     var building = buildings[i];
                     var distance = Mathf.Abs(building.transform.position.x - gameObject.transform.position.x);

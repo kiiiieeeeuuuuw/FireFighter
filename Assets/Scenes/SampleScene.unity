@@ -37196,7 +37196,6 @@ GameObject:
   - component: {fileID: 1957270054}
   - component: {fileID: 1957270055}
   - component: {fileID: 1957270056}
-  - component: {fileID: 1957270057}
   - component: {fileID: 1957270058}
   - component: {fileID: 1957270059}
   - component: {fileID: 1957270060}
@@ -37358,24 +37357,6 @@ MonoBehaviour:
   - Love the smell of BBQ
   - Hmmmm... Bacon
   - You're crispier than my chips
---- !u!114 &1957270057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957270051}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cce7d2e635513b4b88da1820dac488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CoatedInWater: 0
-  WaterTime: 2
-  WaterCoat: 106
-  sprite: {fileID: 0}
-  StartWaterCoat: 0
-  tempDelta: 0
 --- !u!96 &1957270058
 TrailRenderer:
   serializedVersion: 2
