@@ -131,4 +131,9 @@ public class BuildingHealth : MonoBehaviour
         }
             
     }
+
+    public void Repair()
+    {
+        CurrentHealth = StartHealth;
+    }
 }
