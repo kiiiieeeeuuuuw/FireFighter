@@ -68,7 +68,7 @@ public class DestroyMeteor : MonoBehaviour
         Instantiate(ExtinguishEffect, transform.position, Quaternion.identity, transform);
 
         var rng = new System.Random();
-        GameObject drop = rng.Next(5) == 1? RepairDrop : HealthDrop;        
+        GameObject drop = rng.Next(3) == 1? RepairDrop : HealthDrop;        
 
         Instantiate(drop, transform.position, Quaternion.identity, transform);
         DestroyMe();        

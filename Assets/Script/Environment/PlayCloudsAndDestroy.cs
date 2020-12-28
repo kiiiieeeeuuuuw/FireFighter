@@ -20,8 +20,8 @@ public class PlayCloudsAndDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DestroyBuilding && !RepairClouds.Any(x => x.IsAlive()))                 
-            Destroy(gameObject);                    
+        if (DestroyBuilding && !RepairClouds.Any(x => x.isEmitting))                 
+            Destroy(transform.parent.gameObject);                    
     }
 
     public void PlayClouds()

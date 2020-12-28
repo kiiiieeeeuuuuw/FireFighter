@@ -4,10 +4,17 @@ namespace Assets.Script.Items
 {    
     public class PickupRepair : MonoBehaviour
     {
-        public GameObject BuildingManager;
+        private GameObject BuildingManager;
+
+        private void Start()
+        {
+            
+        }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if(BuildingManager == null)
+                BuildingManager = GameObject.Find("BuildingGenerator");
             if (collision.collider.CompareTag("Player"))
             {
                 // Determine closest building
@@ -28,6 +35,8 @@ namespace Assets.Script.Items
 
                 //closest.GetComponentInChildren<BuildingHealth>().Repair();
                 buildingGen.ReplaceBuilding(closest);
+
+                // Destroy the icon
                 Destroy(gameObject);
             }
         }
