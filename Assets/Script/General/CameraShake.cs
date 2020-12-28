@@ -41,8 +41,8 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    public void StartCameraShake()
+    public void StartCameraShake(float duration)
     {
-        ShakeElapsedTime = ShakeDuration;
+        ShakeElapsedTime = duration;
     }
 }

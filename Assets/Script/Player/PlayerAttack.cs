@@ -22,6 +22,9 @@ public class PlayerAttack : MonoBehaviour
     public KeyCode UpCode = KeyCode.Z;
     public KeyCode DownCode = KeyCode.S;
 
+    [Header("Camera FX")]
+    public GameObject CinemachineCamera;
+
     [Header("Scorekeeper")]
     public GameObject SKObject;
     public int MeteorScore;
@@ -60,6 +63,7 @@ public class PlayerAttack : MonoBehaviour
         {            
             if (Input.GetKey(AttackCode))   
             {
+                CinemachineCamera.GetComponent<CameraShake>().StartCameraShake(0.1f);
                 PM.isAttacking = true;
                 StartCoroutine(Attacking());
                 if (Input.GetKey(UpCode))

@@ -86,7 +86,7 @@ public class PlayerHealth : MonoBehaviour
             }
             if (Health > 0)
             {                
-                CinemachineCamera.GetComponent<CameraShake>().StartCameraShake();
+                CinemachineCamera.GetComponent<CameraShake>().StartCameraShake(0.3f);
                 PostProcessing.GetComponent<PostProcessControl>().ShowVignetteEffect(true, false);
                 PlayerAC.SetTrigger("Damage");
                 HandleColor();                
