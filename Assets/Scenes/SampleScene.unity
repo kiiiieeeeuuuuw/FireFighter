@@ -37508,6 +37508,7 @@ MonoBehaviour:
   AttackCode: 106
   UpCode: 122
   DownCode: 115
+  CinemachineCamera: {fileID: 1813041288}
   SKObject: {fileID: 1265097934}
   MeteorScore: 5
   FlameScore: 1
