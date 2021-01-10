@@ -56,7 +56,8 @@ public class DestroyMeteor : MonoBehaviour
         // Stop meteor from spawning more fires
         GetComponent<Collider2D>().enabled = false;
 
-        SMT.DestroyTrajectory(name);
+        if(SMT != null)
+            SMT.DestroyTrajectory(name);
 
         // Stop particleSystems from emitting more
         Particles.ForEach(x => x.Stop());        
