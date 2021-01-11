@@ -1,6 +1,4 @@
-﻿using Assets.Script.General;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
@@ -43,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpMultiplier = 1;
     public float maxJumpMultiplier = 3;
     public float jumpIncrement = 0.5f;
-    public float FallMultiplier;    
+    public float FallMultiplier;
+    private bool wasGrounded;
 
     #endregion
 
@@ -92,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         {
             x = transform.localScale.x,
             y = transform.localScale.y
-        };        
+        };
     }
 
     private void Update()
@@ -105,11 +104,11 @@ public class PlayerMovement : MonoBehaviour
         WallGlide();
         Fall();
         PlayerAC.SetBool("IsJumping", !isGrounded);
-    }
-
-    void FixedUpdate()
-    {        
-               
+        if(wasGrounded == false && isGrounded)
+        {
+            AudioManagerScript.PlaySound("jumpLand");
+        }
+        wasGrounded = isGrounded;
     }
 
     Vector3 MoveHorizontal()
@@ -161,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 PlayerAC.SetTrigger("TakeOff");
+                AudioManagerScript.PlaySound("jumpLand");
                 rb.AddForce(new Vector2(0f, jumpForce * jumpMultiplier), ForceMode2D.Impulse);
                 jumpMultiplier = 1;
                 jumpStart = false;
