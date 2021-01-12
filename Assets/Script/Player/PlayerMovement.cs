@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     public float DustInterval;
     private float CurrentDustTimePassed;
 
+    public KeyCode Left = KeyCode.Q;
+    public KeyCode Right = KeyCode.D;
+
     #endregion
 
     #region vertical movement fields
@@ -113,6 +116,9 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 MoveHorizontal()
     {
+        Vector3 movement = new Vector3(0,0,0);
+        if (Input.GetKey(Left)) movement.x = -1;
+        if (Input.GetKey(Right)) movement.x = 1;
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         var currentDirection = movement.normalized.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
         if (movement.x != 0 && !isAttacking)

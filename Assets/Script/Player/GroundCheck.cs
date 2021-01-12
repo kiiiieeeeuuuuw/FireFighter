@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using Assets.Script.Items;
 using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
@@ -15,6 +13,10 @@ public class GroundCheck : MonoBehaviour
         {
             Player.GetComponent<PlayerMovement>().isGrounded = true;
             Instantiate(LandingDustEffect, DustPos.position, LandingDustEffect.transform.rotation);
+        }
+        if (collision.collider.tag == "Pickup")
+        {
+            collision.gameObject.GetComponent<PickupItem>().PickupAction(Player);
         }
     }
 

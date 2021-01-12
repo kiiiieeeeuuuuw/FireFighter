@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Meteor
   - Building
+  - Pickup
   layers:
   - Default
   - TransparentFX
