@@ -1530,7 +1530,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2129477474}
-        m_MethodName: QuitGame
+        m_MethodName: TogglePlayerPreference
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1972,3 +1972,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NewGameScene: CityLevel
+  KeyboardLayoutPreference: {fileID: 467793437}

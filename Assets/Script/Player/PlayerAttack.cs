@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Assets.Script.General;
+using System.Collections;
 using UnityEngine;
+using static Assets.Script.General.KeyboardManager;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -18,9 +20,9 @@ public class PlayerAttack : MonoBehaviour
     public Transform DownAttackPos;
 
     [Header("KeyBindings")]
-    public KeyCode AttackCode = KeyCode.J;
-    public KeyCode UpCode = KeyCode.Z;
-    public KeyCode DownCode = KeyCode.S;
+    public KeyCode AttackCode;
+    public KeyCode UpCode;
+    public KeyCode DownCode;
 
     [Header("Camera FX")]
     public GameObject CinemachineCamera;
@@ -49,6 +51,10 @@ public class PlayerAttack : MonoBehaviour
         PM = GetComponent<PlayerMovement>();
         PlayerScale = GetComponent<Transform>();
         SK = SKObject.GetComponent<ScoreKeeper>();
+
+        AttackCode = GetKey(Key.Attack);
+        UpCode = GetKey(Key.Up);
+        DownCode = GetKey(Key.Down);
     }
 
     // Update is called once per frame
