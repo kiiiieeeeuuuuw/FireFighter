@@ -7,12 +7,18 @@ public class MainMenu : MonoBehaviour
 {
     public string NewGameScene;
     public Text KeyboardLayoutPreference;
+    public Text InputText;
 
     public void Start()
     {
         if (!PlayerPrefs.HasKey(Constants.KeyboardLayout))
-            PlayerPrefs.SetString(Constants.KeyboardLayout, Constants.Azerty);        
-        KeyboardLayoutPreference.text = PlayerPrefs.GetString(Constants.KeyboardLayout);
+            PlayerPrefs.SetString(Constants.KeyboardLayout, Constants.Azerty);
+        var pref = PlayerPrefs.GetString(Constants.KeyboardLayout);
+        KeyboardLayoutPreference.text = pref;
+        if (pref == Constants.Azerty)
+            InputText.text = Constants.AzertyInput;
+        else
+            InputText.text = Constants.QwertyInput;
     }
     public void NewGame()
     {
@@ -30,6 +36,12 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetString(Constants.KeyboardLayout, Constants.Qwerty);
         else
             PlayerPrefs.SetString(Constants.KeyboardLayout, Constants.Azerty);
-        KeyboardLayoutPreference.text = PlayerPrefs.GetString(Constants.KeyboardLayout);
+
+        var pref = PlayerPrefs.GetString(Constants.KeyboardLayout);
+        KeyboardLayoutPreference.text = pref;
+        if (pref == Constants.Azerty)
+            InputText.text = Constants.AzertyInput;
+        else
+            InputText.text = Constants.QwertyInput;
     }
 }
