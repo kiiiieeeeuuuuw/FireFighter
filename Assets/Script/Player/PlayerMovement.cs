@@ -82,9 +82,25 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion    
 
+    private PlayerControl PC;
+
 
     private Vector2 startScale;
 
+    private void Awake()
+    {
+        PC = new PlayerControl();
+    }
+
+    private void OnEnable()
+    {
+        PC.Enable();
+    }
+
+    private void OnDisable()
+    {
+        PC.Disable();
+    }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -120,12 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 MoveHorizontal()
     {
-        Vector3 movement = new Vector3(0,0,0);
-        if (Input.GetKey(Left)) 
-            movement.x = -1;
-        if (Input.GetKey(Right)) 
-            movement.x = 1;
-        movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        Vector3 movement = new Vector3(PC.Azerty.Move.ReadValue<float>(), 0,0);
         var currentDirection = movement.normalized.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
         if (movement.x != 0 && !isAttacking)
         {
@@ -154,12 +165,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Jump()
-    {
-        if (Input.GetButton("Jump") && isGrounded)
+    {        
+        if (PC.Azerty.Jump.ReadValue<float>() == 1 && isGrounded)
         {
             jumpStart = true;            
         }
-        if (Input.GetButtonUp("Jump"))
+        if (jumpStart && PC.Azerty.Jump.ReadValue<float>() == 0)
         {
             jumpStop = true;
         }
