@@ -121,8 +121,11 @@ public class PlayerMovement : MonoBehaviour
     {
         var moveDirection = MoveHorizontal();
         direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
-        if(Input.GetAxis("Horizontal") != 0)
-            HandleDash(direction);
+        //if(Input.GetAxis("Horizontal") != 0)
+        //    HandleDash(direction);
+
+        HandleDash2();
+
         Jump();
         WallGlide();
         Fall();
@@ -204,6 +207,44 @@ public class PlayerMovement : MonoBehaviour
     public void SetDashColor(Color color)
     {
         DashColor = color;
+    }
+
+    void HandleDash2()
+    {
+        var LeftDash = PC.Azerty.LeftDash.ReadValue<float>() == 1;
+        var RightDash = PC.Azerty.RightDash.ReadValue<float>() == 1;
+        
+        if (LeftDash || RightDash)
+        {
+            ParticleSystem DashEffect = new ParticleSystem();
+            currentDashTime = 0.1f;
+            PlayerAC.SetTrigger("Dash");            
+
+            if (RightDash)
+            {
+                SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
+                DashEffect = RightDashEffect;
+            }
+            if (LeftDash)
+            {
+                SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
+                DashEffect = LeftDashEffect;
+            }
+            DashEffect.startColor = DashColor;
+            Instantiate(DashEffect, DashEffectPos.position, DashEffect.transform.rotation);
+            dashStopped = false;
+            PlayerColider.enabled = false;
+            StartCoroutine(Dashing());
+            AudioManagerScript.PlaySound("woosh");
+        }        
+
+        // End dash
+        currentDashTime -= Time.deltaTime;
+        if (currentDashTime <= 0 && !dashStopped)
+        {
+            SetVelocity(new Vector2(0f, rb.velocity.y), "handledash");
+            dashStopped = true;
+        }
     }
 
     void HandleDash(DirectionEnum dir)
