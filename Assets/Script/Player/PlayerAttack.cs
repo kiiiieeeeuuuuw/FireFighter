@@ -43,6 +43,22 @@ public class PlayerAttack : MonoBehaviour
     private Rigidbody2D RB;
     private PlayerMovement PM;
     private Transform PlayerScale;
+    private PlayerControl PC;
+
+    private void Awake()
+    {
+        PC = new PlayerControl();
+    }
+
+    private void OnEnable()
+    {
+        PC.Enable();
+    }
+
+    private void OnDisable()
+    {
+        PC.Disable();
+    }
 
     private void Start()
     {
@@ -67,12 +83,12 @@ public class PlayerAttack : MonoBehaviour
         BounceOnDownAttack = false;
         if (TimeBtwAttack <= 0)
         {            
-            if (Input.GetKey(AttackCode))   
+            if (PC.Azerty.Attack.ReadValue<float>() == 1)   
             {
                 CinemachineCamera.GetComponent<CameraShake>().StartCameraShake(0.1f);
                 PM.isAttacking = true;
                 StartCoroutine(Attacking());
-                if (Input.GetKey(UpCode))
+                if (PC.Azerty.UpAttack.ReadValue<float>() == 1)
                 {
                     AttackPosToCheck = UpAttackPos.position;
                     if (!FirstUpAttackPassed)
@@ -87,7 +103,7 @@ public class PlayerAttack : MonoBehaviour
                         PlayerAC.SetTrigger("UpAttack2");
                     }                    
                 }
-                else if (Input.GetKey(DownCode) && !PM.isGrounded)
+                else if (PC.Azerty.DownAttack.ReadValue<float>() == 1 && !PM.isGrounded)
                 {
                     PlayerAC.SetTrigger("DownAttack");
                     AttackPosToCheck = DownAttackPos.position;

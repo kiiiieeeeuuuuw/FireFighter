@@ -73,6 +73,22 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""LeftMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c8fd001-2cb9-4861-b6a5-cef7b584517a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""e10ddae8-32ad-4188-819a-bed2c3a6735f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -93,7 +109,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -104,7 +120,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -115,7 +131,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -137,7 +153,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Left Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -148,7 +164,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Left Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -170,7 +186,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Right Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -181,7 +197,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Right Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -192,7 +208,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -214,7 +230,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""UpAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -225,7 +241,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""UpAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -247,7 +263,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""DownAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -262,11 +278,50 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""action"": ""DownAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8aee27e0-1c81-488b-ba26-ee458bd629a7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""LeftMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32a15e5c-ad4f-4617-a022-7777359d5e07"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""RightMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Mouse & Keyboard"",
+            ""bindingGroup"": ""Mouse & Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Azerty
         m_Azerty = asset.FindActionMap("Azerty", throwIfNotFound: true);
@@ -277,6 +332,8 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         m_Azerty_Attack = m_Azerty.FindAction("Attack", throwIfNotFound: true);
         m_Azerty_UpAttack = m_Azerty.FindAction("UpAttack", throwIfNotFound: true);
         m_Azerty_DownAttack = m_Azerty.FindAction("DownAttack", throwIfNotFound: true);
+        m_Azerty_LeftMouse = m_Azerty.FindAction("LeftMouse", throwIfNotFound: true);
+        m_Azerty_RightMouse = m_Azerty.FindAction("RightMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -333,6 +390,8 @@ public class @PlayerControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Azerty_Attack;
     private readonly InputAction m_Azerty_UpAttack;
     private readonly InputAction m_Azerty_DownAttack;
+    private readonly InputAction m_Azerty_LeftMouse;
+    private readonly InputAction m_Azerty_RightMouse;
     public struct AzertyActions
     {
         private @PlayerControl m_Wrapper;
@@ -344,6 +403,8 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_Azerty_Attack;
         public InputAction @UpAttack => m_Wrapper.m_Azerty_UpAttack;
         public InputAction @DownAttack => m_Wrapper.m_Azerty_DownAttack;
+        public InputAction @LeftMouse => m_Wrapper.m_Azerty_LeftMouse;
+        public InputAction @RightMouse => m_Wrapper.m_Azerty_RightMouse;
         public InputActionMap Get() { return m_Wrapper.m_Azerty; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -374,6 +435,12 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                 @DownAttack.started -= m_Wrapper.m_AzertyActionsCallbackInterface.OnDownAttack;
                 @DownAttack.performed -= m_Wrapper.m_AzertyActionsCallbackInterface.OnDownAttack;
                 @DownAttack.canceled -= m_Wrapper.m_AzertyActionsCallbackInterface.OnDownAttack;
+                @LeftMouse.started -= m_Wrapper.m_AzertyActionsCallbackInterface.OnLeftMouse;
+                @LeftMouse.performed -= m_Wrapper.m_AzertyActionsCallbackInterface.OnLeftMouse;
+                @LeftMouse.canceled -= m_Wrapper.m_AzertyActionsCallbackInterface.OnLeftMouse;
+                @RightMouse.started -= m_Wrapper.m_AzertyActionsCallbackInterface.OnRightMouse;
+                @RightMouse.performed -= m_Wrapper.m_AzertyActionsCallbackInterface.OnRightMouse;
+                @RightMouse.canceled -= m_Wrapper.m_AzertyActionsCallbackInterface.OnRightMouse;
             }
             m_Wrapper.m_AzertyActionsCallbackInterface = instance;
             if (instance != null)
@@ -399,10 +466,25 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                 @DownAttack.started += instance.OnDownAttack;
                 @DownAttack.performed += instance.OnDownAttack;
                 @DownAttack.canceled += instance.OnDownAttack;
+                @LeftMouse.started += instance.OnLeftMouse;
+                @LeftMouse.performed += instance.OnLeftMouse;
+                @LeftMouse.canceled += instance.OnLeftMouse;
+                @RightMouse.started += instance.OnRightMouse;
+                @RightMouse.performed += instance.OnRightMouse;
+                @RightMouse.canceled += instance.OnRightMouse;
             }
         }
     }
     public AzertyActions @Azerty => new AzertyActions(this);
+    private int m_MouseKeyboardSchemeIndex = -1;
+    public InputControlScheme MouseKeyboardScheme
+    {
+        get
+        {
+            if (m_MouseKeyboardSchemeIndex == -1) m_MouseKeyboardSchemeIndex = asset.FindControlSchemeIndex("Mouse & Keyboard");
+            return asset.controlSchemes[m_MouseKeyboardSchemeIndex];
+        }
+    }
     public interface IAzertyActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -412,5 +494,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnUpAttack(InputAction.CallbackContext context);
         void OnDownAttack(InputAction.CallbackContext context);
+        void OnLeftMouse(InputAction.CallbackContext context);
+        void OnRightMouse(InputAction.CallbackContext context);
     }
 }

@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         var LeftDash = PC.Azerty.LeftDash.ReadValue<float>() == 1;
         var RightDash = PC.Azerty.RightDash.ReadValue<float>() == 1;
         
-        if (LeftDash || RightDash)
+        if ((LeftDash || RightDash) && currentDashTime <= 0)
         {
             ParticleSystem DashEffect = new ParticleSystem();
             currentDashTime = 0.1f;
@@ -292,24 +292,21 @@ public class PlayerMovement : MonoBehaviour
     void WallGlide()
     {         
         IsTouchingFront = Physics2D.OverlapCircleAll(FrontalCheck.position, CheckRadius).Any(x => x.CompareTag("Wall"));
-        var move = Input.GetAxisRaw("Horizontal");
+        //var move = Input.GetAxisRaw("Horizontal");
+        var move = PC.Azerty.Move.ReadValue<float>();
         bool WallSliding = IsTouchingFront && !isGrounded && move != 0;
         PlayerAC.SetBool("IsWallHugging", WallSliding);
-        if(WallSliding)
-        {
-            rb.velocity = new Vector2(0, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
-        }
+        if(WallSliding)        
+            rb.velocity = new Vector2(0, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));        
 
-        if(Input.GetButtonDown("Jump") && WallSliding)
+        if (PC.Azerty.Jump.ReadValue<float>() == 1 && WallSliding)
         {
             WallJumping = true;
             Invoke("EndWallJump", WallJumpTime);
         }
 
-        if (WallJumping)
-        {
-            SetVelocity(new Vector2(xWallForce * -move, yWallForce), "walljump");
-        }
+        if (WallJumping)        
+            SetVelocity(new Vector2(xWallForce * -move, yWallForce), "walljump");        
     }
 
     void EndWallJump()
