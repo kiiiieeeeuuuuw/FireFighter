@@ -8,62 +8,53 @@ public class PlayerMovement : MonoBehaviour
 {
     #region shared movement fields
 
-    private Rigidbody2D rb;
-    private Animator PlayerAC;
-
-    private Color yellow = new Color(255, 255, 0);
-    private Color red = new Color(255, 0, 0);
-    private Color blue = new Color(0, 0, 255);
-
-    private Vector3 movement;
+    private Rigidbody2D PlayerRigidBody;
+    private PlayerControl PlayerControls;
+    private Animator PlayerAnimatorController;
 
     #endregion
 
     #region horizontal movement fields
     [Header("Horizontal movement")]
-    public float moveSpeed = 5f;
-    public bool isAttacking = false;
-    public ParticleSystem DustEffect;
-    public Transform DustEffectLocation;
+    public float MoveSpeed = 15f;
+    public bool IsAttacking = false;
+    public ParticleSystem WalkingDustEffect;
+    public Transform WalkingDustEffectLocation;
     public float DustInterval;
     private float CurrentDustTimePassed;
-
-    public KeyCode Left;
-    public KeyCode Right;
 
     #endregion
 
     #region vertical movement fields
 
     [Header("Vertical Movement")]
-    public float jumpForce = 5f;
+    public bool IsGrounded = false;
+    private bool wasGrounded;
 
-    public bool isGrounded = false;
+    public float JumpForce = 10f;
     private bool jumpStart = false;
     private bool jumpStop = false;
     private bool jumped = false;
-    public float jumpMultiplier = 1;
-    public float maxJumpMultiplier = 3;
-    public float jumpIncrement = 0.5f;
-    public float FallMultiplier;
-    private bool wasGrounded;
+    public float JumpMultiplier = 1;
+    public float MaxJumpMultiplier = 3;
+    public float JumpIncrement = 0.1f;
+    public float FallMultiplier = 1.03f;
 
     #endregion
 
     #region dash movement fields
     [Header("Dash Movement")]
-    public float dashSpeed;
-    public float InvincibleTime;
+    public float DashSpeed = 40f;
+    public float InvincibleTime = 0.5f;
+    public float DashUnavailableTime = 0.5f;
+
     public ParticleSystem LeftDashEffect;
     public ParticleSystem RightDashEffect;
     public Transform DashEffectPos;
-
     private float currentDashTime;
-    private bool dashStopped;
-    private DirectionEnum direction = DirectionEnum.None;
-    private DirectionEnum prevDirection;
-    private Collider2D PlayerColider;
-    private Color DashColor;
+    private Collider2D playerColider;
+    private Color dashColor;
+    [SerializeField]private bool dashAvailable = true;
 
     #endregion
 
@@ -82,73 +73,64 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion    
 
-    private PlayerControl PC;
+    
 
 
     private Vector2 startScale;
 
     private void Awake()
     {
-        PC = new PlayerControl();
+        PlayerControls = new PlayerControl();
     }
 
     private void OnEnable()
     {
-        PC.Enable();
+        PlayerControls.Enable();
     }
 
     private void OnDisable()
     {
-        PC.Disable();
+        PlayerControls.Disable();
     }
+
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        PlayerAC = GetComponent<Animator>();
-        PlayerColider = GetComponent<Collider2D>();
+        PlayerRigidBody = GetComponent<Rigidbody2D>();
+        PlayerAnimatorController = GetComponent<Animator>();
+        playerColider = GetComponent<Collider2D>();
 
         startScale = new Vector2
         {
             x = transform.localScale.x,
             y = transform.localScale.y
         };
-
-        Left = GetKey(Key.Left);
-        Right = GetKey(Key.Right);
     }
 
     private void Update()
     {
-        var moveDirection = MoveHorizontal();
-        direction = moveDirection.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
-        //if(Input.GetAxis("Horizontal") != 0)
-        //    HandleDash(direction);
-
-        HandleDash2();
+        MoveHorizontal();
+        HandleDash();
 
         Jump();
         WallGlide();
         Fall();
-        PlayerAC.SetBool("IsJumping", !isGrounded);
-        if(wasGrounded == false && isGrounded)
-        {
-            AudioManagerScript.PlaySound("jumpLand");
-        }
-        wasGrounded = isGrounded;
+
+        PlayerAnimatorController.SetBool("IsJumping", !IsGrounded);
+        if(wasGrounded == false && IsGrounded) AudioManagerScript.PlaySound("jumpLand");
+        wasGrounded = IsGrounded;
     }
 
-    Vector3 MoveHorizontal()
+    private void MoveHorizontal()
     {
-        Vector3 movement = new Vector3(PC.Azerty.Move.ReadValue<float>(), 0,0);
-        var currentDirection = movement.normalized.x > 0 ? DirectionEnum.Right : DirectionEnum.Left;
-        if (movement.x != 0 && !isAttacking)
+        Vector3 movement = new Vector3(PlayerControls.Azerty.Move.ReadValue<float>(), 0,0);
+        if (movement.x != 0 && !IsAttacking && !IsTouchingFront)
         {
-            if (!IsTouchingFront)
-                transform.position += movement * Time.deltaTime * moveSpeed;
-            else if (currentDirection != prevDirection)
-                transform.position += movement * Time.deltaTime * moveSpeed;
-            PlayerAC.SetBool("IsRunning", true);
-            if (CurrentDustTimePassed <= 0 && isGrounded)
+            // Move player
+            transform.position += movement * Time.deltaTime * MoveSpeed;
+            // Set animation
+            PlayerAnimatorController.SetBool("IsRunning", true);
+            // Handle dust effect
+            if (CurrentDustTimePassed <= 0 && IsGrounded)
             {
                 StartDustEffect();
                 CurrentDustTimePassed = DustInterval;
@@ -156,39 +138,35 @@ public class PlayerMovement : MonoBehaviour
             else
                 CurrentDustTimePassed -= Time.deltaTime;
         }
-        else
-            PlayerAC.SetBool("IsRunning", false);
+        else PlayerAnimatorController.SetBool("IsRunning", false);
 
-        prevDirection = currentDirection;
         //change the player orientation
         if (Mathf.Abs(movement.x) > 0)
-            transform.localScale = new Vector3(startScale.x * movement.normalized.x, startScale.y);
-        
-        return movement.normalized;
+            transform.localScale = new Vector3(startScale.x * movement.x, startScale.y);
     }
 
-    void Jump()
-    {        
-        if (PC.Azerty.Jump.ReadValue<float>() == 1 && isGrounded)
-        {
-            jumpStart = true;            
-        }
-        if (jumpStart && PC.Azerty.Jump.ReadValue<float>() == 0)
-        {
-            jumpStop = true;
-        }
+    private void Jump()
+    {
+        // Start charging up jump
+        if (PlayerControls.Azerty.Jump.ReadValue<float>() == 1 && IsGrounded) jumpStart = true;            
+        // Finished charging jump
+        if (jumpStart && PlayerControls.Azerty.Jump.ReadValue<float>() == 0) jumpStop = true;
+        
         if(jumpStart)
         {            
             if (!jumpStop)
             {
-                if (jumpMultiplier < maxJumpMultiplier) jumpMultiplier += jumpIncrement;
+                if (JumpMultiplier < MaxJumpMultiplier) JumpMultiplier += JumpIncrement;
             }
             else
             {
-                PlayerAC.SetTrigger("TakeOff");
+                // Move player
+                PlayerAnimatorController.SetTrigger("TakeOff");
                 AudioManagerScript.PlaySound("jumpLand");
-                rb.AddForce(new Vector2(0f, jumpForce * jumpMultiplier), ForceMode2D.Impulse);
-                jumpMultiplier = 1;
+                PlayerRigidBody.AddForce(new Vector2(0f, JumpForce * JumpMultiplier), ForceMode2D.Impulse);
+
+                // Reset jump parameters
+                JumpMultiplier = 1;
                 jumpStart = false;
                 jumpStop = false;
                 jumped = true;
@@ -196,110 +174,70 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Fall()
+    private void Fall()
     {
-        if(!isGrounded && rb.velocity.y < 0)
+        // Increase fall speed over time
+        if(!IsGrounded && PlayerRigidBody.velocity.y < 0)
         {
-            SetVelocity(new Vector2(rb.velocity.x, rb.velocity.y*FallMultiplier), "fall");
+            SetVelocity(new Vector2(PlayerRigidBody.velocity.x, PlayerRigidBody.velocity.y*FallMultiplier), "fall");
         }
     }
 
+    // Public because it's handled by the players health
     public void SetDashColor(Color color)
     {
-        DashColor = color;
+        dashColor = color;
     }
 
-    void HandleDash2()
+    private void HandleDash()
     {
-        var LeftDash = PC.Azerty.LeftDash.ReadValue<float>() == 1;
-        var RightDash = PC.Azerty.RightDash.ReadValue<float>() == 1;
+        var LeftDash = PlayerControls.Azerty.LeftDash.ReadValue<float>() == 1;
+        var RightDash = PlayerControls.Azerty.RightDash.ReadValue<float>() == 1;
         
-        if ((LeftDash || RightDash) && currentDashTime <= 0)
+        if ((LeftDash || RightDash) && dashAvailable)
         {
             ParticleSystem DashEffect = new ParticleSystem();
             currentDashTime = 0.1f;
-            PlayerAC.SetTrigger("Dash");            
+            PlayerAnimatorController.SetTrigger("Dash");            
 
             if (RightDash)
             {
-                SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
+                SetVelocity(Vector2.right * DashSpeed, "dashmoveright");
                 DashEffect = RightDashEffect;
             }
             if (LeftDash)
             {
-                SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
+                SetVelocity(Vector2.left * DashSpeed, "dashmoveleft");
                 DashEffect = LeftDashEffect;
             }
-            DashEffect.startColor = DashColor;
+            DashEffect.startColor = dashColor;
             Instantiate(DashEffect, DashEffectPos.position, DashEffect.transform.rotation);
-            dashStopped = false;
-            PlayerColider.enabled = false;
+            playerColider.enabled = false;
             StartCoroutine(Dashing());
             AudioManagerScript.PlaySound("woosh");
+            dashAvailable = false;
         }        
 
         // End dash
         currentDashTime -= Time.deltaTime;
-        if (currentDashTime <= 0 && !dashStopped)
+        if (currentDashTime <= 0)
         {
-            SetVelocity(new Vector2(0f, rb.velocity.y), "handledash");
-            dashStopped = true;
+            SetVelocity(new Vector2(0f, PlayerRigidBody.velocity.y), "handledash");
+            StartCoroutine(EnableDash());
         }
-    }
-
-    void HandleDash(DirectionEnum dir)
-    {
-        // Initiate dash        
-        if (Input.GetKeyDown(KeyCode.LeftShift))        
-            DashMove(dir);                                
-
-        // End dash
-        currentDashTime -= Time.deltaTime;
-        if (currentDashTime <= 0 && !dashStopped)
-        {
-            SetVelocity(new Vector2(0f, rb.velocity.y), "handledash");
-            dashStopped = true;            
-        }
-    }
-
-    void DashMove(DirectionEnum direction)
-    {
-        ParticleSystem DashEffect = new ParticleSystem();
-        currentDashTime = 0.1f;
-        if(direction != DirectionEnum.None)
-        {
-            if (direction == DirectionEnum.Right)
-            {
-                SetVelocity(Vector2.right * dashSpeed, "dashmoveright");
-                DashEffect = RightDashEffect;
-            }
-            if (direction == DirectionEnum.Left)
-            {
-                SetVelocity(Vector2.left * dashSpeed, "dashmoveleft");
-                DashEffect = LeftDashEffect;
-            }
-            dashStopped = false;
-            PlayerColider.enabled = false;
-            StartCoroutine(Dashing());
-            AudioManagerScript.PlaySound("woosh");
-        }
-
-        PlayerAC.SetTrigger("Dash");
-        DashEffect.startColor = DashColor;
-        Instantiate(DashEffect, DashEffectPos.position, DashEffect.transform.rotation);
     }
 
     void WallGlide()
     {         
         IsTouchingFront = Physics2D.OverlapCircleAll(FrontalCheck.position, CheckRadius).Any(x => x.CompareTag("Wall"));
         //var move = Input.GetAxisRaw("Horizontal");
-        var move = PC.Azerty.Move.ReadValue<float>();
-        bool WallSliding = IsTouchingFront && !isGrounded && move != 0;
-        PlayerAC.SetBool("IsWallHugging", WallSliding);
+        var move = PlayerControls.Azerty.Move.ReadValue<float>();
+        bool WallSliding = IsTouchingFront && !IsGrounded && move != 0;
+        PlayerAnimatorController.SetBool("IsWallHugging", WallSliding);
         if(WallSliding)        
-            rb.velocity = new Vector2(0, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));        
+            PlayerRigidBody.velocity = new Vector2(0, Mathf.Clamp(PlayerRigidBody.velocity.y, -WallSlidingSpeed, float.MaxValue));        
 
-        if (PC.Azerty.Jump.ReadValue<float>() == 1 && WallSliding)
+        if (PlayerControls.Azerty.Jump.ReadValue<float>() == 1 && WallSliding)
         {
             WallJumping = true;
             Invoke("EndWallJump", WallJumpTime);
@@ -312,25 +250,31 @@ public class PlayerMovement : MonoBehaviour
     void EndWallJump()
     {
         WallJumping = false; 
-        SetVelocity(new Vector2(0f, rb.velocity.y), "EndWallJump");
+        SetVelocity(new Vector2(0f, PlayerRigidBody.velocity.y), "EndWallJump");
     }
 
     void SetVelocity(Vector2 velocity, string origin)
     {
-        rb.velocity = velocity;
+        PlayerRigidBody.velocity = velocity;
         Debug.Log(origin);
     }
 
     IEnumerator Dashing()
     {
         yield return new WaitForSeconds(InvincibleTime);
-        PlayerColider.enabled = true;
+        playerColider.enabled = true;
+    }
+
+    IEnumerator EnableDash()
+    {
+        yield return new WaitForSeconds(DashUnavailableTime);
+        dashAvailable = true;
     }
 
     public void StartDustEffect()
     {
         if (!jumped)
-            Instantiate(DustEffect, DustEffectLocation.position, quaternion.identity);
+            Instantiate(WalkingDustEffect, WalkingDustEffectLocation.position, quaternion.identity);
         else
         {
             jumped = false;

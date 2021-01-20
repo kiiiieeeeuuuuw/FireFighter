@@ -37056,27 +37056,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdf0b20915b8ac4584e33ada8c5e0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  isAttacking: 0
-  DustEffect: {fileID: 7226455622272871308, guid: 4f12a12a950bf5243b7ed12279b52ddc,
+  MoveSpeed: 15
+  IsAttacking: 0
+  WalkingDustEffect: {fileID: 7226455622272871308, guid: 4f12a12a950bf5243b7ed12279b52ddc,
     type: 3}
-  DustEffectLocation: {fileID: 713424993}
+  WalkingDustEffectLocation: {fileID: 713424993}
   DustInterval: 0.4
-  Left: 113
-  Right: 100
-  jumpForce: 10
-  isGrounded: 0
-  jumpMultiplier: 1
-  maxJumpMultiplier: 3
-  jumpIncrement: 0.1
+  IsGrounded: 0
+  JumpForce: 10
+  JumpMultiplier: 1
+  MaxJumpMultiplier: 3
+  JumpIncrement: 0.1
   FallMultiplier: 1.03
-  dashSpeed: 40
+  DashSpeed: 40
   InvincibleTime: 0.5
+  DashUnavailableTime: 10
   LeftDashEffect: {fileID: 1047554496843560442, guid: 96bedbe00eb1ca1448751364d168c853,
     type: 3}
   RightDashEffect: {fileID: 3571665441270901344, guid: f81ed72192dd9c042bf4b9b06b0d4009,
     type: 3}
   DashEffectPos: {fileID: 791320940}
+  dashAvailable: 1
   FrontalCheck: {fileID: 530756667}
   IsTouchingFront: 0
   WallSliding: 0

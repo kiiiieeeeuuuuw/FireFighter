@@ -86,7 +86,7 @@ public class PlayerAttack : MonoBehaviour
             if (PC.Azerty.Attack.ReadValue<float>() == 1)   
             {
                 CinemachineCamera.GetComponent<CameraShake>().StartCameraShake(0.1f);
-                PM.isAttacking = true;
+                PM.IsAttacking = true;
                 StartCoroutine(Attacking());
                 if (PC.Azerty.UpAttack.ReadValue<float>() == 1)
                 {
@@ -103,7 +103,7 @@ public class PlayerAttack : MonoBehaviour
                         PlayerAC.SetTrigger("UpAttack2");
                     }                    
                 }
-                else if (PC.Azerty.DownAttack.ReadValue<float>() == 1 && !PM.isGrounded)
+                else if (PC.Azerty.DownAttack.ReadValue<float>() == 1 && !PM.IsGrounded)
                 {
                     PlayerAC.SetTrigger("DownAttack");
                     AttackPosToCheck = DownAttackPos.position;
@@ -178,6 +178,6 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Attacking()
     {
         yield return new WaitForSeconds(AnimationLength);
-        PM.isAttacking = false;
+        PM.IsAttacking = false;
     }
 }
