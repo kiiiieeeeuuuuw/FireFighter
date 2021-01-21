@@ -11,7 +11,9 @@ public class GroundCheck : MonoBehaviour
     {
         if(collision.collider.tag == "Ground")
         {
-            Player.GetComponent<PlayerMovement>().IsGrounded = true;
+            var playerMovement = Player.GetComponent<PlayerMovement>();
+            playerMovement.IsGrounded = true;
+            playerMovement.ResetDashUnavailableTime();
             Instantiate(LandingDustEffect, DustPos.position, LandingDustEffect.transform.rotation);
         }
         if (collision.collider.tag == "Pickup")

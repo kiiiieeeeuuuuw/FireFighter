@@ -47,11 +47,13 @@ public class PlayerMovement : MonoBehaviour
     public float DashSpeed = 40f;
     public float InvincibleTime = 0.5f;
     public float DashUnavailableTime = 0.5f;
+    public float MaxDashTime = 0.1f;
 
     public ParticleSystem LeftDashEffect;
     public ParticleSystem RightDashEffect;
     public Transform DashEffectPos;
     private float currentDashTime;
+    private float currentDashUnavailableTime;
     private Collider2D playerColider;
     private Color dashColor;
     [SerializeField]private bool dashAvailable = true;
@@ -72,9 +74,6 @@ public class PlayerMovement : MonoBehaviour
     public float WallJumpTime;
 
     #endregion    
-
-    
-
 
     private Vector2 startScale;
 
@@ -191,15 +190,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleDash()
     {
+        // Countdown untill dash is available again
+        if (currentDashUnavailableTime > 0) currentDashUnavailableTime -= Time.deltaTime;
+
         var LeftDash = PlayerControls.Azerty.LeftDash.ReadValue<float>() == 1;
         var RightDash = PlayerControls.Azerty.RightDash.ReadValue<float>() == 1;
         
-        if ((LeftDash || RightDash) && dashAvailable)
-        {
+        if ((LeftDash || RightDash) && currentDashUnavailableTime <= 0)
+        {                        
+            // Visual handling
+            PlayerAnimatorController.SetTrigger("Dash");
+            AudioManagerScript.PlaySound("woosh");
             ParticleSystem DashEffect = new ParticleSystem();
-            currentDashTime = 0.1f;
-            PlayerAnimatorController.SetTrigger("Dash");            
-
             if (RightDash)
             {
                 SetVelocity(Vector2.right * DashSpeed, "dashmoveright");
@@ -212,10 +214,11 @@ public class PlayerMovement : MonoBehaviour
             }
             DashEffect.startColor = dashColor;
             Instantiate(DashEffect, DashEffectPos.position, DashEffect.transform.rotation);
+
+            // Logic handling
             playerColider.enabled = false;
-            StartCoroutine(Dashing());
-            AudioManagerScript.PlaySound("woosh");
-            dashAvailable = false;
+            currentDashTime = MaxDashTime;
+            currentDashUnavailableTime = DashUnavailableTime;
         }        
 
         // End dash
@@ -223,8 +226,13 @@ public class PlayerMovement : MonoBehaviour
         if (currentDashTime <= 0)
         {
             SetVelocity(new Vector2(0f, PlayerRigidBody.velocity.y), "handledash");
-            StartCoroutine(EnableDash());
+            playerColider.enabled = true;
         }
+    }
+
+    public void ResetDashUnavailableTime()
+    {
+        currentDashUnavailableTime = 0;
     }
 
     void WallGlide()
@@ -234,8 +242,9 @@ public class PlayerMovement : MonoBehaviour
         var move = PlayerControls.Azerty.Move.ReadValue<float>();
         bool WallSliding = IsTouchingFront && !IsGrounded && move != 0;
         PlayerAnimatorController.SetBool("IsWallHugging", WallSliding);
-        if(WallSliding)        
-            PlayerRigidBody.velocity = new Vector2(0, Mathf.Clamp(PlayerRigidBody.velocity.y, -WallSlidingSpeed, float.MaxValue));        
+        if (WallSliding)        
+            PlayerRigidBody.velocity = new Vector2(0, Mathf.Clamp(PlayerRigidBody.velocity.y, -WallSlidingSpeed, float.MaxValue));
+        
 
         if (PlayerControls.Azerty.Jump.ReadValue<float>() == 1 && WallSliding)
         {
@@ -269,6 +278,8 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(DashUnavailableTime);
         dashAvailable = true;
+        Debug.Log("enable dash");
+        StopCoroutine(EnableDash());
     }
 
     public void StartDustEffect()
