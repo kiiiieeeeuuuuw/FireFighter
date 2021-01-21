@@ -37071,6 +37071,7 @@ MonoBehaviour:
   DashSpeed: 40
   InvincibleTime: 0.5
   DashUnavailableTime: 0.5
+  MaxDashTime: 0.1
   LeftDashEffect: {fileID: 1047554496843560442, guid: 96bedbe00eb1ca1448751364d168c853,
     type: 3}
   RightDashEffect: {fileID: 3571665441270901344, guid: f81ed72192dd9c042bf4b9b06b0d4009,
