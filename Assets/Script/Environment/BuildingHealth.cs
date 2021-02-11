@@ -89,6 +89,8 @@ public class BuildingHealth : MonoBehaviour
                     trigger += "2Q";
                 else if (CurrentHealth > 1f / 4f * StartHealth)
                     trigger += "1Q";
+                else
+                    trigger += "0Q";
                 BuildingAC.SetTrigger(trigger);
                 CurrentTime = HitAnimationInterval;
             }
