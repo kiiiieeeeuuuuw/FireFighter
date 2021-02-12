@@ -7,9 +7,10 @@ TagManager:
   - Ground
   - Enemy
   - Wall
-  - Meteor
   - Building
   - Pickup
+  - IceMeteor
+  - FireMeteor
   layers:
   - Default
   - TransparentFX

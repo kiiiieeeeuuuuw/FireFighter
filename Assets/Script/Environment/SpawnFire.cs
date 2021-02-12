@@ -18,27 +18,9 @@ public class SpawnFire : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Meteor"))
-        {            
-            var impactPos = collision.transform.position;
-
-            Collider2D[] PlayerCloseToImpact = Physics2D.OverlapCircleAll(impactPos, 4, WhatIsPlayer);
-            if (PlayerCloseToImpact.Length > 0)
-                AudioManagerScript.PlaySound("impact");
-            
-
-            var top = gameObject.transform.parent.Find("TopLocation").transform.position;
-            if (impactPos.x > top.x)
-                impactPos.x -= delta;
-            if (impactPos.x < top.x)            
-                impactPos.x += delta;                            
-            if (impactPos.y > top.y)
-                impactPos.y -= delta;
-            
-            Instantiate(Explosion,impactPos, Quaternion.identity, transform);
-            var fire = Instantiate(Fire, impactPos, Quaternion.identity, transform);
-            fire.name = "Ember_" + index;
-            index++;            
+        // Destroy meteor on impact
+        if (collision.collider.tag.Contains("Meteor"))
+        {                                   
             try
             {
                 collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
@@ -47,6 +29,36 @@ public class SpawnFire : MonoBehaviour
             {
                 Console.WriteLine(e.Message);
             }                       
+        }
+
+        // Spawn fire when it's a fire meteor
+        if (collision.collider.CompareTag("FireMeteor"))
+        {
+            var impactPos = collision.transform.position;
+
+            Collider2D[] PlayerCloseToImpact = Physics2D.OverlapCircleAll(impactPos, 4, WhatIsPlayer);
+            if (PlayerCloseToImpact.Length > 0)
+                AudioManagerScript.PlaySound("impact");
+
+
+            var top = gameObject.transform.parent.Find("TopLocation").transform.position;
+            if (impactPos.x > top.x)
+                impactPos.x -= delta;
+            if (impactPos.x < top.x)
+                impactPos.x += delta;
+            if (impactPos.y > top.y)
+                impactPos.y -= delta;
+
+            Instantiate(Explosion, impactPos, Quaternion.identity, transform);
+            var fire = Instantiate(Fire, impactPos, Quaternion.identity, transform);
+            fire.name = "Ember_" + index;
+            index++;
+        }
+
+        // Spawn ice when it's an ice meteor
+        if (collision.collider.CompareTag("IceMeteor"))
+        {
+
         }
     }    
 }

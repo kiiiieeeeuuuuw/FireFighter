@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnMeteor : MonoBehaviour
 {
-    public GameObject Meteor;
+    public List<GameObject> Projectiles;
     public GenerateBuilding Gb;
     private SpawnMeteorTrajectory ST;
     public List<GameObject> Targets;
@@ -64,7 +63,11 @@ public class SpawnMeteor : MonoBehaviour
             }
             
             // Determine direction
-            var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);            
+            var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);
+
+            // Determine projectile type
+            var projectileType = Random.Range(0, Projectiles.Count);
+            var Meteor = Projectiles[projectileType];
 
             // Shoot meteor
             var fb = Instantiate(Meteor, spawnLocation, Quaternion.identity, transform);
@@ -74,7 +77,7 @@ public class SpawnMeteor : MonoBehaviour
             rb.velocity = direction * MeteorForce;
 
             // Show direction
-            ST.StartDrawing(new Vector2(spawnLocation.x, spawnLocation.y), new Vector2(xTarget, yTarget), index);
+            ST.StartDrawing(new Vector2(spawnLocation.x, spawnLocation.y), new Vector2(xTarget, yTarget), index, projectileType);
 
             // Reset for next meteor
             index++;

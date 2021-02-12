@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using UnityEngine;
 
 public class SpawnMeteorTrajectory : MonoBehaviour
@@ -9,7 +7,7 @@ public class SpawnMeteorTrajectory : MonoBehaviour
     public Vector2 TargetPoint;
     public float Angle;
 
-    public GameObject Trail;
+    public List<GameObject> Trails;
 
     public bool DrawGizmos;
 
@@ -20,11 +18,14 @@ public class SpawnMeteorTrajectory : MonoBehaviour
         SpawnedTrails = new Dictionary<float, GameObject>();
     }
 
-    public void StartDrawing(Vector2 start, Vector2 target, float index)
+    public void StartDrawing(Vector2 start, Vector2 target, float index, int projectileType)
     {
         StartingPoint = start;
         TargetPoint = target;
         DrawGizmos = true;
+
+        // Select trail
+        var Trail = Trails[projectileType];
 
         var t = Instantiate(Trail, TargetPoint, Quaternion.identity);
         t.name = "MeteorTrail_" + index;
