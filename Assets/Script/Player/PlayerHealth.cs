@@ -67,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Meteor"))
+        if (collision.collider.tag.Contains("Meteor"))
         {
             Instantiate(Explosion, transform.position, Quaternion.identity, transform);
             Damage(25, collision.transform.position, "meteor");
