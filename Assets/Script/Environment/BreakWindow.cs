@@ -10,7 +10,7 @@ public class BreakWindow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!Triggered && collision.gameObject.CompareTag("Meteor"))
+        if (!Triggered && collision.gameObject.tag.Contains("Meteor"))
         {
             Window.SetActive(false);
             BrokenWindow.SetActive(true);

@@ -9,7 +9,7 @@ public class CleanUp : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerHealth>().KillPlayer();
         }
-        if (collision.gameObject.CompareTag("Meteor"))
+        if (collision.gameObject.tag.Contains("Meteor"))
         {
             collision.gameObject.GetComponent<DestroyMeteor>().DestroyMe();
         }
