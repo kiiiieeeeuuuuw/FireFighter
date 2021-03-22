@@ -69,7 +69,7 @@ public class BuildingHealth : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Meteor"))
+        if (collision.collider.tag.Contains("Meteor"))
         {            
             Damage(collision.gameObject.GetComponent<DoesDamage>().GetDamage());
         }
