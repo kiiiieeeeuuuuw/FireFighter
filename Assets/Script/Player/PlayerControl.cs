@@ -302,71 +302,6 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""ButtonSelection"",
-            ""id"": ""66ed6325-05d6-4220-89fd-41e3ede44a55"",
-            ""actions"": [
-                {
-                    ""name"": ""MoveUp"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""e501bf82-c954-425b-a23d-df21f4508789"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""MoveDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""a25fd6a3-bc86-49cf-88a9-e3bafec2a758"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""PerformAction"",
-                    ""type"": ""Button"",
-                    ""id"": ""034efcf4-afc4-4203-befa-b78271bfb02a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""a993448e-4114-4508-a095-ce3cbebc88af"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""MoveUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bfb26882-5f7d-4353-b353-896cc64749c9"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""MoveDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7492d76d-fb77-41a2-a81a-3a782d70cd08"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""PerformAction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -399,11 +334,6 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         m_Azerty_DownAttack = m_Azerty.FindAction("DownAttack", throwIfNotFound: true);
         m_Azerty_LeftMouse = m_Azerty.FindAction("LeftMouse", throwIfNotFound: true);
         m_Azerty_RightMouse = m_Azerty.FindAction("RightMouse", throwIfNotFound: true);
-        // ButtonSelection
-        m_ButtonSelection = asset.FindActionMap("ButtonSelection", throwIfNotFound: true);
-        m_ButtonSelection_MoveUp = m_ButtonSelection.FindAction("MoveUp", throwIfNotFound: true);
-        m_ButtonSelection_MoveDown = m_ButtonSelection.FindAction("MoveDown", throwIfNotFound: true);
-        m_ButtonSelection_PerformAction = m_ButtonSelection.FindAction("PerformAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -546,55 +476,6 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         }
     }
     public AzertyActions @Azerty => new AzertyActions(this);
-
-    // ButtonSelection
-    private readonly InputActionMap m_ButtonSelection;
-    private IButtonSelectionActions m_ButtonSelectionActionsCallbackInterface;
-    private readonly InputAction m_ButtonSelection_MoveUp;
-    private readonly InputAction m_ButtonSelection_MoveDown;
-    private readonly InputAction m_ButtonSelection_PerformAction;
-    public struct ButtonSelectionActions
-    {
-        private @PlayerControl m_Wrapper;
-        public ButtonSelectionActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveUp => m_Wrapper.m_ButtonSelection_MoveUp;
-        public InputAction @MoveDown => m_Wrapper.m_ButtonSelection_MoveDown;
-        public InputAction @PerformAction => m_Wrapper.m_ButtonSelection_PerformAction;
-        public InputActionMap Get() { return m_Wrapper.m_ButtonSelection; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ButtonSelectionActions set) { return set.Get(); }
-        public void SetCallbacks(IButtonSelectionActions instance)
-        {
-            if (m_Wrapper.m_ButtonSelectionActionsCallbackInterface != null)
-            {
-                @MoveUp.started -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnMoveUp;
-                @MoveUp.performed -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnMoveUp;
-                @MoveUp.canceled -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnMoveUp;
-                @MoveDown.started -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnMoveDown;
-                @MoveDown.performed -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnMoveDown;
-                @MoveDown.canceled -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnMoveDown;
-                @PerformAction.started -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnPerformAction;
-                @PerformAction.performed -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnPerformAction;
-                @PerformAction.canceled -= m_Wrapper.m_ButtonSelectionActionsCallbackInterface.OnPerformAction;
-            }
-            m_Wrapper.m_ButtonSelectionActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MoveUp.started += instance.OnMoveUp;
-                @MoveUp.performed += instance.OnMoveUp;
-                @MoveUp.canceled += instance.OnMoveUp;
-                @MoveDown.started += instance.OnMoveDown;
-                @MoveDown.performed += instance.OnMoveDown;
-                @MoveDown.canceled += instance.OnMoveDown;
-                @PerformAction.started += instance.OnPerformAction;
-                @PerformAction.performed += instance.OnPerformAction;
-                @PerformAction.canceled += instance.OnPerformAction;
-            }
-        }
-    }
-    public ButtonSelectionActions @ButtonSelection => new ButtonSelectionActions(this);
     private int m_MouseKeyboardSchemeIndex = -1;
     public InputControlScheme MouseKeyboardScheme
     {
@@ -615,11 +496,5 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         void OnDownAttack(InputAction.CallbackContext context);
         void OnLeftMouse(InputAction.CallbackContext context);
         void OnRightMouse(InputAction.CallbackContext context);
-    }
-    public interface IButtonSelectionActions
-    {
-        void OnMoveUp(InputAction.CallbackContext context);
-        void OnMoveDown(InputAction.CallbackContext context);
-        void OnPerformAction(InputAction.CallbackContext context);
     }
 }
