@@ -66,7 +66,7 @@ public class SpawnMeteor : MonoBehaviour
             var direction = new Vector2(xTarget - spawnLocation.x, yTarget - spawnLocation.y);
 
             // Determine projectile type
-            var projectileType = Random.Range(0, Projectiles.Count);
+            var projectileType = 0;// Random.Range(0, Projectiles.Count);
             var Meteor = Projectiles[projectileType];
 
             // Shoot meteor

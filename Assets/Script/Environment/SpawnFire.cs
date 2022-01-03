@@ -16,10 +16,10 @@ public class SpawnFire : MonoBehaviour
         index = 0;                
     }    
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // Destroy meteor on impact
-        if (collision.collider.tag.Contains("Meteor"))
+        if (collision.tag.Contains("Meteor"))
         {                                   
             try
             {
@@ -32,7 +32,7 @@ public class SpawnFire : MonoBehaviour
         }
 
         // Spawn fire when it's a fire meteor
-        if (collision.collider.CompareTag("FireMeteor"))
+        if (collision.CompareTag("FireMeteor"))
         {
             var impactPos = collision.transform.position;
 
@@ -56,7 +56,7 @@ public class SpawnFire : MonoBehaviour
         }
 
         // Spawn ice when it's an ice meteor
-        if (collision.collider.CompareTag("IceMeteor"))
+        if (collision.CompareTag("IceMeteor"))
         {
 
         }
